@@ -1,0 +1,25 @@
+header {
+    width: 100%;
+    padding : 10px 20px;
+    background-color: rgb(43, 51, 60);
+    display: flex;
+    justify-content: space-between;
+    div {
+        display: flex;
+        align-items: center;
+        .title {
+            font-size: 28px;
+            a {
+                text-decoration: none;
+                color: #ccc;
+            }
+        }
+        .logo {
+            margin-right: 20px;
+            margin-bottom: -2px;
+        }
+    }
+    .account {
+        margin-right: 40px; 
+    }
+}

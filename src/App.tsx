@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Dashboard from './pages/Dashboard';
+import Search from './pages/Search';
+import Detail from './pages/Detail';
+import Header from './components/Header/Header';
+import './App.scss';
 
-function App() {
+type Props = {};
+
+const App: React.FC<Props> = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Header />
+        <main>
+          <Switch>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/detail">
+              <Detail />
+            </Route>
+            <Route path="/">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </main>
+      </Router>
     </div>
   );
 }
