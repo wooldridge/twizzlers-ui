@@ -1,0 +1,23 @@
+.result {
+    width: 100%;
+    .thumbnail img {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+    }
+    .text {
+        position: relative;
+        width: 80%;
+        top: -15px;
+    }
+    > div {
+        display: inline-block;
+    }
+    div.subtitle > div {
+        position: relative;
+        display: inline-block;
+        margin-right: 20px;
+        top: 5px;
+    }
+}
+

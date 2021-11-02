@@ -7,16 +7,24 @@ header {
     div {
         display: flex;
         align-items: center;
+        .logo {
+            margin-right: 20px;
+            margin-bottom: -2px;
+        }
         .title {
             font-size: 28px;
             a {
                 text-decoration: none;
                 color: #ccc;
             }
+            margin-right: 60px;
         }
-        .logo {
-            margin-right: 20px;
-            margin-bottom: -2px;
+        .menu {
+            margin-left: 40px; 
+            a {
+                text-decoration: none;
+                color: #ccc;
+            }
         }
     }
     .account {
