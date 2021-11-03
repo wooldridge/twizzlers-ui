@@ -8,14 +8,15 @@ header {
         display: flex;
         align-items: center;
         .logo {
-            margin-right: 20px;
+            margin-right: 10px;
             margin-bottom: -2px;
+            margin-left: 10px;
         }
         .title {
             font-size: 28px;
             a {
                 text-decoration: none;
-                color: #ccc;
+                color: #ddd;
             }
             margin-right: 60px;
         }
@@ -23,7 +24,7 @@ header {
             margin-left: 40px; 
             a {
                 text-decoration: none;
-                color: #ccc;
+                color: #ddd;
             }
         }
     }

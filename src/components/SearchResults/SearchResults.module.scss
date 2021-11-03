@@ -1,23 +1,60 @@
 .result {
     width: 100%;
-    .thumbnail img {
-        width: 60px;
-        height: 60px;
-        margin-right: 20px;
+    border-bottom: solid 1px #ccc;
+    padding: 10px 0;
+    color: #333333;
+    .thumbnail {
+        width: 7%;
+        img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
     }
     .text {
         position: relative;
-        width: 80%;
+        width: 93%;
         top: -15px;
     }
     > div {
         display: inline-block;
+    }
+    div.title {
+        font-size: 18px;
+        font-weight: bold;
+        a {
+            text-decoration: none;
+            color: #5d6aaa;
+        }
     }
     div.subtitle > div {
         position: relative;
         display: inline-block;
         margin-right: 20px;
         top: 5px;
+        font-size: 15px;
+    }
+    .address {
+        width: 380px;
+    }
+    .phone {
+        width: 120px;
+        font-weight: bold;
+    }
+    .email {
+        width: 180px;
+        color: #5d6aaa;
+    }
+    .items {
+        width: 120px;
+    }
+    .createdOn {
+        position: absolute;
+        right: 10px;
+        font-size: 15px;
     }
 }
+.result:nth-of-type(1) {
+    border-top: solid 1px #ccc;
+} 
 

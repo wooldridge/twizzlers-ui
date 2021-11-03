@@ -1,16 +1,23 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import Metrics from '../components/Metrics/Metrics';
+import { configDashboard } from "../config/dashboard.js";
+import { getSummary } from '../api/search';
 import styles from './Dashboard.module.scss';
 
 type Props = {};
 
 const Dashboard: React.FC<Props> = (props) => {
+
+  const [summary, setSummary] = useState<any>({});
+
+  useEffect(() => {
+    setSummary(getSummary({}));
+  });
+
   return (
-    <div>
-    <h1>Dashboard Page</h1>
-      <p><Link to="/search">Search Page Link</Link></p>
-      <p><Link to="/detail">Detail Page Link</Link></p>
-    </div>
+      <div className={styles.dashboard}>
+        <Metrics data={summary} config={configDashboard.metrics} />
+      </div>
   );
 }
 

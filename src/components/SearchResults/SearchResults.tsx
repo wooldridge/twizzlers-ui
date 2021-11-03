@@ -1,10 +1,10 @@
 import React from 'react';
-import _ from 'lodash';
+import { Link } from "react-router-dom";
 import styles from './SearchResults.module.scss';
-import {Link} from "react-router-dom";
+import _ from 'lodash';
 
 type Props = {
-    searchResults: any;
+    data: any;
     config?: any
 };
 
@@ -12,15 +12,21 @@ const SearchResults: React.FC<Props> = (props) => {
 
   function display(key, res) {
     let val = _.get(res, key)
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val)
+    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
+  }
+
+  function displayDate(key, res) {
+    let val = _.get(res, key)
+    let parts = val.split('T');
+    return _.isNil(parts[0]) ? null : parts[0];
   }
 
   function getResults() {
-    let snippet = props.config.search.snippet;
-    let res = props.searchResults.results.map((res, index) => {
+    let snippet = props.config.snippet;
+    let res = props.data.results.map((res, index) => {
         let items = snippet.items.map((it, index) => {
           return (
-            <div key={"item-" + index}>
+            <div key={"item-" + index} className={styles.items}>
               {display(it, res)}
             </div>
           )
@@ -34,21 +40,24 @@ const SearchResults: React.FC<Props> = (props) => {
               ></img>
             </div>
             <div className={styles.text}>
+              <div className={styles.createdOn}>
+                Created on: {displayDate(snippet.createdOn, res)}
+              </div>
               <div className={styles.title}>
                 <Link to="/detail">{display(snippet.title, res)}</Link>
               </div>
               <div className={styles.subtitle}>
-                <div className="address">
+                <div className={styles.address}>
                   {display(snippet.address.street, res)},&nbsp;
                   {display(snippet.address.city, res)},&nbsp;
                   {display(snippet.address.state, res)}&nbsp;
                   {display(snippet.address.zip[0], res)}-
                   {display(snippet.address.zip[1], res)}
                 </div>
-                <div className="phone">
+                <div className={styles.phone}>
                   {display(snippet.phone, res)}
                 </div>
-                <div className="email">
+                <div className={styles.email}>
                   {display(snippet.email, res)}
                 </div>
                 {items}
@@ -62,11 +71,10 @@ const SearchResults: React.FC<Props> = (props) => {
 
   return (
     <div>
-        {(props.searchResults.results && props.searchResults.results.length) > 0 ? (
+        {(props.data.results && props.data.results.length) > 0 ? (
             <div>{getResults()}</div>
-        ) : (
-            <p>Try searching</p>
-        )}
+        ) : null
+        }
     </div>
   );
 }

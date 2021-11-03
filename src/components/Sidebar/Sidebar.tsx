@@ -5,7 +5,7 @@ type Props = {};
 
 const Sidebar: React.FC<Props> = (props) => {
   return (
-    <div></div>
+    <div className={styles.sidebar}></div>
   );
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { ArrowUpRightSquare, PersonCircle } from 'react-bootstrap-icons';
+import { configHeader } from "../../config/header.js";
 import styles from './Header.module.scss';
-import { config } from "../../config/config.js";
 
 type Props = {
     config?: any
@@ -10,7 +10,7 @@ type Props = {
 
 const Header: React.FC<Props> = (props) => {
 
-    let menus = config.menus.map((menu, index) => {
+    let menus = configHeader.menus.map((menu, index) => {
         return (
             <span className={styles.menu} key={"menu-" + index}>
                 {menu.to ? 
@@ -28,7 +28,7 @@ const Header: React.FC<Props> = (props) => {
                     <ArrowUpRightSquare color="#ccc" size={24} />
                 </span>
                 <span className={styles.title}>
-                    <Link to="/">{config.title}</Link>
+                    <Link to="/">{configHeader.title}</Link>
                 </span>
                 {menus}
             </div>

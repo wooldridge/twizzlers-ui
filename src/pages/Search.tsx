@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import SearchResults from '../components/SearchResults/SearchResults';
 import { getSearchResults } from '../api/search';
 import styles from './Search.module.scss';
-import { config } from "../config/config.js";
+import { configSearch } from "../config/search.js";
 
 type Props = {};
 
@@ -21,8 +21,7 @@ const Search: React.FC<Props> = (props) => {
         <Sidebar />   
       </aside>
       <div className={styles.results}> 
-        <h2>Search Results</h2>
-        <SearchResults searchResults={searchResults} config={config} />
+        <SearchResults data={searchResults} config={configSearch} />
       </div>
     </div>
   );
