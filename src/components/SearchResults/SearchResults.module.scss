@@ -4,17 +4,19 @@
     padding: 10px 0;
     color: #333333;
     .thumbnail {
+        position: relative;
+        top: -4px;
         width: 7%;
         img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             margin-right: 20px;
         }
     }
     .text {
         position: relative;
         width: 93%;
-        top: -15px;
+        top: 10px;
     }
     > div {
         display: inline-block;
@@ -50,6 +52,7 @@
     }
     .createdOn {
         position: absolute;
+        top: 4px;
         right: 10px;
         font-size: 15px;
     }

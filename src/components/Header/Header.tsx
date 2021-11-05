@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import SearchBox from '../../components/SearchBox/SearchBox';
 import { ArrowUpRightSquare, PersonCircle } from 'react-bootstrap-icons';
 import { configHeader } from "../../config/header.js";
 import styles from './Header.module.scss';
 
-type Props = {
-    config?: any
-};
+type Props = {};
 
 const Header: React.FC<Props> = (props) => {
 
@@ -31,6 +30,7 @@ const Header: React.FC<Props> = (props) => {
                     <Link to="/">{configHeader.title}</Link>
                 </span>
                 {menus}
+                <SearchBox />
             </div>
             <div className={styles.account}>
                 <PersonCircle color="#ccc" size={28} />

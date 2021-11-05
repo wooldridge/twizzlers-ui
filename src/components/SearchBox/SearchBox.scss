@@ -1,0 +1,15 @@
+#searchBoxDropdown {
+    margin-left: 50px;
+}
+
+#searchBoxDropdown.dropdown-toggle {
+    min-width: 100px;
+    text-align: left;
+    background-color: #394494;
+    color: white;
+}
+#searchBoxDropdown.dropdown-toggle::after {
+    position: absolute;
+    top: 17px;
+    right: 10px;
+}
