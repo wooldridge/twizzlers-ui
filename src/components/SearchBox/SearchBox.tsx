@@ -7,7 +7,9 @@ import FormControl from "react-bootstrap/FormControl";
 import styles from './SearchBox.module.scss';
 import './SearchBox.scss';
 
-type Props = {};
+type Props = {
+    width?: string;
+};
 
 const SearchBox: React.FC<Props> = (props) => {
 
@@ -38,8 +40,12 @@ const SearchBox: React.FC<Props> = (props) => {
         setQtext(e.target.value);
     };
 
+    const divStyle = {
+        width: props.width ? props.width : "100%"
+    }
+
     return (
-        <div className={styles.searchBox}>
+        <div className={styles.searchBox} style={divStyle}>
             <InputGroup>
                 <DropdownButton
                     variant="outline-secondary"

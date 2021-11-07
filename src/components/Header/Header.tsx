@@ -29,8 +29,10 @@ const Header: React.FC<Props> = (props) => {
                 <span className={styles.title}>
                     <Link to="/">{configHeader.title}</Link>
                 </span>
-                {menus}
-                <SearchBox />
+                <span className={styles.menus}>
+                    {menus}
+                </span>
+                <SearchBox width="600px" />
             </div>
             <div className={styles.account}>
                 <PersonCircle color="#ccc" size={28} />
