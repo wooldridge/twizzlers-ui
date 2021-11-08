@@ -11,9 +11,9 @@ This application is being developed on (and is known to work with) the following
 - [Node.js](https://nodejs.org/) v14.16.0
 - [npm](https://www.npmjs.com/) v6.14.11
 
-On the GitHub project page, click Code and then Download ZIP to download the project 
+To download the project, click Code and then Download ZIP on the GitHub project page.
 
-Unzip the downloaded twizzlers-ui-master.zip project file. Change to the project root directory:
+Unzip the downloaded project file (e.g., twizzlers-ui-master.zip). Change to the project root directory:
 
  ### `cd twizzlers-ui-master`
 
