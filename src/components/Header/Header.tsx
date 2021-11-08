@@ -14,7 +14,7 @@ const Header: React.FC<Props> = (props) => {
             <span className={styles.menu} key={"menu-" + index}>
                 {menu.to ? 
                     <Link to={menu.to}>{menu.label}</Link> :
-                    <a href={menu.url} target="_blank">{menu.label}</a>
+                    <a href={menu.url} target="_blank" rel="noreferrer">{menu.label}</a>
                 }
             </span>
         )

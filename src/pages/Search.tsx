@@ -13,7 +13,7 @@ const Search: React.FC<Props> = (props) => {
 
   useEffect(() => {
     setSearchResults(getSearchResults({}));
-  });
+  }, []);
 
   return (
     <div>

@@ -14,7 +14,7 @@ const Dashboard: React.FC<Props> = (props) => {
 
   useEffect(() => {
     setSummary(getSummary({}));
-  });
+  }, []);
 
   return (
       <div className={styles.dashboard}>
