@@ -6,22 +6,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Application Setup
 
-This application is being developed on (and is known to work on) the following:
+This application is being developed on (and is known to work with) the following:
 
 - [Node.js](https://nodejs.org/) v14.16.0
 - [npm](https://www.npmjs.com/) v6.14.11
 
-## Available Scripts
+On the GitHub project page, click Code and then Download ZIP to download the project 
 
-In the project directory, you can run:
+Unzip the downloaded twizzlers-ui-master.zip project file. Change to the project root directory:
+
+ ### `cd twizzlers-ui-master`
+
+Install the project dependencies:
+
+### `npm install`
+
+Start the application:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In a browser, open the application here: [http://localhost:3000](http://localhost:3000)
 
 ## Learn More
 
