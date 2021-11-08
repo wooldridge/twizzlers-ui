@@ -14,9 +14,9 @@ const Metrics: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.metrics}>
-        {_.isArray(props.config) && props.config.map(m => {
+        {_.isArray(props.config) && props.config.map((m, i) => {
             return (
-                <Metric data={props.data} config={m} />
+                <Metric key={"metric-" + i} data={props.data} config={m} />
             )
         })}
     </div>
