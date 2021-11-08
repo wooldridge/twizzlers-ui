@@ -4,6 +4,13 @@ A configurable, browser-based [React](https://reactjs.org/) application for sear
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Application Setup
+
+This application is being developed on (and is known to work on) the following:
+
+- [Node.js](https://nodejs.org/) v14.16.0
+- [npm](https://www.npmjs.com/) v6.14.11
+
 ## Available Scripts
 
 In the project directory, you can run:
