@@ -10,7 +10,6 @@ type Props = {
 const Metric: React.FC<Props> = (props) => {
 
   function display(key, res) {
-    console.log(key, res);
     let val = _.get(res, key)
     return _.isNil(val) ? null : (_.isNumber(val) ? val.toLocaleString() : val)
   }

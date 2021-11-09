@@ -16,13 +16,16 @@ const Search: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div>
-      <aside>
+    <div className={styles.searchResults}>
+
+      <aside className={styles.sidebar}>
         <Sidebar />   
       </aside>
+
       <div className={styles.results}> 
         <SearchResults data={searchResults} config={configSearch} />
       </div>
+
     </div>
   );
 }

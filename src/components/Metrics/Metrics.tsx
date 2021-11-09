@@ -10,13 +10,11 @@ type Props = {
 
 const Metrics: React.FC<Props> = (props) => {
 
-    console.log("props.config", props.config);
-
   return (
     <div className={styles.metrics}>
         {_.isArray(props.config) && props.config.map((m, i) => {
             return (
-                <Metric key={"metric-" + i} data={props.data} config={m} />
+                <Metric key={"metric-" + i} data={props.data.metrics} config={m} />
             )
         })}
     </div>
