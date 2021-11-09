@@ -22,4 +22,34 @@ export const configDashboard = {
         }
     ],
     // metrics: null
+    saved: {
+        cols: [
+            {
+                title: null,
+                type: "icon",
+                value: "hasChanges",
+                test: function (value) {return value},
+                sortable: false
+            },
+            {
+                title: "Name",
+                type: "text",
+                value: "name",
+                sortable: true
+            },
+            {
+                title: "Edited On",
+                type: "date",
+                value: "updatedOn",
+                sortable: true
+            },
+            {
+                title: "Watching",
+                type: "icon",
+                value: "isWatching",
+                test: function (value) {return value},
+                sortable: true
+            }
+        ]
+    }
 };

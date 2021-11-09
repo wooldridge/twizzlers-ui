@@ -9,7 +9,7 @@ type Props = {
 const Section: React.FC<Props> = (props) => {
 
     let divStyle = {
-        width: props.width
+        width: props.width ? props.width : "100%"
     }
 
     return (
