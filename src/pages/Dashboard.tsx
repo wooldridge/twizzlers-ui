@@ -32,7 +32,7 @@ const Dashboard: React.FC<Props> = (props) => {
       {/* METRICS ROW */}
       <div className="row">
 
-        <Metrics data={summary} config={configDashboard.metrics} />
+        <Metrics data={summary.metrics} config={configDashboard.metrics} />
 
       </div>
 
