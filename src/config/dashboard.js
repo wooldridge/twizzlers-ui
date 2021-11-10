@@ -1,4 +1,6 @@
 export const configDashboard = { 
+
+    // Config for Metrics component in Dashboard
     metrics: [
         {
             title: "New entities this week",
@@ -21,7 +23,8 @@ export const configDashboard = {
             color: "#ff984e"
         }
     ],
-    // metrics: null
+
+    // Config for Saved component in Dashboard
     saved: {
         cols: [
             {

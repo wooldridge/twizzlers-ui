@@ -1,19 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Sidebar from '../components/Sidebar/Sidebar';
-import SearchResults from '../components/SearchResults/SearchResults';
-import { getSearchResults } from '../api/search';
+import Snippet from '../components/Snippet/Snippet';
 import styles from './Search.module.scss';
 import { configSearch } from "../config/search.js";
 
-type Props = {};
+type Props = {
+  searchResults: any;
+};
 
 const Search: React.FC<Props> = (props) => {
-
-  const [searchResults, setSearchResults] = useState<any>({});
-
-  useEffect(() => {
-    setSearchResults(getSearchResults({}));
-  }, []);
 
   return (
     <div className={styles.searchResults}>
@@ -23,7 +18,7 @@ const Search: React.FC<Props> = (props) => {
       </aside>
 
       <div className={styles.results}> 
-        <SearchResults data={searchResults} config={configSearch} />
+        <Snippet data={props.searchResults} config={configSearch} />
       </div>
 
     </div>

@@ -10,7 +10,11 @@ import { getSummary } from '../api/search';
 import { getHistory } from '../api/search';
 import styles from './Dashboard.module.scss';
 
-type Props = {};
+type Props = {
+  data?: any;
+  config?: any;
+  handleSearch: any;
+};
 
 const Dashboard: React.FC<Props> = (props) => {
 
@@ -41,7 +45,7 @@ const Dashboard: React.FC<Props> = (props) => {
           <Section title="Search">
             <div className={styles.newSearch}>
               <h4>New Search</h4>
-              <SearchBox width="100%" />
+              <SearchBox width="100%" handleSearch={props.handleSearch} />
             </div>
             <div className={styles.divider}>- or -</div>
             <div className={styles.savedSearches}>

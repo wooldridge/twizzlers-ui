@@ -1,27 +1,27 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import styles from './SearchResults.module.scss';
+import styles from './Snippet.module.scss';
 import _ from 'lodash';
 
 type Props = {
-    data: any;
-    config?: any
+  data?: any;
+  config?: any;
 };
 
 const SearchResults: React.FC<Props> = (props) => {
 
-  function display(key, res) {
+  const display = (key, res) => {
     let val = _.get(res, key)
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
   }
 
-  function displayDate(key, res) {
+  const displayDate = (key, res) => {
     let val = _.get(res, key)
     let parts = val.split('T');
     return _.isNil(parts[0]) ? null : parts[0];
   }
 
-  function getResults() {
+  const getResults = () => {
     let snippet = props.config.snippet;
     let res = props.data.results.map((res, index) => {
         let items = snippet.items.map((it, index) => {

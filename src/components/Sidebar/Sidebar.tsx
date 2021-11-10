@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './Sidebar.module.scss';
 
-type Props = {};
+type Props = {
+  data?: any;
+  config?: any;
+};
 
 const Sidebar: React.FC<Props> = (props) => {
   return (

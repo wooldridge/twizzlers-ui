@@ -8,7 +8,10 @@ import styles from './SearchBox.module.scss';
 import './SearchBox.scss';
 
 type Props = {
+    data?: any;
+    config?: any;
     width?: string;
+    handleSearch: any;
 };
 
 const SearchBox: React.FC<Props> = (props) => {
@@ -20,9 +23,9 @@ const SearchBox: React.FC<Props> = (props) => {
 
     // TODO retrieve entities from search results
     let entities = ["Person", "Place", "Thing"];
-    let items = entities.map(e => {
+    let items = entities.map((e, i) => {
         return (
-            <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>
+            <Dropdown.Item key={"item-" + i} eventKey={e}>{e}</Dropdown.Item>
         )
     })
 
@@ -32,6 +35,8 @@ const SearchBox: React.FC<Props> = (props) => {
     
     const handleSubmit = (e) => {
         if (e.keyCode === 13 && qtext !== "") {
+            // TODO Send search request up component tree
+            props.handleSearch({qtext: qtext});
             history.push("/search");
         }
     }
@@ -40,12 +45,12 @@ const SearchBox: React.FC<Props> = (props) => {
         setQtext(e.target.value);
     };
 
-    const divStyle = {
+    const searchBoxStyle = {
         width: props.width ? props.width : "100%"
     }
 
     return (
-        <div className={styles.searchBox} style={divStyle}>
+        <div className={styles.searchBox} style={searchBoxStyle}>
             <InputGroup>
                 <DropdownButton
                     variant="outline-secondary"

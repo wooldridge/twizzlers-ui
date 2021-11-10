@@ -42,7 +42,7 @@ const Saved: React.FC<Props> = (props) => {
         <tbody>
           {_.isArray(props.data) && props.data.map((r, i) => {
             return (
-              <tr>
+              <tr key={"row-" + i}>
                 {_.isArray(props.config.cols) && props.config.cols.map((c, i) => {
                   return (
                     <td key={"dat-" + i} className={c.value}>{display(c, r)}</td>
