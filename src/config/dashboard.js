@@ -31,7 +31,7 @@ export const configDashboard = {
                 title: null,
                 type: "icon",
                 value: "hasChanges",
-                test: function (value) {return value},
+                test: function (value) {return (value === true)},
                 sortable: false
             },
             {
@@ -50,7 +50,7 @@ export const configDashboard = {
                 title: "Watching",
                 type: "icon",
                 value: "isWatching",
-                test: function (value) {return value},
+                test: function (value) {return (value === true)},
                 sortable: true
             }
         ]

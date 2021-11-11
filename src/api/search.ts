@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { searchResults } from "../mocks/search";
+import { searchResults } from "../mocks/results";
 import { summary } from "../mocks/summary";
 import { history } from "../mocks/history";
 

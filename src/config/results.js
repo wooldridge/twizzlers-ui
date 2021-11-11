@@ -1,4 +1,4 @@
-export const configSearch = { 
+export const configResults = { 
     snippet: {
         thumbnail: {
             src: "entityInstance.image",

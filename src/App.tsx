@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
-import Search from './pages/Search';
+import Results from './pages/Results';
 import Detail from './pages/Detail';
 import Header from './components/Header/Header';
 import { configHeader } from "./config/header.js";
@@ -31,7 +31,7 @@ const App: React.FC<Props> = (props) => {
         <main>
           <Switch>
             <Route path="/search">
-              <Search searchResults={searchResults} />
+              <Results searchResults={searchResults} />
             </Route>
             <Route path="/detail">
               <Detail />
