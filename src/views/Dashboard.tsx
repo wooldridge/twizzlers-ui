@@ -26,38 +26,40 @@ const Dashboard: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className="dashboard container-fluid">
+    <div className={styles.dashboard}>
+      <div className="dashboard container-fluid">
 
-      <div className="row">
+        <div className="row">
 
-        <Metrics data={summary.metrics} config={configDashboard.metrics} />
-
-      </div>
-
-      <div className="row">
-
-        <div className="col-lg">
-
-          <Section title="Search">
-            <Search data={saved} config={configDashboard} handleSearch={props.handleSearch} />
-          </Section>
+          <Metrics data={summary.metrics} config={configDashboard.metrics} />
 
         </div>
 
-        <div className="col-lg">
+        <div className="row">
 
-          <Section title="What's New with Entities">
-            <New />
-          </Section>
+          <div className="col-lg">
 
-          <Section title="Recently Visited">
-            <Recent />
-          </Section>
+            <Section title="Search">
+              <Search data={saved} config={configDashboard} handleSearch={props.handleSearch} />
+            </Section>
+
+          </div>
+
+          <div className="col-lg">
+
+            <Section title="What's New with Entities">
+              <New />
+            </Section>
+
+            <Section title="Recently Visited">
+              <Recent />
+            </Section>
+
+          </div>
 
         </div>
 
       </div>
-
     </div>
   );
 }
