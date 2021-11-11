@@ -14,7 +14,7 @@ To change content in the views, edit the JSX (which is similar to HTML) in the c
 
 ## Application Components
 
-Functionality in the views is achieved with React components in the `src/components` directory. Components are defined in the views with bracket and attribiute notation (similar to HTML), for example:
+Functionality in the views is achieved with React components in the `src/components` directory. Components are defined in the views with bracket and attribute notation (similar to HTML), for example:
 
 ```
 <Search data={saved} config={configDashboard} handleSearch={props.handleSearch} />
