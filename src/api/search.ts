@@ -1,7 +1,7 @@
 // import axios from "axios";
 import { searchResults } from "../mocks/results";
 import { summary } from "../mocks/summary";
-import { history } from "../mocks/history";
+import { saved } from "../mocks/saved";
 
 // export const getSearchResults = async (query) => { // TODO
 export const getSearchResults = (query) => {
@@ -17,9 +17,9 @@ export const getSummary = (opts) => {
   return summary;
 };
 
-// export const getHistory = async (opts) => { // TODO
-export const getHistory = (opts) => {
-  // return await axios.get(`/api/history`); // TODO
-  console.log("getHistory", opts, history);
-  return history;
+// export const getSaved = async (opts) => { // TODO
+export const getSaved = (opts) => {
+  // return await axios.get(`/api/saved`); // TODO
+  console.log("getSaved", opts, saved);
+  return saved;
 };

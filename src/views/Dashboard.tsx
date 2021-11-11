@@ -6,7 +6,7 @@ import Search from '../components/Search/Search';
 import Recent from '../components/Recent/Recent';
 import { configDashboard } from "../config/dashboard.js";
 import { getSummary } from '../api/search';
-import { getHistory } from '../api/search';
+import { getSaved } from '../api/search';
 import styles from './Dashboard.module.scss';
 
 type Props = {
@@ -18,15 +18,15 @@ type Props = {
 const Dashboard: React.FC<Props> = (props) => {
 
   const [summary, setSummary] = useState<any>({});
-  const [hist, setHist] = useState<any>({});
+  const [saved, setSaved] = useState<any>({});
 
   useEffect(() => {
     setSummary(getSummary({}));
-    setHist(getHistory({}));
+    setSaved(getSaved({}));
   }, []);
 
   return (
-    <div className="container-fluid">
+    <div className="dashboard container-fluid">
 
       <div className="row">
 
@@ -39,7 +39,7 @@ const Dashboard: React.FC<Props> = (props) => {
         <div className="col-lg">
 
           <Section title="Search">
-            <Search data={hist} config={configDashboard} handleSearch={props.handleSearch} />
+            <Search data={saved} config={configDashboard} handleSearch={props.handleSearch} />
           </Section>
 
         </div>

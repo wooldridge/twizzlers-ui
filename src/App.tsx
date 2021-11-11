@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from './pages/Dashboard';
-import Results from './pages/Results';
-import Detail from './pages/Detail';
+import Dashboard from './views/Dashboard';
+import Results from './views/Results';
+import Detail from './views/Detail';
 import Header from './components/Header/Header';
 import { configHeader } from "./config/header.js";
 import { getSearchResults } from './api/search';

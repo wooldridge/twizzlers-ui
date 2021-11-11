@@ -20,7 +20,7 @@ const Search: React.FC<Props> = (props) => {
         <div className={styles.divider}>- or -</div>
         <div className={styles.savedSearches}>
             <h4>Saved Searches</h4>
-            <Saved data={props.data.saved} config={props.config.saved} />
+            <Saved data={props.data} config={props.config.saved} />
         </div>
     </div>
   );
