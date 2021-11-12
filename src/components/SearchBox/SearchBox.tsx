@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import FormControl from "react-bootstrap/FormControl";
+import SearchContext from "../../store/search-context";
 import styles from './SearchBox.module.scss';
 import './SearchBox.scss';
 
@@ -11,12 +12,12 @@ type Props = {
     data?: any;
     config?: any;
     width?: string;
-    handleSearch: any;
 };
 
 const SearchBox: React.FC<Props> = (props) => {
 
     const history = useHistory();
+    const ctx = useContext(SearchContext);
 
     const [selected, setSelected] = useState<string>("Person");
     const [qtext, setQtext] = useState<string>("");
@@ -35,8 +36,7 @@ const SearchBox: React.FC<Props> = (props) => {
     
     const handleSubmit = (e) => {
         if (e.keyCode === 13 && qtext !== "") {
-            // TODO Send search request up component tree
-            props.handleSearch({qtext: qtext});
+            ctx.handleSearch({qtext: qtext});
             history.push("/search");
         }
     }

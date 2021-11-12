@@ -9,11 +9,7 @@ import { getSummary } from '../api/search';
 import { getSaved } from '../api/search';
 import styles from './Dashboard.module.scss';
 
-type Props = {
-  data?: any;
-  config?: any;
-  handleSearch: any;
-};
+type Props = {};
 
 const Dashboard: React.FC<Props> = (props) => {
 
@@ -40,7 +36,7 @@ const Dashboard: React.FC<Props> = (props) => {
           <div className="col-lg">
 
             <Section title="Search">
-              <Search data={saved} config={configDashboard} handleSearch={props.handleSearch} />
+              <Search data={saved} config={configDashboard} />
             </Section>
 
           </div>

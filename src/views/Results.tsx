@@ -4,9 +4,7 @@ import Snippet from '../components/Snippet/Snippet';
 import styles from './Results.module.scss';
 import { configResults } from "../config/results.js";
 
-type Props = {
-  searchResults: any;
-};
+type Props = {};
 
 const Results: React.FC<Props> = (props) => {
 
@@ -18,7 +16,7 @@ const Results: React.FC<Props> = (props) => {
       </aside>
 
       <div className={styles.snippet}> 
-        <Snippet data={props.searchResults} config={configResults} />
+        <Snippet config={configResults.snippet} />
       </div>
 
     </div>

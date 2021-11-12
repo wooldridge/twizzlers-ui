@@ -6,7 +6,6 @@ import styles from './Search.module.scss';
 type Props = {
   data?: any;
   config?: any;
-  handleSearch: any;
 };
 
 const Search: React.FC<Props> = (props) => {
@@ -15,7 +14,7 @@ const Search: React.FC<Props> = (props) => {
       <div className="search">
         <div className={styles.newSearch}>
             <h4>New Search</h4>
-            <SearchBox width="100%" handleSearch={props.handleSearch} />
+            <SearchBox width="100%" />
         </div>
         <div className={styles.divider}>- or -</div>
         <div className={styles.savedSearches}>

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from "react";
+import SearchContext from "../../store/search-context";
 import { Link } from "react-router-dom";
 import styles from './Snippet.module.scss';
 import _ from 'lodash';
 
 type Props = {
-  data?: any;
   config?: any;
 };
 
 const SearchResults: React.FC<Props> = (props) => {
+
+  const ctx = useContext(SearchContext);
 
   const display = (key, res) => {
     let val = _.get(res, key)
@@ -22,8 +24,8 @@ const SearchResults: React.FC<Props> = (props) => {
   }
 
   const getResults = () => {
-    let snippet = props.config.snippet;
-    let res = props.data.results.map((res, index) => {
+    let snippet = props.config;
+    let res = ctx.searchResults.results.map((res, index) => {
         let items = snippet.items.map((it, index) => {
           return (
             <div key={"item-" + index} className={styles.items}>
@@ -71,7 +73,7 @@ const SearchResults: React.FC<Props> = (props) => {
 
   return (
     <div>
-        {(props.data.results && props.data.results.length) > 0 ? (
+        {(ctx.searchResults.results && ctx.searchResults.results.length) > 0 ? (
             <div>{getResults()}</div>
         ) : null
         }

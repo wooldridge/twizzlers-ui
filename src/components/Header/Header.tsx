@@ -1,18 +1,15 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import SearchBox from '../../components/SearchBox/SearchBox';
+import { configHeader } from "../../config/header.js";
 import { ArrowUpRightSquare, PersonCircle } from 'react-bootstrap-icons';
 import styles from './Header.module.scss';
 
-type Props = {
-    data?: any;
-    config?: any;
-    handleSearch: any;
-};
+type Props = {};
 
 const Header: React.FC<Props> = (props) => {
 
-    let menus = props.config.menus.map((menu, index) => {
+    let menus = configHeader.menus.map((menu, index) => {
         return (
             <span className={styles.menu} key={"menu-" + index}>
                 {menu.to ? 
@@ -30,12 +27,12 @@ const Header: React.FC<Props> = (props) => {
                     <ArrowUpRightSquare color="#ccc" size={24} />
                 </span>
                 <span className={styles.title}>
-                    <Link to="/">{props.config.title}</Link>
+                    <Link to="/">{configHeader.title}</Link>
                 </span>
                 <span className={styles.menus}>
                     {menus}
                 </span>
-                <SearchBox width="600px" handleSearch={props.handleSearch} />
+                <SearchBox width="600px" />
             </div>
             <div className={styles.account}>
                 <PersonCircle color="#ccc" size={28} />
