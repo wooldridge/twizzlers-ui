@@ -27,6 +27,20 @@ Start the application:
 
 In a browser, open the application here: [http://localhost:3000](http://localhost:3000)
 
+## Code Linting
+
+### `npm run lint .`
+
+Or to automatically fix errors:
+
+### `npm run lint . -- --fix`
+
+## Build Documentation
+
+### `npm run docs`
+
+Builds documentation files in `/docs`.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
