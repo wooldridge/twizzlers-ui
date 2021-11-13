@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './Metric.module.scss';
-import _ from 'lodash';
+import React from "react";
+import styles from "./Metric.module.scss";
+import _ from "lodash";
 
 type Props = {
   data?: any;
@@ -10,8 +10,8 @@ type Props = {
 const Metric: React.FC<Props> = (props) => {
 
   function display(key, res) {
-    let val = _.get(res, key)
-    return _.isNil(val) ? null : (_.isNumber(val) ? val.toLocaleString() : val)
+    let val = _.get(res, key);
+    return _.isNil(val) ? null : (_.isNumber(val) ? val.toLocaleString() : val);
   }
 
   return (
@@ -20,6 +20,6 @@ const Metric: React.FC<Props> = (props) => {
       <div className={styles.title}>{props.config.title}</div>
     </div>
   );
-}
+};
 
 export default Metric;

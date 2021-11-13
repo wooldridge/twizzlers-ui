@@ -1,7 +1,7 @@
 // import axios from "axios";
-import { searchResults } from "../mocks/results";
-import { summary } from "../mocks/summary";
-import { saved } from "../mocks/saved";
+import {searchResults} from "../mocks/results";
+import {summary} from "../mocks/summary";
+import {saved} from "../mocks/saved";
 
 // export const getSearchResults = async (query) => { // TODO
 export const getSearchResults = (query) => {

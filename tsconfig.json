@@ -19,12 +19,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "importHelpers": true
   },
   "include": [
     "src"
   ],
   "exclude": [
-    "src/setupProxy.js"
+    "src/setupProxy.js",
+    "node_modules"
   ]
 }

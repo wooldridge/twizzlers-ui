@@ -6,8 +6,8 @@ interface SearchContextInterface {
 }
 
 const SearchContext = React.createContext<SearchContextInterface>({
-    searchResults: {},
-    handleSearch: () => {}
+  searchResults: {},
+  handleSearch: () => {}
 });
 
 export default SearchContext;

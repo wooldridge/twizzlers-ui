@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
-import New from '../components/New/New';
-import Metrics from '../components/Metrics/Metrics';
-import Section from '../components/Section/Section';
-import Search from '../components/Search/Search';
-import Recent from '../components/Recent/Recent';
-import { configDashboard } from "../config/dashboard.js";
-import { getSummary } from '../api/search';
-import { getSaved } from '../api/search';
-import styles from './Dashboard.module.scss';
+import New from "../components/New/New";
+import Metrics from "../components/Metrics/Metrics";
+import Section from "../components/Section/Section";
+import Search from "../components/Search/Search";
+import Recent from "../components/Recent/Recent";
+import {configDashboard} from "../config/dashboard.js";
+import {getSummary} from "../api/search";
+import {getSaved} from "../api/search";
+import styles from "./Dashboard.module.scss";
 
 type Props = {};
 
@@ -58,6 +58,6 @@ const Dashboard: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

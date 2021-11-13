@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from './views/Dashboard';
-import Detail from './views/Detail';
-import Results from './views/Results';
-import Header from './components/Header/Header';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Dashboard from "./views/Dashboard";
+import Detail from "./views/Detail";
+import Results from "./views/Results";
+import Header from "./components/Header/Header";
 import SearchContext from "./store/search-context";
-import { getSearchResults } from './api/search';
-import './App.scss';
+import {getSearchResults} from "./api/search";
+import "./App.scss";
 
 type Props = {};
 
@@ -22,7 +22,7 @@ const App: React.FC<Props> = (props) => {
   const handleSearch = (opts) => {
     console.log("App handleSearch", opts);
     setSearchOptions(opts);
-  }
+  };
 
   return (
     <SearchContext.Provider value={{
@@ -50,6 +50,6 @@ const App: React.FC<Props> = (props) => {
     </SearchContext.Provider>
   );
 
-}
+};
 
 export default App;

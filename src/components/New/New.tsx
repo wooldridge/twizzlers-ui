@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './New.module.scss';
+import React from "react";
+import styles from "./New.module.scss";
 
 type Props = {
   data?: any;
@@ -13,6 +13,6 @@ const New: React.FC<Props> = (props) => {
         What's New content...
     </div>
   );
-}
+};
 
 export default New;

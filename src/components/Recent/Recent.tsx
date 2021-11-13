@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Recent.module.scss';
+import React from "react";
+import styles from "./Recent.module.scss";
 
 type Props = {
   data?: any;
@@ -13,6 +13,6 @@ const Recent: React.FC<Props> = (props) => {
         Recently Visited content...
     </div>
   );
-}
+};
 
 export default Recent;

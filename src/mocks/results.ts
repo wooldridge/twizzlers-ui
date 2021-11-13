@@ -58,7 +58,7 @@ export const searchResults = {
         "sources": [
           "USA Today",
           "New York Times"
-      	],
+        ],
       }
     },
     {
@@ -111,7 +111,7 @@ export const searchResults = {
         "ssn": "111-11-1111",
         "sources": [
           "New York Times"
-      	],
+        ],
       }
     },
     {
@@ -165,7 +165,7 @@ export const searchResults = {
         "sources": [
           "Chicago Tibune",
           "USA Today"
-      	]
+        ]
       }
     }
   ],
@@ -240,4 +240,3 @@ export const searchResults = {
   "selectedPropertyDefinitions": [],
   "entityPropertyDefinitions": []
 };
-  
