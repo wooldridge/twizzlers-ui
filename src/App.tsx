@@ -37,7 +37,7 @@ const App: React.FC<Props> = (props) => {
               <Route path="/search">
                 <Results />
               </Route>
-              <Route path="/detail">
+              <Route path="/detail/:id">
                 <Detail />
               </Route>
               <Route path="/">

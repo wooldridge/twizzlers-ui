@@ -16,6 +16,7 @@ export const configResults = {
         ]
     },
     snippet: {
+        id: "entityInstance.customerId",
         thumbnail: {
             src: "entityInstance.image",
             width: 100,

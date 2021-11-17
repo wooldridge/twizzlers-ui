@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import SearchContext from "../../store/search-context";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Snippet.module.scss";
 import _ from "lodash";
 
@@ -12,7 +12,13 @@ const SearchResults: React.FC<Props> = (props) => {
 
   const ctx = useContext(SearchContext);
 
-  const display = (key, res) => {
+  // TODO different than displayValue?
+  const getValue = (key, res) => {
+    let val = _.get(res, key);
+    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
+  };
+
+  const displayValue = (key, res) => {
     let val = _.get(res, key);
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
   };
@@ -29,7 +35,7 @@ const SearchResults: React.FC<Props> = (props) => {
       let items = snippet.items.map((it, index) => {
         return (
           <div key={"item-" + index} className={styles.items}>
-            {display(it, res)}
+            {displayValue(it, res)}
           </div>
         );
       });
@@ -37,8 +43,8 @@ const SearchResults: React.FC<Props> = (props) => {
         <div key={"result-" + index} className={styles.result}>
           <div className={styles.thumbnail}>
             <img
-              src={display(snippet.thumbnail.src, res)}
-              alt={display(snippet.title, res)}
+              src={displayValue(snippet.thumbnail.src, res)}
+              alt={displayValue(snippet.title, res)}
             ></img>
           </div>
           <div className={styles.text}>
@@ -46,21 +52,21 @@ const SearchResults: React.FC<Props> = (props) => {
                 Created on: {displayDate(snippet.createdOn, res)}
             </div>
             <div className={styles.title}>
-              <Link to="/detail">{display(snippet.title, res)}</Link>
+              <Link to={"/detail/" + getValue(snippet.id, res)}>{displayValue(snippet.title, res)}</Link>
             </div>
             <div className={styles.subtitle}>
               <div className={styles.address}>
-                {display(snippet.address.street, res)},&nbsp;
-                {display(snippet.address.city, res)},&nbsp;
-                {display(snippet.address.state, res)}&nbsp;
-                {display(snippet.address.zip[0], res)}-
-                {display(snippet.address.zip[1], res)}
+                {displayValue(snippet.address.street, res)},&nbsp;
+                {displayValue(snippet.address.city, res)},&nbsp;
+                {displayValue(snippet.address.state, res)}&nbsp;
+                {displayValue(snippet.address.zip[0], res)}-
+                {displayValue(snippet.address.zip[1], res)}
               </div>
               <div className={styles.phone}>
-                {display(snippet.phone, res)}
+                {displayValue(snippet.phone, res)}
               </div>
               <div className={styles.email}>
-                {display(snippet.email, res)}
+                {displayValue(snippet.email, res)}
               </div>
               {items}
             </div>
