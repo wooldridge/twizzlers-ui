@@ -170,7 +170,7 @@ export const searchResults = {
     }
   ],
   "facets": {
-    "entities": {
+    "Entities": {
       "type": "xs:string",
       "facetValues": [
         {
@@ -190,7 +190,7 @@ export const searchResults = {
         }
       ]
     },
-    "sources": {
+    "Sources": {
       "type": "xs:string",
       "facetValues": [
         {
@@ -210,11 +210,11 @@ export const searchResults = {
         }
       ]
     },
-    "createdOn": {
+    "CreatedOn": {
       "type": "xs:date",
       "facetValues": []
     },
-    "status": {
+    "Status": {
       "type": "xs:string",
       "facetValues": [
         {

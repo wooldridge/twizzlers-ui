@@ -1,10 +1,13 @@
 .metric {
-    width: 250px;
     border: solid 1px;
     border-left: solid 20px;
     padding: 15px;
     margin-right: 20px;
     position: relative;
+    flex-grow: 1;
+    &:last-child {
+        margin-right: 0;
+    }
     .value {
         position: relative;
         width: 100%;

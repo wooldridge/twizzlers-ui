@@ -12,7 +12,7 @@ const Results: React.FC<Props> = (props) => {
     <div className={styles.results}>
 
       <aside className={styles.sidebar}>
-        <Sidebar />
+        <Sidebar config={configResults.sidebar} />
       </aside>
 
       <div className={styles.snippet}>

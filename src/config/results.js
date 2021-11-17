@@ -1,4 +1,20 @@
 export const configResults = { 
+    sidebar: {
+        facets: [
+            {
+                type: "category",
+                value: "Entities"
+            },
+            {
+                type: "category",
+                value: "Sources"
+            },
+            {
+                type: "category",
+                value: "Status"
+            }
+        ]
+    },
     snippet: {
         thumbnail: {
             src: "entityInstance.image",
