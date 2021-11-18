@@ -1,10 +1,10 @@
-import React, {useState, useContext} from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import FormControl from "react-bootstrap/FormControl";
-import SearchContext from "../../store/search-context";
+import { SearchContext } from "../../store/SearchContext";
 import styles from "./SearchBox.module.scss";
 import "./SearchBox.scss";
 
@@ -16,11 +16,21 @@ type Props = {
 
 const SearchBox: React.FC<Props> = (props) => {
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const ctx = useContext(SearchContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [selected, setSelected] = useState<string>("Person");
-  const [qtext, setQtext] = useState<string>("");
+  const [qtext, setQtext] = useState<any>("");
+
+  useEffect(() => {
+    const q = searchParams.get("qtext");
+    if (q !== null) {
+      if (q.trim() !== "") {
+        setQtext(q);
+      }
+    }
+  }, []);
 
   // TODO retrieve entities from search results
   let entities = ["Person", "Place", "Thing"];
@@ -35,9 +45,9 @@ const SearchBox: React.FC<Props> = (props) => {
   };
 
   const handleSubmit = (e) => {
-    if (e.keyCode === 13 && qtext !== "") {
-      ctx.handleSearch({qtext: qtext});
-      history.push("/search");
+    if (e.keyCode === 13) {
+      ctx.handleSearch(qtext);
+      navigate("/search");
     }
   };
 

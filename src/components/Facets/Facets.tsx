@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import SearchContext from "../../store/search-context";
+import { SearchContext } from "../../store/SearchContext";
 import Form from "react-bootstrap/Form";
 import styles from "./Facets.module.scss";
 import "./Facets.scss";
@@ -12,15 +12,21 @@ const Facets: React.FC<Props> = (props) => {
 
   const ctx = useContext(SearchContext);
 
-  const getFacetValues = (faceValues) => {
-    let res = faceValues.map((fv, index) => {
+  const handleSelect = (e) => {
+    console.log("handleSelect", e);
+    ctx.handleFacets(e.target.id, e.target.checked);
+  };
+
+  const getFacetValues = (facet, facetValues) => {
+    let res = facetValues.map((fv, index) => {
       return (
         <li key={"facetValue-" + index}>
           <Form.Check 
             type={"checkbox"}
-            id={fv.name}
+            id={facet + ":" + fv.name}
             label={fv.name}
             className="shadow-none"
+            onClick={handleSelect}
           />
           <div className={styles.count}>{fv.count.toLocaleString()}</div>
         </li>
@@ -39,7 +45,7 @@ const Facets: React.FC<Props> = (props) => {
           <ul className={styles.values}>
             {/* Show each facet value (and count) */}
             {ctx.searchResults.facets && ctx.searchResults.facets[f.value] !== undefined ?
-              getFacetValues(ctx.searchResults.facets[f.value].facetValues) :
+              getFacetValues(f.value, ctx.searchResults.facets[f.value].facetValues) :
               null
             }
           </ul>

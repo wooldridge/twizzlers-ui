@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import SearchContext from "../../store/search-context";
+import { SearchContext } from "../../store/SearchContext";
 import { Link } from "react-router-dom";
 import styles from "./Snippet.module.scss";
 import _ from "lodash";
