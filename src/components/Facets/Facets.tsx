@@ -14,7 +14,8 @@ const Facets: React.FC<Props> = (props) => {
 
   const handleSelect = (e) => {
     console.log("handleSelect", e);
-    ctx.handleFacets(e.target.id, e.target.checked);
+    let parts = e.target.id.split(":");
+    ctx.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
   const getFacetValues = (facet, facetValues) => {
@@ -23,7 +24,7 @@ const Facets: React.FC<Props> = (props) => {
         <li key={"facetValue-" + index}>
           <Form.Check 
             type={"checkbox"}
-            checked={ctx.facets.includes(facet + ":" + fv.name)}
+            checked={ctx.facetStrings.includes(facet + ":" + fv.name)}
             id={facet + ":" + fv.name}
             label={fv.name}
             className="shadow-none"

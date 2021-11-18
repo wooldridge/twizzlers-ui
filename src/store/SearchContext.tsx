@@ -1,66 +1,90 @@
-import React, { useEffect, useState, FC } from 'react';
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 import { getSearchResults } from "../api/search";
 
 interface SearchContextInterface {
   qtext: string;
-  facets: any;
+  facetStrings: string[];
   searchResults: any;
   handleSearch: any;
-  handleFacets: any;
+  handleFacetString: any;
+}
+interface QueryInterface {
+  qtext: string;
+  facetStrings: {
+    name: string;
+    values: string[];
+  }[];
 }
   
 const defaultState = {
   qtext: "",
-  facets: [],
+  facetStrings: [],
   searchResults: {},
   handleSearch: () => {},
-  handleFacets: () => {}
+  handleFacetString: () => {}
 };
 
 export const SearchContext = React.createContext<SearchContextInterface>(defaultState);
 
 const SearchProvider: React.FC = ({ children }) => {
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [qtext, setQtext] = useState<any>("");
-  const [facets, setFacets] = useState<any>([]);
+  const [facetStrings, setFacetStrings] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [newSearch, setNewSearch] = useState<boolean>(false);
 
-  useEffect(() => {
-    const params = {};
-    if (qtext.trim() !== "") {
-      params["qtext"] = qtext;
-    }
-    if (facets.length > 0) {
-      params["facet"] = facets;
-    }
-    setSearchParams(params);
-    setSearchResults(getSearchResults({}));
-  }, [qtext, facets]);
-
-  const handleSearch = (qtext) => {
-    console.log("App handleSearch", qtext);
-    setQtext(qtext);
+  const buildQuery = ():QueryInterface => {
+    let query = {
+      qtext: qtext,
+      facetStrings: []
+    };
+    facetStrings.forEach(fs => {
+      let parts = fs.split(":");
+      if (query.facetStrings[parts[0]]) {
+        query.facetStrings[parts[0]].push(parts[1]);
+      } else {
+        query.facetStrings[parts[0]] = [parts[1]];
+      }
+    });
+    return query;
   };
 
-  const handleFacets = (facet, selected) => {
-    console.log("App handleFacets", facet, selected);
-    if (selected === false) {
-      setFacets(facets.filter(f => f !== facet));
-    } else {
-      setFacets(prevArray => [...prevArray, facet]);
+  useEffect(() => {
+    setSearchResults(getSearchResults(buildQuery()));
+    setNewSearch(false);
+  }, [newSearch]);
+
+  const handleSearch = (qtext) => {
+    if (location.pathname !== "/search") {
+      navigate("/search"); // Handle search submit from another view
     }
+    setQtext(qtext);
+    setNewSearch(true);
+  };
+
+  const handleFacetString = (name, value, selected) => {
+    if (selected) {
+      let newFacetString = name + ":" + value;
+      setFacetStrings(prevState => [...prevState, newFacetString]);
+    } else {
+      let newFacetStrings = facetStrings.filter(f => (f !== (name + ":" + value)));
+      setFacetStrings(newFacetStrings);
+    }
+    setNewSearch(true);
   };
 
   return (
     <SearchContext.Provider
       value={{
         qtext,
-        facets,
+        facetStrings,
         searchResults,
         handleSearch,
-        handleFacets
+        handleFacetString
       }}
     >
       {children}

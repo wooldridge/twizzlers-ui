@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -16,21 +16,10 @@ type Props = {
 
 const SearchBox: React.FC<Props> = (props) => {
 
-  const navigate = useNavigate();
   const ctx = useContext(SearchContext);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [selected, setSelected] = useState<string>("Person");
   const [qtext, setQtext] = useState<any>("");
-
-  useEffect(() => {
-    const q = searchParams.get("qtext");
-    if (q !== null) {
-      if (q.trim() !== "") {
-        setQtext(q);
-      }
-    }
-  }, []);
 
   // TODO retrieve entities from search results
   let entities = ["Person", "Place", "Thing"];
@@ -47,7 +36,6 @@ const SearchBox: React.FC<Props> = (props) => {
   const handleSubmit = (e) => {
     if (e.keyCode === 13) {
       ctx.handleSearch(qtext);
-      navigate("/search");
     }
   };
 
