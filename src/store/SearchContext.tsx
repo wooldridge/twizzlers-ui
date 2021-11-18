@@ -3,15 +3,19 @@ import { useSearchParams } from "react-router-dom";
 import { getSearchResults } from "../api/search";
 
 interface SearchContextInterface {
-    searchResults: any;
-    handleSearch: any;
-    handleFacets: any;
+  qtext: string;
+  facets: any;
+  searchResults: any;
+  handleSearch: any;
+  handleFacets: any;
 }
   
 const defaultState = {
-    searchResults: {},
-    handleSearch: () => {},
-    handleFacets: () => {}
+  qtext: "",
+  facets: [],
+  searchResults: {},
+  handleSearch: () => {},
+  handleFacets: () => {}
 };
 
 export const SearchContext = React.createContext<SearchContextInterface>(defaultState);
@@ -52,6 +56,8 @@ const SearchProvider: React.FC = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
+        qtext,
+        facets,
         searchResults,
         handleSearch,
         handleFacets

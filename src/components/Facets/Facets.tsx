@@ -23,10 +23,11 @@ const Facets: React.FC<Props> = (props) => {
         <li key={"facetValue-" + index}>
           <Form.Check 
             type={"checkbox"}
+            checked={ctx.facets.includes(facet + ":" + fv.name)}
             id={facet + ":" + fv.name}
             label={fv.name}
             className="shadow-none"
-            onClick={handleSelect}
+            onChange={handleSelect}
           />
           <div className={styles.count}>{fv.count.toLocaleString()}</div>
         </li>
