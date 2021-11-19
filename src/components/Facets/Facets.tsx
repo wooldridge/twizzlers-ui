@@ -13,13 +13,12 @@ const Facets: React.FC<Props> = (props) => {
   const ctx = useContext(SearchContext);
 
   const handleSelect = (e) => {
-    console.log("handleSelect", e);
     let parts = e.target.id.split(":");
     ctx.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
   const getFacetValues = (facet, facetValues) => {
-    let res = facetValues.map((fv, index) => {
+    let result = facetValues.map((fv, index) => {
       return (
         <li key={"facetValue-" + index}>
           <Form.Check 
@@ -34,7 +33,7 @@ const Facets: React.FC<Props> = (props) => {
         </li>
       )
     });
-    return <div>{res}</div>
+    return <div>{result}</div>
   }
 
   return (

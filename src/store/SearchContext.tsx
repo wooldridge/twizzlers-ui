@@ -54,7 +54,9 @@ const SearchProvider: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
-    setSearchResults(getSearchResults(buildQuery()));
+    if (newSearch) {
+      setSearchResults(getSearchResults(buildQuery()));
+    }
     setNewSearch(false);
   }, [newSearch]);
 

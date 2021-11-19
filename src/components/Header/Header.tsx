@@ -1,8 +1,8 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import {configHeader} from "../../config/header.js";
-import {ArrowUpRightSquare, PersonCircle} from "react-bootstrap-icons";
+import { configHeader } from "../../config/header.js";
+import { ArrowUpRightSquare, PersonCircle } from "react-bootstrap-icons";
 import styles from "./Header.module.scss";
 
 type Props = {};
