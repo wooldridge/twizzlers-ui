@@ -1,5 +1,11 @@
 export const configResults = { 
     sidebar: {
+        meter: {
+            colors: {
+                all: "#cccccc",
+                filters: "#5fc9aa"
+            }
+        },
         facets: [
             {
                 type: "category",
