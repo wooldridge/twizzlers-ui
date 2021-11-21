@@ -90,6 +90,9 @@ const options = {
                     var self: any = this;
                     return Highcharts.numberFormat(self.y, 0, '', ',')
             },
+        },
+        animation: {
+          duration: 1000
         }
       }
     ]

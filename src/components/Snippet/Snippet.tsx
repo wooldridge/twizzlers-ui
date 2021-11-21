@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../store/SearchContext";
-import { Link } from "react-router-dom";
 import styles from "./Snippet.module.scss";
 import _ from "lodash";
 
@@ -11,6 +10,11 @@ type Props = {
 const SearchResults: React.FC<Props> = (props) => {
 
   const ctx = useContext(SearchContext);
+
+  const handleNameClick = (e) => {
+    console.log("handleNameClick", e);
+    ctx.handleDetail(e.target.id);
+  };
 
   // TODO different than displayValue?
   const getValue = (key, res) => {
@@ -43,16 +47,17 @@ const SearchResults: React.FC<Props> = (props) => {
         <div key={"result-" + index} className={styles.result}>
           <div className={styles.thumbnail}>
             <img
-              src={displayValue(snippet.thumbnail.src, res)}
-              alt={displayValue(snippet.title, res)}
+              src={getValue(snippet.thumbnail.src, res)}
+              alt={getValue(snippet.title, res)}
             ></img>
           </div>
           <div className={styles.text}>
             <div className={styles.createdOn}>
                 Created on: {displayDate(snippet.createdOn, res)}
             </div>
-            <div className={styles.title}>
-              <Link to={"/detail/" + getValue(snippet.id, res)}>{displayValue(snippet.title, res)}</Link>
+            <div className={styles.title} id={getValue(snippet.id, res)} onClick={handleNameClick}>
+              {displayValue(snippet.title, res)}
+              {/* <Link to={"/detail/" + getValue(snippet.id, res)}>{displayValue(snippet.title, res)}</Link> */}
             </div>
             <div className={styles.subtitle}>
               <div className={styles.address}>

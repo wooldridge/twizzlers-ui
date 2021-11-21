@@ -12,18 +12,16 @@ type Props = {};
 const App: React.FC<Props> = (props) => {
 
   return (
-    <Router>
-      <SearchProvider>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/search" element={<Results />} />
-            <Route path="/detail/:id" element={<Detail />} />
-          </Routes>
-        </main>
-      </SearchProvider>
-    </Router>
+    <SearchProvider>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/search" element={<Results />} />
+          <Route path="/detail/:id" element={<Detail />} />
+        </Routes>
+      </main>
+    </SearchProvider>
   );
 
 };

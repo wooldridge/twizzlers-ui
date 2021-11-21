@@ -1,7 +1,23 @@
 .detail {
     padding-top: 20px;
-    a {
-        text-decoration: none;
-        color: #5d6aaa;
+    .heading {
+        display: flex;
+        align-items: center;
+        .icon {
+            margin-right: 10px;
+        }
+        .title {
+            font-size: 28px;
+        }
+        .thumbnail {
+            position: relative;
+            top: -4px;
+            width: 7%;
+            img {
+                width: 60px;
+                height: 60px;
+                margin-left: 20px;
+            }
+        }
     }
 }

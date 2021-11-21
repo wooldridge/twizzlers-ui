@@ -24,10 +24,9 @@
     div.title {
         font-size: 18px;
         font-weight: bold;
-        a {
-            text-decoration: none;
-            color: #5d6aaa;
-        }
+        text-decoration: none;
+        color: #5d6aaa;
+        cursor: pointer;
     }
     div.subtitle > div {
         position: relative;
