@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../store/SearchContext";
+import { DetailContext } from "../../store/DetailContext";
 import styles from "./Snippet.module.scss";
 import _ from "lodash";
 
@@ -9,11 +10,13 @@ type Props = {
 
 const SearchResults: React.FC<Props> = (props) => {
 
-  const ctx = useContext(SearchContext);
+  const searchContext = useContext(SearchContext);
+  const detailContext = useContext(DetailContext);
 
   const handleNameClick = (e) => {
     console.log("handleNameClick", e);
-    ctx.handleDetail(e.target.id);
+    console.log("detailContext", detailContext);
+    detailContext.handleDetail(e.target.id);
   };
 
   // TODO different than displayValue?
@@ -35,7 +38,7 @@ const SearchResults: React.FC<Props> = (props) => {
 
   const getResults = () => {
     let snippet = props.config;
-    let res = ctx.searchResults.results.map((res, index) => {
+    let res = searchContext.searchResults.results.map((res, index) => {
       let items = snippet.items.map((it, index) => {
         return (
           <div key={"item-" + index} className={styles.items}>
@@ -84,7 +87,7 @@ const SearchResults: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {(ctx.searchResults.results && ctx.searchResults.results.length) > 0 ? (
+      {(searchContext.searchResults.results && searchContext.searchResults.results.length) > 0 ? (
         <div>{getResults()}</div>
       ) : null
       }

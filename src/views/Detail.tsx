@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { SearchContext } from "../store/SearchContext";
+import { DetailContext } from "../store/DetailContext";
 import Occupations from "../components/Occupations/Occupations";
 import PersonalData from "../components/PersonalData/PersonalData";
 import Relationships from "../components/Relationships/Relationships";
@@ -14,7 +14,7 @@ type Props = {};
 
 const Detail: React.FC<Props> = (props) => {
 
-  const ctx = useContext(SearchContext);
+  const detailContext = useContext(DetailContext);
   let { id } = useParams();
 
   // TODO different than displayValue?
@@ -29,7 +29,7 @@ const Detail: React.FC<Props> = (props) => {
   };
 
   const getHeading = () => {
-    console.log("getHeading", configDetail.heading, ctx.detail);
+    console.log("getHeading", configDetail.heading, detailContext.detail);
     let config = configDetail.heading;
     return (
       <div className={styles.heading}>
@@ -37,12 +37,12 @@ const Detail: React.FC<Props> = (props) => {
         <Link to="/search"><ArrowLeft color="#5d6aaa" size={28} /></Link>
       </div>
       <div className={styles.title}>
-        {displayValue(config.title, ctx.detail)}
+        {displayValue(config.title, detailContext.detail)}
       </div>
       <div className={styles.thumbnail}>
         <img
-            src={getValue(config.thumbnail.src, ctx.detail)}
-            alt={getValue(config.title, ctx.detail)}
+            src={getValue(config.thumbnail.src, detailContext.detail)}
+            alt={getValue(config.title, detailContext.detail)}
         ></img>
       </div>
     </div>
@@ -52,7 +52,7 @@ const Detail: React.FC<Props> = (props) => {
   return (
 
     <div className={styles.detail}>
-      {(!_.isNil(ctx.detail))  ? (
+      {(!_.isNil(detailContext.detail))  ? (
 
       <div>
 

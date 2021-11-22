@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import { SearchContext } from "../../store/SearchContext";
+import { DetailContext } from "../../store/DetailContext";
 import Graph from "react-graph-vis";
 import styles from "./Relationships.module.scss";
 
@@ -11,7 +11,7 @@ type Props = {
 
 const Relationships: React.FC<Props> = (props) => {
 
-    const ctx = useContext(SearchContext);
+    const detailContext = useContext(DetailContext);
 
     const [network, setNetwork] = useState<any>(null);
     const initNetworkInstance = (networkInstance) => {
@@ -47,7 +47,7 @@ const Relationships: React.FC<Props> = (props) => {
         },
     };
 
-    const currentId = ctx.detail["entityInstanceProperties"]["personId"];
+    const currentId = detailContext.detail["entityInstanceProperties"]["personId"];
     const imageArr = [
         "https://cdn1.marklogic.com/wp-content/uploads/2020/04/JamesKenwood-headshot-600x600-1.jpg",
         "https://cdn1.marklogic.com/wp-content/uploads/2021/07/chuck-hollis.jpeg",
@@ -77,7 +77,7 @@ const Relationships: React.FC<Props> = (props) => {
     const events = {
         select: ({ nodes, edges }) => {
             if (nodes && nodes[0]) {
-                ctx.handleDetail(nodes[0]);
+                detailContext.handleDetail(nodes[0]);
             }
         },
         hoverNode: (event) => {

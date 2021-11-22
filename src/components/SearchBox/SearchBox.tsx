@@ -16,7 +16,7 @@ type Props = {
 
 const SearchBox: React.FC<Props> = (props) => {
 
-  const ctx = useContext(SearchContext);
+  const searchContext = useContext(SearchContext);
 
   const [selected, setSelected] = useState<string>("Person");
   const [qtext, setQtext] = useState<any>("");
@@ -35,7 +35,7 @@ const SearchBox: React.FC<Props> = (props) => {
 
   const handleSubmit = (e) => {
     if (e.keyCode === 13) {
-      ctx.handleSearch(qtext);
+      searchContext.handleSearch(qtext);
     }
   };
 

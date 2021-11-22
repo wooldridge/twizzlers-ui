@@ -10,11 +10,11 @@ type Props = {
 
 const Facets: React.FC<Props> = (props) => {
 
-  const ctx = useContext(SearchContext);
+  const searchContext = useContext(SearchContext);
 
   const handleSelect = (e) => {
     let parts = e.target.id.split(":");
-    ctx.handleFacetString(parts[0], parts[1], e.target.checked);
+    searchContext.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
   const getFacetValues = (facet, facetValues, disabled=false) => {
@@ -23,7 +23,7 @@ const Facets: React.FC<Props> = (props) => {
         <li key={"facetValue-" + index}>
           <Form.Check 
             type={"checkbox"}
-            checked={ctx.facetStrings.includes(facet + ":" + fv.name)}
+            checked={searchContext.facetStrings.includes(facet + ":" + fv.name)}
             disabled={disabled ? disabled : false}
             id={facet + ":" + fv.name}
             label={fv.name}
@@ -46,8 +46,8 @@ const Facets: React.FC<Props> = (props) => {
           <div className={styles.title}>{f.value}</div>
           <ul className={styles.values}>
             {/* Show each facet value (and count) */}
-            {ctx.searchResults.facets && ctx.searchResults.facets[f.value] !== undefined ?
-              getFacetValues(f.value, ctx.searchResults.facets[f.value].facetValues, f.disabled) :
+            {searchContext.searchResults.facets && searchContext.searchResults.facets[f.value] !== undefined ?
+              getFacetValues(f.value, searchContext.searchResults.facets[f.value].facetValues, f.disabled) :
               null
             }
           </ul>

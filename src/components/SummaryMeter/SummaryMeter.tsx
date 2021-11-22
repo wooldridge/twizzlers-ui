@@ -18,7 +18,7 @@ type Props = {
 
 const SummaryMeter: React.FC<Props> = (props) => {
 
-  const ctx = useContext(SearchContext);
+  const searchContext = useContext(SearchContext);
 
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
@@ -51,7 +51,7 @@ const SummaryMeter: React.FC<Props> = (props) => {
     },
     yAxis: {
       min: 0,
-      max: ctx.total,
+      max: searchContext.total,
       lineWidth: 0,
       tickPositions: [],
       minorTickInterval: null,
@@ -79,7 +79,7 @@ const SummaryMeter: React.FC<Props> = (props) => {
             color: "#5fc9aa",
             radius: "100%",
             innerRadius: "60%",
-            y: ctx.returned
+            y: searchContext.returned
           }
         ],
         dataLabels: {
@@ -116,11 +116,11 @@ const SummaryMeter: React.FC<Props> = (props) => {
             <div className={styles.text}>With filters applied</div>
         </div>
         <div className={styles.min}>0</div>
-        <div className={styles.max}>{ctx.total}</div>
+        <div className={styles.max}>{searchContext.total}</div>
         
         <div className={styles.returned}>
             <div className={styles.separator} />
-            <span>{ctx.returned}</span>
+            <span>{searchContext.returned}</span>
         </div>
         <HighchartsReact
             highcharts={Highcharts}

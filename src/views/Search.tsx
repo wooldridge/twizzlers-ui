@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Snippet from "../components/Snippet/Snippet";
-import styles from "./Results.module.scss";
+import styles from "./Search.module.scss";
 import {configResults} from "../config/results.js";
 
 type Props = {};

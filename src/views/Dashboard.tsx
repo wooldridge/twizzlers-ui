@@ -4,11 +4,9 @@ import Metrics from "../components/Metrics/Metrics";
 import Section from "../components/Section/Section";
 import Search from "../components/Search/Search";
 import Recent from "../components/Recent/Recent";
-import SummaryMeter from "../components/SummaryMeter/SummaryMeter";
 import {configDashboard} from "../config/dashboard.js";
-import {configResults} from "../config/results.js";
-import {getSummary} from "../api/search";
-import {getSaved} from "../api/search";
+import {getSummary} from "../api/api";
+import {getSaved} from "../api/api";
 import styles from "./Dashboard.module.scss";
 
 type Props = {};
