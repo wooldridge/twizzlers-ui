@@ -6,10 +6,10 @@ import {configResults} from "../config/results.js";
 
 type Props = {};
 
-const Results: React.FC<Props> = (props) => {
+const Search: React.FC<Props> = (props) => {
 
   return (
-    <div className={styles.results}>
+    <div className={styles.search}>
 
       <aside className={styles.sidebar}>
         <Sidebar config={configResults.sidebar} />
@@ -23,4 +23,4 @@ const Results: React.FC<Props> = (props) => {
   );
 };
 
-export default Results;
+export default Search;
