@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+import { SearchContext } from "../../store/SearchContext";
 import Highcharts from 'highcharts'
 import highchartsMore from "highcharts/highcharts-more.js"
 import solidGauge from "highcharts/modules/solid-gauge.js";
@@ -15,7 +16,13 @@ type Props = {
 
 // TODO Add needle by overlaying a second chart: https://jsfiddle.net/doc_snyder/j5owogor/
 
-const options = {
+const SummaryMeter: React.FC<Props> = (props) => {
+
+  const ctx = useContext(SearchContext);
+
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+
+  const options = {
     chart: {
       type: "solidgauge",
       height: "160",
@@ -44,7 +51,7 @@ const options = {
     },
     yAxis: {
       min: 0,
-      max: 2756000,
+      max: ctx.total,
       lineWidth: 0,
       tickPositions: [],
       minorTickInterval: null,
@@ -72,8 +79,8 @@ const options = {
             color: "#5fc9aa",
             radius: "100%",
             innerRadius: "60%",
-            y: 1125000
-          },
+            y: ctx.returned
+          }
         ],
         dataLabels: {
             align: 'center',
@@ -92,15 +99,11 @@ const options = {
             },
         },
         animation: {
-          duration: 1000
+          duration: 500
         }
       }
     ]
   };
-
-const SummaryMeter: React.FC<Props> = (props) => {
-
-  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
 
   return (
     <div className={styles.meter}>
@@ -113,12 +116,11 @@ const SummaryMeter: React.FC<Props> = (props) => {
             <div className={styles.text}>With filters applied</div>
         </div>
         <div className={styles.min}>0</div>
-        <div className={styles.min}>0</div>
-        <div className={styles.max}>2,756,000</div>
+        <div className={styles.max}>{ctx.total}</div>
         
         <div className={styles.returned}>
             <div className={styles.separator} />
-            <span>1,125,000</span>
+            <span>{ctx.returned}</span>
         </div>
         <HighchartsReact
             highcharts={Highcharts}

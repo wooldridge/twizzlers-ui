@@ -75,7 +75,7 @@ const Detail: React.FC<Props> = (props) => {
             <div className="col-lg-5">
 
               <Section title="Relationships">
-                <Relationships />
+                <Relationships id={id ? parseInt(id) : 0} />
               </Section>
 
               <Section title="Occupations">

@@ -4,8 +4,9 @@ import Graph from "react-graph-vis";
 import styles from "./Relationships.module.scss";
 
 type Props = {
-  data?: any;
-  config?: any 
+    id: number;
+    data?: any;
+    config?: any 
 };
 
 const Relationships: React.FC<Props> = (props) => {
@@ -46,20 +47,30 @@ const Relationships: React.FC<Props> = (props) => {
         },
     };
 
+    const currentId = ctx.detail["entityInstanceProperties"]["personId"];
+    const imageArr = [
+        "https://cdn1.marklogic.com/wp-content/uploads/2020/04/JamesKenwood-headshot-600x600-1.jpg",
+        "https://cdn1.marklogic.com/wp-content/uploads/2021/07/chuck-hollis.jpeg",
+        "https://cdn1.marklogic.com/wp-content/uploads/2018/02/trinh-lieu-profile.jpg",
+        "https://cdn1.marklogic.com/wp-content/uploads/2021/02/1612313387205.jpeg",
+        "https://cdn1.marklogic.com/wp-content/uploads/2020/11/george-bloom-headshot-300x300-1.jpg"
+        
+    ];
+
     const graph = {
         nodes: [
-          { id: "105", shape: "image", size: 30, image: "https://cdn1.marklogic.com/wp-content/uploads/2021/07/chuck-hollis.jpeg" },
-          { id: "101", shape: "image", size: 30, image: "https://cdn1.marklogic.com/wp-content/uploads/2018/02/trinh-lieu-profile.jpg" },
-          { id: "102", shape: "image", size: 30, image: "https://cdn1.marklogic.com/wp-content/uploads/2021/02/1612313387205.jpeg" },
-          { id: "990", shape: "image", size: 30, image: "https://cdn1.marklogic.com/wp-content/uploads/2020/11/george-bloom-headshot-300x300-1.jpg" },
-          { id: "991", shape: "image", size: 30, image: "https://cdn1.marklogic.com/wp-content/uploads/2020/04/JamesKenwood-headshot-600x600-1.jpg" },
+          { id: currentId, shape: "image", size: 30, image: imageArr[(currentId)%5] },
+          { id: currentId+1, shape: "image", size: 30, image: imageArr[(currentId+1)%5] },
+          { id: currentId+2, shape: "image", size: 30, image: imageArr[(currentId+2)%5] },
+          { id: currentId+3, shape: "image", size: 30, image: imageArr[(currentId+3)%5] },
+          { id: currentId+4, shape: "image", size: 30, image: imageArr[(currentId+4)%5] },
         ],
         edges: [
-          { from: "105", to: "101", label: "relatedTo", font: { align: "top" } },
-          { from: "101", to: "102", label: "relatedTo", font: { align: "top" } },
-          { from: "102", to: "105", label: "worksWith", font: { align: "top" } },
-          { from: "102", to: "990", label: "livesWith", font: { align: "top" } },
-          { from: "101", to: "991", label: "worksWith", font: { align: "top" } },
+          { from: currentId+2, to: currentId, label: "relatedTo", font: { align: "top" } },
+          { from: currentId, to: currentId+1, label: "relatedTo", font: { align: "top" } },
+          { from: currentId+1, to: currentId+2, label: "worksWith", font: { align: "top" } },
+          { from: currentId+1, to: currentId+3, label: "livesWith", font: { align: "top" } },
+          { from: currentId, to: currentId+4, label: "worksWith", font: { align: "top" } },
         ]
       };
 
@@ -70,7 +81,6 @@ const Relationships: React.FC<Props> = (props) => {
             }
         },
         hoverNode: (event) => {
-            console.log("hoverNode", event);
             event.event.target.style.cursor = "pointer";
         }
     };
