@@ -9,7 +9,8 @@ export const configResults = {
         facets: [
             {
                 type: "category",
-                value: "Entities"
+                value: "Entities",
+                disabled: true
             },
             {
                 type: "category",
@@ -22,7 +23,7 @@ export const configResults = {
         ]
     },
     snippet: {
-        id: "entityInstance.customerId",
+        id: "entityInstance.personId",
         thumbnail: {
             src: "entityInstance.image",
             width: 100,

@@ -7,12 +7,16 @@ interface SearchContextInterface {
   qtext: string;
   facetStrings: string[];
   searchResults: any;
+  returned: number;
+  total: number;
   detail: any;
   handleSearch: any;
   handleFacetString: any;
   handleDetail: any;
 }
 interface QueryInterface {
+  start: number;
+  pageLength: number;
   qtext: string;
   facetStrings: {
     name: string;
@@ -25,6 +29,8 @@ const defaultState = {
   facetStrings: [],
   searchResults: {},
   detail: {},
+  returned: 0,
+  total: 0,
   handleSearch: () => {},
   handleFacetString: () => {},
   handleDetail: () => {}
@@ -37,6 +43,13 @@ const SearchProvider: React.FC = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const startInit = 1;
+  const pageLengthInit = 100;
+
+  const [start, setStart] = useState<number>(startInit);
+  const [pageLength, setPagePength] = useState<number>(pageLengthInit);
+  const [returned, setReturned] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const [qtext, setQtext] = useState<string>("");
   const [facetStrings, setFacetStrings] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
@@ -46,8 +59,10 @@ const SearchProvider: React.FC = ({ children }) => {
   const [detail, setDetail] = useState<any>({});
   const [newDetail, setNewDetail] = useState<boolean>(false);
 
-  const buildQuery = ():QueryInterface => {
+  const buildQuery = (start, pageLength):QueryInterface => {
     let query = {
+      start: start,
+      pageLength: pageLength,
       qtext: qtext,
       facetStrings: []
     };
@@ -64,7 +79,10 @@ const SearchProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (newSearch) {
-      setSearchResults(getSearchResults(buildQuery()));
+      let sr = getSearchResults(buildQuery(startInit, pageLengthInit));
+      setSearchResults(sr);
+      setReturned(sr.returned);
+      setTotal(sr.total);
     }
     setNewSearch(false);
   }, [newSearch]);
@@ -116,6 +134,8 @@ const SearchProvider: React.FC = ({ children }) => {
         qtext,
         facetStrings,
         searchResults,
+        returned,
+        total,
         detail,
         handleSearch,
         handleFacetString,

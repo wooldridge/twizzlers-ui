@@ -17,13 +17,14 @@ const Facets: React.FC<Props> = (props) => {
     ctx.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
-  const getFacetValues = (facet, facetValues) => {
+  const getFacetValues = (facet, facetValues, disabled=false) => {
     let result = facetValues.map((fv, index) => {
       return (
         <li key={"facetValue-" + index}>
           <Form.Check 
             type={"checkbox"}
             checked={ctx.facetStrings.includes(facet + ":" + fv.name)}
+            disabled={disabled ? disabled : false}
             id={facet + ":" + fv.name}
             label={fv.name}
             className="shadow-none"
@@ -46,7 +47,7 @@ const Facets: React.FC<Props> = (props) => {
           <ul className={styles.values}>
             {/* Show each facet value (and count) */}
             {ctx.searchResults.facets && ctx.searchResults.facets[f.value] !== undefined ?
-              getFacetValues(f.value, ctx.searchResults.facets[f.value].facetValues) :
+              getFacetValues(f.value, ctx.searchResults.facets[f.value].facetValues, f.disabled) :
               null
             }
           </ul>
