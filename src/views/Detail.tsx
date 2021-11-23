@@ -16,6 +16,9 @@ const Detail: React.FC<Props> = (props) => {
 
   const detailContext = useContext(DetailContext);
   let { id } = useParams();
+  if (_.isEmpty(detailContext.detail)) {
+    detailContext.handleDetail(id);
+  }
 
   // TODO different than displayValue?
   const getValue = (key, res) => {
@@ -52,7 +55,7 @@ const Detail: React.FC<Props> = (props) => {
   return (
 
     <div className={styles.detail}>
-      {(!_.isNil(detailContext.detail))  ? (
+      {(!_.isEmpty(detailContext.detail)) ? (
 
       <div>
 
@@ -84,6 +87,7 @@ const Detail: React.FC<Props> = (props) => {
 
             </div>
           </div>
+
         </div>
 
       </div>
