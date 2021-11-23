@@ -68,7 +68,7 @@ const Detail: React.FC<Props> = (props) => {
             <div className="col-lg-7">
 
               <Section title="Personal Info">
-                <PersonalData />
+                <PersonalData config={configDetail.personal}/>
               </Section>
 
             </div>
