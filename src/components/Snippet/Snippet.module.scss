@@ -34,6 +34,9 @@
         margin-right: 20px;
         top: 5px;
         font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .address {
         width: 380px;
