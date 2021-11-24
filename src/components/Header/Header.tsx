@@ -21,7 +21,7 @@ const Header: React.FC<Props> = (props) => {
   });
 
   return (
-    <header>
+    <header className="sticky-top">
       <div>
         <span className={styles.logo}>
           <ArrowUpRightSquare color="#ccc" size={24} />
