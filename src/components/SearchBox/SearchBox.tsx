@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -18,8 +18,10 @@ const SearchBox: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
 
+  let qtextInit = searchContext.qtext || "";
+
   const [selected, setSelected] = useState<string>("Person");
-  const [qtext, setQtext] = useState<any>("");
+  const [qtext, setQtext] = useState<any>(qtextInit);
 
   // TODO retrieve entities from search results
   let entities = ["Person", "Place", "Thing"];
@@ -28,6 +30,10 @@ const SearchBox: React.FC<Props> = (props) => {
       <Dropdown.Item key={"item-" + i} eventKey={e}>{e}</Dropdown.Item>
     );
   });
+
+  useEffect(() => {
+    setQtext(searchContext.qtext);
+  }, [searchContext.qtext]);
 
   const handleSelect = (e) => {
     setSelected(e);

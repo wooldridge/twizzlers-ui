@@ -10,6 +10,7 @@ interface SearchContextInterface {
   total: number;
   handleSearch: any;
   handleFacetString: any;
+  handleSaved: any;
 }
 interface QueryInterface {
   start: number;
@@ -28,7 +29,8 @@ const defaultState = {
   returned: 0,
   total: 0,
   handleSearch: () => {},
-  handleFacetString: () => {}
+  handleFacetString: () => {},
+  handleSaved: () => {}
 };
 
 export const SearchContext = React.createContext<SearchContextInterface>(defaultState);
@@ -97,6 +99,16 @@ const SearchProvider: React.FC = ({ children }) => {
     setNewSearch(true);
   };
 
+  const handleSaved = (opts) => {
+    console.log("handleSaved", opts);
+    setQtext(opts.qtext);
+    setFacetStrings(opts.facetStrings);
+    if (location.pathname !== "/search") {
+      navigate("/search"); // Handle search submit from another view
+    }
+    setNewSearch(true);
+  };
+
   return (
     <SearchContext.Provider
       value={{
@@ -106,7 +118,8 @@ const SearchProvider: React.FC = ({ children }) => {
         returned,
         total,
         handleSearch,
-        handleFacetString
+        handleFacetString,
+        handleSaved
       }}
     >
       {children}

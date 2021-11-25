@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SearchContext } from "../../store/SearchContext";
 import Table from "react-bootstrap/Table";
 import styles from "./Saved.module.scss";
 import "./Saved.scss";
@@ -11,6 +12,13 @@ type Props = {
 };
 
 const Saved: React.FC<Props> = (props) => {
+
+  const searchContext = useContext(SearchContext);
+
+  const handleClick = (opts) => () => {
+    console.log("handleClick");
+    searchContext.handleSaved(opts);
+  }
 
   function display(cfg, row) {
     if (cfg.type === "text") {
@@ -45,7 +53,7 @@ const Saved: React.FC<Props> = (props) => {
               <tr key={"row-" + i}>
                 {_.isArray(props.config.cols) && props.config.cols.map((c, i) => {
                   return (
-                    <td key={"dat-" + i} className={c.value}>{display(c, r)}</td>
+                    <td key={"dat-" + i} className={c.value} onClick={handleClick(r.query)}>{display(c, r)}</td>
                   );
                 })}
               </tr>

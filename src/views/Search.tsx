@@ -13,7 +13,7 @@ const Search: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
   if (_.isEmpty(searchContext.searchResults)) {
-    searchContext.handleSearch({});
+    searchContext.handleSearch(searchContext.qtext);
   }
 
   return (
