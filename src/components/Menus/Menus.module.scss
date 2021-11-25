@@ -1,0 +1,13 @@
+.menus {
+    margin-right: 50px; 
+}
+.menu {
+    margin-left: 40px; 
+    a {
+        text-decoration: none;
+        color: #ddd;
+        &:hover {
+            color: #ddd;
+        }
+    }
+}

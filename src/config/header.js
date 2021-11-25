@@ -8,6 +8,19 @@ export const configHeader = {
         {
             label: "ML Home",
             url: "http://www.marklogic.com"
+        },
+        {
+            label: "Submenu",
+            submenu: [
+                {
+                    label: "ML Docs",
+                    url: "https://docs.marklogic.com/"
+                },
+                {
+                    label: "Search",
+                    to: "/search"
+                }
+            ]
         }
     ]
 };

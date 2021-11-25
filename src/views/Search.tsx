@@ -18,22 +18,13 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.search}>
-
-    {(!_.isEmpty(searchContext.searchResults)) ? (
-
-      <div>
-        <aside className={styles.sidebar}>
-          <Sidebar config={configResults.sidebar} />
-        </aside>
-
-        <div className={styles.snippet}>
-          <SelectedFacets />
-          <Snippet config={configResults.snippet} />
-        </div>
+      <aside className={styles.sidebar}>
+        <Sidebar config={configResults.sidebar} />
+      </aside>
+      <div className={styles.snippet}>
+        <SelectedFacets />
+        <Snippet config={configResults.snippet} />
       </div>
-
-    ) : null}
-
     </div>
   );
 };
