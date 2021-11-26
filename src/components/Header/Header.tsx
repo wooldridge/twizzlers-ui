@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Menus from "../../components/Menus/Menus";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { configHeader } from "../../config/header.js";
 import { ArrowUpRightSquare, PersonCircle } from "react-bootstrap-icons";
 import styles from "./Header.module.scss";
