@@ -4,14 +4,15 @@ import styles from "./Metrics.module.scss";
 import _ from "lodash";
 
 type Props = {
-  data?: any;
-  config?: any
+  data: any;
+  config: any
 };
 
 /**
  * Component for showing summary statistics for the application.
  *
  * @component
+ * @prop {object} data - Data payload for metrics.
  * @prop {object[]} config  Array of metric configuration objects.
  * @prop {string} config[].title - Metric label.
  * @prop {string} config[].value - Path to metric value in payload.

@@ -6,6 +6,17 @@ type Props = {
     width?: string;
 };
 
+/**
+ * Component for showing a container around one or more other components.
+ *
+ * @component
+ * @prop {string} title - Section label.
+ * @prop {string} value - Section width (as CSS width value, default to "100%").
+ * @example
+ * <Section title="My Section Title" width="200px">
+ *   <SomeComponent />
+ * </Section>
+ */
 const Section: React.FC<Props> = (props) => {
 
   let divStyle = {
