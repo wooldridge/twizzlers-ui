@@ -18,7 +18,9 @@ const Menus: React.FC<Props> = (props) => {
         navigate(to);
     }
 
-    // TODO Possible solution for multiple submenus: https://www.npmjs.com/package/react-bootstrap-submenu
+    // TODO Possible solutions for cascading submenus: 
+    // https://www.npmjs.com/package/react-bootstrap-submenu
+    // https://www.npmjs.com/package/rc-cascader
 
     return (
         <div className={styles.menus}>
