@@ -16,6 +16,23 @@ type Props = {
 
 // TODO Add needle by overlaying a second chart: https://jsfiddle.net/doc_snyder/j5owogor/
 
+/**
+ * Component for showing search summary values as a donut chart.
+ *
+ * @component
+ * @prop {object} config  Configuration object.
+ * @prop {object} config.colors  Color object.
+ * @prop {string} config.colors.all  Color representing all results (HTML color).
+ * @prop {string} config.colors.filters  Color representing results with filters applied (HTML color).
+ * @see {@link https://www.highcharts.com/demo/gauge-solid|Highcharts Solid Gauge}
+ * @example
+ * {
+ *   colors: {
+ *     all: "#cccccc",
+ *     filters: "#5fc9aa"
+ *   }
+ * }
+ */
 const SummaryMeter: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);

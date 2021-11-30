@@ -6,6 +6,15 @@ type Props = {
   config?: any
 };
 
+/**
+ * Component for showing occupation information for record.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object[]} config  Array of configuration objects.
+ * @example
+ * TBD
+ */
 const Occupations: React.FC<Props> = (props) => {
 
   return (

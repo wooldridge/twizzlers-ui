@@ -12,7 +12,7 @@ type Props = {
  * Component for showing summary statistics for the application.
  *
  * @component
- * @prop {object} data - Data payload for metrics.
+ * @prop {object} data - Data payload.
  * @prop {object[]} config  Array of metric configuration objects.
  * @prop {string} config[].title - Metric label.
  * @prop {string} config[].value - Path to metric value in payload.

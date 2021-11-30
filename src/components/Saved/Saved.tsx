@@ -11,6 +11,15 @@ type Props = {
   config?: any
 };
 
+/**
+ * Component for showing saved search queries.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object[]} config  Array of configuration objects.
+ * @example
+ * TBD
+ */
 const Saved: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);

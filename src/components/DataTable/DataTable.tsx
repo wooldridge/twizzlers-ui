@@ -11,6 +11,33 @@ type Props = {
   config?: any
 };
 
+/**
+ * Component for showing one or more values for a property in a tabular view.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object} config  Data table configuration object.
+ * @prop {string} config.title - Table label.
+ * @prop {string} config.property - Path to values in payload.
+ * @prop {string} config.width - Width of table (in pixels).
+ * @prop {object[]} config.labels - Configuration objects for label icons.
+ * @prop {string} config.labels[].type - Label type (e.g. "block").
+ * @prop {string} config.labels[].color - Label color (HTML color code).
+ * @prop {string} config.labels[].value - Label value.
+ * @example
+ * {
+ *   title: "Name",
+ *   property: "path.to.name",
+ *   width: 300,
+ *   labels: [
+ *     {
+ *       type: "block",
+ *       color: "#96bde4",
+ *       value: "A"
+ *     }
+ *   ]
+ * }
+ */
 const DataTable: React.FC<Props> = (props) => {
 
     const detailContext = useContext(DetailContext);

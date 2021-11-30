@@ -8,6 +8,15 @@ type Props = {
   config?: any;
 };
 
+/**
+ * Component for showing search results in snippet format.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object[]} config  Array of configuration objects.
+ * @example
+ * TBD
+ */
 const SearchResults: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);

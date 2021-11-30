@@ -9,11 +9,18 @@ import styles from "./SearchBox.module.scss";
 import "./SearchBox.scss";
 
 type Props = {
-    data?: any;
-    config?: any;
     width?: string;
 };
 
+/**
+ * Component for showing search input box. Includes record type dropdown menu.
+ * Searches are executed by {@link SearchContext}.
+ *
+ * @component
+ * @prop {object} width - Width of search box (CSS width value, defaults to "100%").
+ * @example
+ * <SearchBox width="80%" />
+ */
 const SearchBox: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);

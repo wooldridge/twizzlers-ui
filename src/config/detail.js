@@ -15,13 +15,11 @@ export const configDetail = {
             width: 300,
             labels: [
                 {
-                    title: null,
                     type: "block",
                     color: "#96bde4",
                     value: "B"
                 },
                 {
-                    title: null,
                     type: "block",
                     color: "#5d6aaa",
                     value: "4"
@@ -34,13 +32,11 @@ export const configDetail = {
             width: 300,
             labels: [
                 {
-                    title: null,
                     type: "block",
                     color: "#96bde4",
                     value: "B"
                 },
                 {
-                    title: null,
                     type: "block",
                     color: "#5d6aaa",
                     value: "4"
@@ -53,13 +49,11 @@ export const configDetail = {
             width: 300,
             labels: [
                 {
-                    title: null,
                     type: "block",
                     color: "#96bde4",
                     value: "B"
                 },
                 {
-                    title: null,
                     type: "block",
                     color: "#5d6aaa",
                     value: "4"

@@ -33,6 +33,23 @@ const defaultState = {
   handleSaved: () => {}
 };
 
+/**
+ * Component for storing state of search query and search results. 
+ * Also provides methods for executing searches.
+ * Made available to components that perform searches or display search results.
+ *
+ * @component
+ * @prop {string} qtext - Search query text (e.g., from SearchBox).
+ * @prop {string[]} facetStrings  Array of facet selections (["Widget:Foo", "Widget:Bar"]).
+ * @prop {object} searchResults - Search results object.
+ * @prop {number} returned - Number of records returned in search results.
+ * @prop {number} total - Total number of records available.
+ * @prop {HandleSearch} handleSearch - Callback to execute a search via query text (TODO document interface). 
+ * @prop {HandleFacetString} handleFacetString - Callback to execute a search via facet selection (TODO document interface). 
+ * @prop {HandleSaved} handleSaved - Callback to execute a search via selection of a saved query (TODO document interface). 
+ * @example
+ * TBD
+ */
 export const SearchContext = React.createContext<SearchContextInterface>(defaultState);
 
 const SearchProvider: React.FC = ({ children }) => {

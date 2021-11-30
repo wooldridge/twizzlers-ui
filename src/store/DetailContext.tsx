@@ -12,6 +12,16 @@ const defaultState = {
   handleDetail: () => {}
 };
 
+/**
+ * Component for storing detail of a selected record (e.g., from search results).
+ * Made available to components that display selected record details.
+ *
+ * @component
+ * @prop {string} detail - Selected record detail.
+ * @prop {HandleDetail} handleDetail - Callback to get the record detail (TODO document interface). 
+ * @example
+ * TBD
+ */
 export const DetailContext = React.createContext<DetailContextInterface>(defaultState);
 
 const DetailProvider: React.FC = ({ children }) => {

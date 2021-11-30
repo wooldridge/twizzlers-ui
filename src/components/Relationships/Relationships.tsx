@@ -9,6 +9,16 @@ type Props = {
     config?: any 
 };
 
+/**
+ * Component for showing relationships between records.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object[]} config  Array of relationship configuration objects.
+ * @prop {number} id - ID of root record.
+ * @example
+ * TBD
+ */
 const Relationships: React.FC<Props> = (props) => {
 
     const detailContext = useContext(DetailContext);

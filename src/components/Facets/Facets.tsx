@@ -8,6 +8,28 @@ type Props = {
     config?: any;
 };
 
+/**
+ * Component for showing selectable search facets.
+ * Searches are executed by {@link SearchContext}.
+ *
+ * @component
+ * @prop {object[]} config  Data table configuration object.
+ * @prop {string} config[].type - Facet type (e.g., "category").
+ * @prop {string} config[].value - Facet value.
+ * @prop {boolean} config[].disabled - Is the facet disabled (optional, default to false).
+ * @example
+ * [
+ *   {
+ *     type: "category",
+ *     value: "Widgets"
+ *   },
+ *   {
+ *     type: "category",
+ *     value: "Other Stuff",
+ *     disabled: true
+ *   }
+ * ]
+ */
 const Facets: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);

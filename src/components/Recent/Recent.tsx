@@ -6,6 +6,15 @@ type Props = {
   config?: any
 };
 
+/**
+ * Component for showing recently viewed records.
+ *
+ * @component
+ * @prop {object} data - Data payload.
+ * @prop {object[]} config  Array of configuration objects.
+ * @example
+ * TBD
+ */
 const Recent: React.FC<Props> = (props) => {
 
   return (

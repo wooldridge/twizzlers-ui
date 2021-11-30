@@ -8,6 +8,14 @@ type Props = {
   config?: any;
 };
 
+/**
+ * Component for showing selected facets in current search query.
+ * Select facet information is provided by {@link SearchContext}.
+ *
+ * @component
+ * @example
+ * <SelectedFacets />
+ */
 const SelectedFacets: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
