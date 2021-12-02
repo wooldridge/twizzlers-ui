@@ -54,5 +54,25 @@ export const configDashboard = {
                 sortable: true
             }
         ]
+    },
+
+    // Config for Recent component in Dashboard
+    recent: {
+        id: "entityInstance.personId",
+        thumbnail: {
+            src: "entityInstance.image",
+            width: 100,
+            height: 100
+        },
+        title: "entityInstance.name",
+        address: {
+            street: "entityInstance.address.street",
+            city: "entityInstance.address.city",
+            state: "entityInstance.address.state",
+            zip: ["entityInstance.address.zip.fiveDigit", "entityInstance.address.zip.plusFour"]
+        },
+        phone: "entityInstance.phone",
+        email: "entityInstance.email",
+        sources: "entityInstance.sources"
     }
 };

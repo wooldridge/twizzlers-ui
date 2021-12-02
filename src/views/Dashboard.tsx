@@ -5,20 +5,23 @@ import Section from "../components/Section/Section";
 import Search from "../components/Search/Search";
 import Recent from "../components/Recent/Recent";
 import {configDashboard} from "../config/dashboard.js";
-import {getSummary} from "../api/api";
+import {getRecent} from "../api/api";
 import {getSaved} from "../api/api";
+import {getSummary} from "../api/api";
 import styles from "./Dashboard.module.scss";
 
 type Props = {};
 
 const Dashboard: React.FC<Props> = (props) => {
 
-  const [summary, setSummary] = useState<any>({});
+  const [recent, setRecent] = useState<any>({});
   const [saved, setSaved] = useState<any>({});
+  const [summary, setSummary] = useState<any>({});
 
   useEffect(() => {
-    setSummary(getSummary({}));
+    setRecent(getRecent({}));
     setSaved(getSaved({}));
+    setSummary(getSummary({}));
   }, []);
 
   return (
@@ -48,7 +51,7 @@ const Dashboard: React.FC<Props> = (props) => {
             </Section>
 
             <Section title="Recently Visited">
-              <Recent />
+              <Recent data={recent} config={configDashboard.recent} />
             </Section>
 
           </div>

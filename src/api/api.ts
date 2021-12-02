@@ -63,3 +63,25 @@ export const getDetail = (opts) => {
   }
   return result;
 };
+
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+// export const getRecent = async (opts) => { // TODO
+export const getRecent = (opts) => {
+  // return await axios.get(`/api/getRecent`); // TODO
+  const rand = getRandomInt(1, 90);
+  console.log("getRecent rand", rand);
+  console.log("getRecent", opts);
+  const myPersons = _.clone(persons);
+  let personsSlice = myPersons.slice(rand, rand+5);
+  const rand2 = getRandomInt(0, 5);
+  personsSlice = personsSlice.map((p, i) => {
+    p["alert"] = i === rand2;
+    return p;
+  });
+  return personsSlice;
+};
