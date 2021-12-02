@@ -7,8 +7,8 @@ import {ExclamationTriangleFill, EyeFill} from "react-bootstrap-icons";
 import _ from "lodash";
 
 type Props = {
-  data?: any;
-  config?: any
+  data: any;
+  config: any
 };
 
 /**
@@ -16,9 +16,29 @@ type Props = {
  *
  * @component
  * @prop {object} data - Data payload.
- * @prop {object[]} config  Array of configuration objects.
+ * @prop {object} config  Configuration object.
+ * @prop {object[]} config.cols  Array of column configuration objects.
+ * @prop {string} config.cols[].title  Column title (or null for no title).
+ * @prop {string} config.cols[].type  Column type ("text", "date", or "icon").
+ * @prop {string} config.cols[].value  Path to column value.
+ * @prop {function} config.cols[].test  Test function to perform on value (optional).
+ * @prop {boolean} config.cols[].sortable  Is column sortable?
  * @example
- * TBD
+ * { cols: [
+ *    {
+ *        title: null,
+ *        type: "icon",
+ *        value: "hasChanges",
+ *        test: function (value) {return (value === true)},
+ *        sortable: false
+ *    },
+ *    {
+ *        title: "Name",
+ *        type: "text",
+ *        value: "name",
+ *        sortable: true
+ *     }
+ * ]}
  */
 const Saved: React.FC<Props> = (props) => {
 

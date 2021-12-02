@@ -10,14 +10,47 @@ type Props = {
 
 /**
  * Component for showing search results in snippet format.
+ * Data payload provided by {@link SearchContext}.
  *
  * @component
- * @prop {object} data - Data payload.
- * @prop {object[]} config  Array of configuration objects.
+ * @prop {object} config  Configuration object.
+ * @prop {string} config.id  Path to ID.
+ * @prop {object} config.thumbnail  Thumbnail configuration object.
+ * @prop {string} config.thumbnail.src  Thumbnail source URL.
+ * @prop {string} config.thumbnail.width  Thumbnail width (in pixels).
+ * @prop {string} config.thumbnail.height  Thumbnail height (in pixels).
+ * @prop {string} config.title  Path to title.
+ * @prop {string} config.createOn  Path to date of creation.
+ * @prop {object} config.address  Address configuration object.
+ * @prop {string} config.address.street  Path to street.
+ * @prop {string} config.address.city  Path to city.
+ * @prop {string} config.address.state  Path to state.
+ * @prop {string[]} config.address.zip  Array of paths to 5-digit and 4-digit codes.
+ * @prop {string} config.phone  Path to phone.
+ * @prop {string} config.email  Path to email.
+ * @prop {string[]} config.items  Array of display value paths.
  * @example
- * TBD
+ * {
+ *   id: "personId",
+ *   thumbnail: {
+ *       src: "image",
+ *       width: 100,
+ *       height: 100
+ *   },
+ *   title: "name",
+ *   createdOn: "createdOn",
+ *   address: {
+ *       street: "address.street",
+ *       city: "address.city",
+ *       state: "address.state",
+ *       zip: ["address.zip.fiveDigit", "address.zip.plusFour"]
+ *   },
+ *   phone: "phone",
+ *   email: "email",
+ *   items: ["ssn", "status"]
+ * }
  */
-const SearchResults: React.FC<Props> = (props) => {
+const Snippet: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
   const detailContext = useContext(DetailContext);
@@ -104,4 +137,4 @@ const SearchResults: React.FC<Props> = (props) => {
   );
 };
 
-export default SearchResults;
+export default Snippet;
