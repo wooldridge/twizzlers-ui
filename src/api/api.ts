@@ -32,10 +32,25 @@ export const getSearchResults = (query) => {
       personsSlice = newArr;
     }
   });
-  results["results"] = personsSlice;
-  results["returned"] = personsSlice.length;
-  results["total"] = persons.length;
-  return results;
+  // TODO Fake qtext search for now...
+  let qRes;
+  if (query.qtext.trim() !== '') {
+    let test;
+    // Check first name
+    qRes = personsSlice.filter(p => {
+      test = Array.isArray(p.entityInstance.name) ? 
+        p.entityInstance.name.join(' ').toLowerCase() : 
+        p.entityInstance.name.toLowerCase();
+      return test.includes(query.qtext.trim().toLowerCase());
+    });
+  }
+  personsSlice = (qRes !== undefined && qRes.length > 0) ? qRes : personsSlice;
+  return {
+    ...results,
+    results: personsSlice,
+    returned: personsSlice.length,
+    total: persons.length
+  }
 };
 
 // export const getSummary = async (opts) => { // TODO
