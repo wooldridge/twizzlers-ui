@@ -1,11 +1,22 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
+import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
 import styles from "./Snippet.module.scss";
 import _ from "lodash";
 
 type Props = {
   config?: any;
+};
+
+// TODO store color-to-source mapping in config
+const sourceColors = {
+  "New York Times": "#cfe3e9",
+  "USA Today": "#f7e9d5",
+  "Los Angeles Times": "#f6e4e0",
+  "Wall Street Journal": "#f1f6dc",
+  "Washington Post": "#cfe3e9",
+  "Chicago Tribune": "#f7e9d5",
 };
 
 /**
@@ -67,6 +78,11 @@ const Snippet: React.FC<Props> = (props) => {
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
   };
 
+  const getArrayValue = (key, res) => {
+    let val = _.get(res, key);
+    return Array.isArray(val) ? val : [val];
+  };
+
   const displayValue = (key, res) => {
     let val = _.get(res, key);
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
@@ -82,43 +98,59 @@ const Snippet: React.FC<Props> = (props) => {
     let snippet = props.config;
     let res = searchContext.searchResults.results.map((res, index) => {
       let items = snippet.items.map((it, index) => {
+        let val = _.isObject(it) ? it.value : it;
         return (
           <div key={"item-" + index} className={styles.items}>
-            {displayValue(it, res)}
+            <span className={styles[it.class]} style={it.style}>{displayValue(val, res)}</span>
           </div>
         );
       });
       return (
         <div key={"result-" + index} className={styles.result}>
           <div className={styles.thumbnail}>
+            {snippet.thumbnail ? 
             <img
               src={getValue(snippet.thumbnail.src, res)}
               alt={getValue(snippet.title, res)}
-            ></img>
+            ></img> : null}
           </div>
-          <div className={styles.text}>
-            <div className={styles.createdOn}>
-                Created on: {displayDate(snippet.createdOn, res)}
-            </div>
+          <div className={styles.details}>
             <div className={styles.title} id={getValue(snippet.id, res)} onClick={handleNameClick}>
               {displayValue(snippet.title, res)}
-              {/* <Link to={"/detail/" + getValue(snippet.id, res)}>{displayValue(snippet.title, res)}</Link> */}
             </div>
             <div className={styles.subtitle}>
+              {snippet.address ? 
               <div className={styles.address}>
                 {displayValue(snippet.address.street, res)},&nbsp;
                 {displayValue(snippet.address.city, res)},&nbsp;
                 {displayValue(snippet.address.state, res)}&nbsp;
                 {displayValue(snippet.address.zip[0], res)}-
                 {displayValue(snippet.address.zip[1], res)}
-              </div>
-              <div className={styles.phone}>
-                {displayValue(snippet.phone, res)}
-              </div>
-              <div className={styles.email}>
-                {displayValue(snippet.email, res)}
-              </div>
+              </div> : null}
               {items}
+            </div>
+            {snippet.categories ? 
+            <div className={styles.categories}>
+              {getArrayValue(snippet.categories, res).map(s => {
+                return (
+                  <div style={{backgroundColor: sourceColors[s]}}>{s}</div>
+                )
+              })}
+            </div> : null}
+          </div>
+          <div className={styles.actions}>
+            {snippet.timestamp ? 
+            <div className={styles.timestamp}>
+              {snippet.timestamp.label} {displayDate(snippet.timestamp.value, res)}
+            </div> : null}
+            <div className={styles.icons}>
+              {snippet.status ? 
+              <div className={styles.status}>
+                {displayValue(snippet.status, res)}
+              </div> : null}
+              <GearFill color="#5d6aaa" size={16} />
+              <CodeSlash color="#5d6aaa" size={16} />
+              <ArrowRepeat color="#5d6aaa" size={16} />
             </div>
           </div>
         </div>
