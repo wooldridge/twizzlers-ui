@@ -36,16 +36,15 @@ const sourceColors = {
  * @prop {string} config.address.city  Path to city.
  * @prop {string} config.address.state  Path to state.
  * @prop {string[]} config.address.zip  Array of paths to 5-digit and 4-digit codes.
- * @prop {string} config.phone  Path to phone.
- * @prop {string} config.email  Path to email.
- * @prop {string} config.sources  Path to array of sources.
+ * @prop {string[]} config.items  Array of paths to properties to display.
+ * @prop {string} config.categories  Path to array of sources.
  * @example
  * {
  *   id: "personId",
  *   thumbnail: {
- *     src: "image",
- *     width: 100,
- *     height: 100
+ *     src: "imageUrl",
+ *     width: "100px",
+ *     height: "100px"
  *   },
  *   title: "name",
  *   address: {
@@ -54,9 +53,8 @@ const sourceColors = {
  *     state: "address.state",
  *     zip: ["address.zip.fiveDigit", "address.zip.plusFour"]
  *   },
- *   phone: "phone",
- *   email: "email",
- *   sources: "sources"
+ *   items: ["phone", "email"],
+ *   categories: "sources"
  * }
  */
 const Recent: React.FC<Props> = (props) => {
@@ -77,6 +75,11 @@ const Recent: React.FC<Props> = (props) => {
     return _.isNil(val) ? null : val;
   };
 
+  const getArrayValue = (key, res) => {
+    let val = _.get(res, key);
+    return Array.isArray(val) ? val : [val];
+  };
+
   const displayValue = (key, res) => {
     let val = _.get(res, key);
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
@@ -86,6 +89,13 @@ const Recent: React.FC<Props> = (props) => {
     console.log("props.data", props.data);
     console.log("props.config", props.config);
     let res = props.data.map((recent, index) => {
+      let items = props.config.items.map((it, index) => {
+        return (
+          <div key={"item-" + index} className={styles.item}>
+            {displayValue(it, recent)}
+          </div>
+        );
+      });
       return (
         <div key={"recent-" + index} className={styles.result}>
           <div className={styles.alert}>
@@ -95,6 +105,7 @@ const Recent: React.FC<Props> = (props) => {
             <img
               src={getValue(props.config.thumbnail.src, recent)}
               alt={getValue(props.config.title, recent)}
+              style={{width: props.config.thumbnail.width, height: props.config.thumbnail.height}}
             ></img>
           </div>
           <div className={styles.text}>
@@ -109,15 +120,10 @@ const Recent: React.FC<Props> = (props) => {
               {displayValue(props.config.address.zip[1], recent)}
             </div>
             <div className={styles.items}>
-              <div className={styles.phone}>
-                {displayValue(props.config.phone, recent)}
-              </div>
-              <div className={styles.email}>
-                {displayValue(props.config.email, recent)}
-              </div>
+              {items}
             </div>
-            <div className={styles.sources}>
-              {getValue(props.config.sources, recent).map(s => {
+            <div className={styles.categories}>
+              {getArrayValue(props.config.categories, recent).map(s => {
                 return (
                   <div style={{backgroundColor: sourceColors[s]}}>{s}</div>
                 )

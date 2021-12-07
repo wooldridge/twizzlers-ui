@@ -61,8 +61,8 @@ export const configDashboard = {
         id: "entityInstance.personId",
         thumbnail: {
             src: "entityInstance.image",
-            width: 100,
-            height: 100
+            width: "70px",
+            height: "70px"
         },
         title: "entityInstance.name",
         address: {
@@ -71,8 +71,7 @@ export const configDashboard = {
             state: "entityInstance.address.state",
             zip: ["entityInstance.address.zip.fiveDigit", "entityInstance.address.zip.plusFour"]
         },
-        phone: "entityInstance.phone",
-        email: "entityInstance.email",
-        sources: "entityInstance.sources"
+        items: ["entityInstance.phone", "entityInstance.email"],
+        categories: "entityInstance.sources"
     }
 };

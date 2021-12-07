@@ -41,29 +41,30 @@
     div.items > div {
         position: relative;
         display: inline-block;
-        min-width: 130px;
+        width: 160px;
         font-size: 15px;
         top: -2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .address {
         width: 100%;
         font-size: 15px;
     }
     .phone {
-        width: 120px;
         font-weight: bold;
     }
     .email {
         color: #5d6aaa;
     }
-    .sources {
+    .categories {
         position: absolute;
         top: 0;
         right: 0;
         > div {
             display: inline-block;
             padding: 1px 6px;
-            background-color: red;
+            background-color: #cfe3e9;
             border-radius: 4px;
             margin-left: 6px;
             font-size: 14px;

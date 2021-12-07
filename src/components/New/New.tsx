@@ -19,7 +19,7 @@ const New: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.new}>
-        What's New content...
+        What's New content (to come)...
     </div>
   );
 };
