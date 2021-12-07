@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DetailContext } from "../store/DetailContext";
 import Occupations from "../components/Occupations/Occupations";
 import PersonalData from "../components/PersonalData/PersonalData";
@@ -13,6 +13,12 @@ import _ from "lodash";
 type Props = {};
 
 const Detail: React.FC<Props> = (props) => {
+  
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
   const detailContext = useContext(DetailContext);
   let { id } = useParams();
@@ -36,8 +42,8 @@ const Detail: React.FC<Props> = (props) => {
     let config = configDetail.heading;
     return (
       <div className={styles.heading}>
-      <div className={styles.icon}>
-        <Link to="/search"><ArrowLeft color="#5d6aaa" size={28} /></Link>
+      <div className={styles.icon} onClick={handleBackClick}>
+        <ArrowLeft color="#5d6aaa" size={28} />
       </div>
       <div className={styles.title}>
         {displayValue(config.title, detailContext.detail)}
