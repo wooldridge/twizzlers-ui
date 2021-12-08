@@ -6,12 +6,31 @@ import {saved} from "../mocks/saved";
 import {detail} from "../mocks/detail";
 import _ from "lodash";
 
-// TODO make async/await
-export const getSearchResults = (query) => { 
-  const results = axios.post(`/api/explore`, query); // TODO
-  console.log("getSearchResults", query, results);
-  return results;
+export const getSearchResults = async (query) => { 
+  try {
+    const response = await axios.post(`/api/explore`, query);
+    console.log("getSearchResults", query, response);
+    if (response && response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    let message = error;
+    console.error("Error: getSearchResults", message);
+  }
 };
+
+// export const getMappingFunctions = async () => {
+//   try {
+//     let response = await axios.get(`/api/artifacts/mapping/functions`);
+
+//     if (response && response.status === 200) {
+//       return response;
+//     }
+//   } catch (error) {
+//     let message = error;
+//     console.error("Error getting functions", message);
+//   }
+// };
 
 // export const getSearchResults = async (query) => { // TODO
 export const getSearchResultsOld = (query) => {

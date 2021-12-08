@@ -23,29 +23,29 @@ export const configResults = {
         ]
     },
     snippet: {
-        id: "entityInstance.personId",
+        id: "extracted.person.personId",
         thumbnail: {
-            src: "entityInstance.image",
+            src: "extracted.person.image",
             width: 100,
             height: 100
         },
-        title: "entityInstance.name",
+        title: "extracted.person.name",
         address: {
-            street: "entityInstance.address.street",
-            city: "entityInstance.address.city",
-            state: "entityInstance.address.state",
-            zip: ["entityInstance.address.zip.fiveDigit", "entityInstance.address.zip.plusFour"]
+            street: "extracted.person.address.street",
+            city: "extracted.person.address.city",
+            state: "extracted.person.address.state",
+            zip: ["extracted.person.address.zip.fiveDigit", "extracted.person.address.zip.plusFour"]
         },
         items: [
-            { value: "entityInstance.phone", class: "phone"},
-            { value: "entityInstance.email", class: "email"},
-            "entityInstance.ssn"
+            { value: "extracted.person.phone", class: "phone"},
+            { value: "extracted.person.email", class: "email"},
+            "extracted.person.ssn"
         ],
-        categories: "entityInstance.sources",
-        timestamp: {
-            value: "createdOn",
-            label: "Created On:"
-        },
-        status: "entityInstance.status"
+        categories: "extracted.person.sources",
+        // timestamp: {
+        //     value: "createdOn",
+        //     label: "Created On:"
+        // },
+        status: "extracted.person.status"
     }
 };

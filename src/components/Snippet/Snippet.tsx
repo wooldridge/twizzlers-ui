@@ -96,7 +96,7 @@ const Snippet: React.FC<Props> = (props) => {
 
   const getResults = () => {
     let snippet = props.config;
-    let res = searchContext.searchResults.results.map((res, index) => {
+    let res = searchContext.searchResults.result.map((res, index) => {
       let items = snippet.items.map((it, index) => {
         let val = _.isObject(it) ? it.value : it;
         return (
@@ -161,7 +161,7 @@ const Snippet: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {(searchContext.searchResults.results && searchContext.searchResults.results.length) > 0 ? (
+      {(searchContext.searchResults.result && searchContext.searchResults.result.length) > 0 ? (
         <div>{getResults()}</div>
       ) : null
       }

@@ -74,7 +74,7 @@ const SearchProvider: React.FC = ({ children }) => {
   const [searchResults, setSearchResults] = useState<any>({});
   const [newSearch, setNewSearch] = useState<boolean>(false);
 
-  const buildQuery = (start, pageLength):QueryInterface => {
+  const buildQuery = (start, pageLength, _qtext):QueryInterface => {
     // let query = {
     //   start: start,
     //   pageLength: pageLength,
@@ -96,7 +96,7 @@ const SearchProvider: React.FC = ({ children }) => {
     //   "selectedFacets": {}
     // }
     let query = {
-      searchText: "Georges",
+      searchText: _qtext,
       entityTypeIds: ["person"],
       selectedFacets: {}
     };
@@ -105,7 +105,8 @@ const SearchProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (newSearch) {
-      let sr = getSearchResults(buildQuery(startInit, pageLengthInit));
+      setNewSearch(false);
+      let sr = getSearchResults(buildQuery(startInit, pageLengthInit, qtext));
       console.log("SearchContext getSearchResults", sr);
       sr.then((result) => {
         console.log("SearchContext getSearchResults result", result);
@@ -117,7 +118,17 @@ const SearchProvider: React.FC = ({ children }) => {
     }
   }, [newSearch]);
 
-  const handleSearch = (qtext) => {
+  const handleSearch = async (qtext) => {
+    if (location.pathname !== "/search") {
+      navigate("/search"); // Handle search submit from another view
+    }
+    setQtext(qtext);
+    let sr = await getSearchResults(buildQuery(startInit, pageLengthInit, qtext));
+    console.log("setSearchResults", sr?.data.searchResults.response);
+    setSearchResults(sr?.data.searchResults.response);
+  };
+
+  const handleSearchOld = (qtext) => {
     if (location.pathname !== "/search") {
       navigate("/search"); // Handle search submit from another view
     }
