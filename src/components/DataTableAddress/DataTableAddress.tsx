@@ -2,8 +2,12 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import styles from "./DataTableAddress.module.scss";
 import "./DataTableAddress.scss";
-import {ArrowBarDown} from "react-bootstrap-icons";
+import {ArrowBarDown, GeoAltFill} from "react-bootstrap-icons";
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import _ from "lodash";
+import GeoMap from "../GeoMap/GeoMap"
+
 
 type Props = {
   data?: any;
@@ -63,6 +67,14 @@ const DataTableAddress: React.FC<Props> = (props) => {
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     };
 
+    const popover = (
+        <Popover id="mapPopover">
+          <Popover.Body>
+            <GeoMap />
+          </Popover.Body>
+        </Popover>
+    );
+
     return (
         <div className="dataTableAddress">
             <div className="title">
@@ -85,6 +97,7 @@ const DataTableAddress: React.FC<Props> = (props) => {
                             <th key={"head-" + (i2 + props.config.cols.length)}></th>
                         );
                     })}
+                    <th key={"head-map"}></th>
                 </tr>
             </thead>
             <tbody>
@@ -103,6 +116,13 @@ const DataTableAddress: React.FC<Props> = (props) => {
                                 </td>
                             );
                         })}
+                        <td key={"map"}>
+                            <div className="mapTrigger">
+                                <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                                    <GeoAltFill color="#5d6aaa" size={19} />
+                                </OverlayTrigger>
+                            </div>
+                        </td>
                     </tr>
                 );
                 })}

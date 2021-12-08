@@ -57,4 +57,22 @@
         position: relative;
         top: 4px;
     }
+    .mapTrigger {
+        cursor: pointer;
+    }
+}
+
+#mapPopover {
+    width: 400px !important;
+    height: 300px;
+    max-width: 100%;
+    .mapContent {
+        width: 600px !important;
+    }
+    .popover-body {
+        padding: 0 !important;
+    }
+    .popover-arrow::after {
+        border-right-color: #eee;
+    }
 }
