@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { DetailContext } from "../../store/DetailContext";
 import DataTable from "../DataTable/DataTable";
+import DataTableAddress from "../DataTableAddress/DataTableAddress";
 import styles from "./PersonalData.module.scss";
 
 type Props = {
@@ -17,6 +18,7 @@ const PersonalData: React.FC<Props> = (props) => {
         <DataTable config={props.config.name} data={detailContext.detail.entityInstanceProperties.name} />
         <DataTable config={props.config.phone} data={detailContext.detail.entityInstanceProperties.phone} />
         <DataTable config={props.config.email} data={detailContext.detail.entityInstanceProperties.email} />
+        <DataTableAddress config={props.config.address} data={detailContext.detail} />
     </div>
   );
 };

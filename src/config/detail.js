@@ -59,6 +59,40 @@ export const configDetail = {
                     value: "4"
                 }
             ]
+        },
+        address: {
+            title: "Address",
+            width: 600,
+            cols: [
+                {
+                    title: "Street",
+                    value: "entityInstanceProperties.address.street"
+                },
+                {
+                    title: "City",
+                    value: "entityInstanceProperties.address.city"
+                },
+                {
+                    title: "State",
+                    value: "entityInstanceProperties.address.state"
+                },
+                {
+                    title: "Zip",
+                    value: "entityInstanceProperties.address.zip.fiveDigit"
+                }
+            ],
+            labels: [
+                {
+                    type: "block",
+                    color: "#96bde4",
+                    value: "B"
+                },
+                {
+                    type: "block",
+                    color: "#5d6aaa",
+                    value: "4"
+                }
+            ]
         }
     }
 };

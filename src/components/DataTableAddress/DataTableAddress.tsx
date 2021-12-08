@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import styles from "./DataTable.module.scss";
-import "./DataTable.scss";
+import styles from "./DataTableAddress.module.scss";
+import "./DataTableAddress.scss";
 import {ArrowBarDown} from "react-bootstrap-icons";
 import _ from "lodash";
 
@@ -17,17 +17,30 @@ type Props = {
  * @prop {object} data - Data payload.
  * @prop {object} config  Data table configuration object.
  * @prop {string} config.title - Table label.
- * @prop {string} config.property - Path to values in payload.
  * @prop {string} config.width - Width of table (in pixels).
+ * @prop {object[]} config.cols - Configuration objects for columns.
+ * @prop {string} config.cols[].title - Column heading title.
+ * @prop {string} config.cols[].value - Path to value in data payload.
  * @prop {object[]} config.labels - Configuration objects for label icons.
  * @prop {string} config.labels[].type - Label type (e.g. "block").
  * @prop {string} config.labels[].color - Label color (HTML color code).
  * @prop {string} config.labels[].value - Label value.
  * @example
  * {
- *   title: "Name",
- *   property: "path.to.name",
- *   width: 300,
+ *   title: "Address",
+ *   width: 600,
+ *   cols: [
+ *      {
+ *          title: "Street",
+ *          type: "text",
+ *          value: "path.to.street"
+ *      },
+ *      {
+ *          title: "City",
+ *          type: "text",
+ *          value: "path.to.city"
+ *      }
+ *   ],
  *   labels: [
  *     {
  *       type: "block",
@@ -37,7 +50,7 @@ type Props = {
  *   ]
  * }
  */
-const DataTable: React.FC<Props> = (props) => {
+const DataTableAddress: React.FC<Props> = (props) => {
 
     let tableStyle = {
         width: props.config.width ? props.config.width + 'px' : "100%"
@@ -45,8 +58,13 @@ const DataTable: React.FC<Props> = (props) => {
 
     let data = _.isArray(props.data) ? props.data : [props.data];
 
+    const displayValue = (key, res) => {
+        let val = _.get(res, key);
+        return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
+    };
+
     return (
-        <div className="dataTable">
+        <div className="dataTableAddress">
             <div className="title">
                 <span>{props.config.title}</span>
                 {data.length > 1 ?
@@ -55,14 +73,32 @@ const DataTable: React.FC<Props> = (props) => {
                     </span> : null}
             </div>
             <Table size="sm" hover style={tableStyle}>
+            <thead>
+                <tr>
+                    {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
+                        return (
+                            <th key={"head-" + i}>{col.title}</th>
+                        );
+                    })}
+                    {_.isArray(props.config.labels) && props.config.labels.map((col, i2) => {
+                        return (
+                            <th key={"head-" + (i2 + props.config.cols.length)}></th>
+                        );
+                    })}
+                </tr>
+            </thead>
             <tbody>
                 {data.map((d, i) => {
                 return (
                     <tr key={"row-" + i}>
-                        <td key={"data-" + i}><span className={styles.rowValue}>{d}</span></td>
+                        {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
+                            return (
+                                <td key={"data-" + i}><span className={styles.rowValue}>{displayValue(col.value, d)}</span></td>
+                            );
+                        })}
                         {_.isArray(props.config.labels) && props.config.labels.map((label, i2) => {
                             return (
-                                <td key={"label-" + i2}>
+                                <td key={"label-" + (i2 + props.config.cols.length)}>
                                     <div className="labelValue">{label.value}</div>
                                 </td>
                             );
@@ -76,4 +112,4 @@ const DataTable: React.FC<Props> = (props) => {
     );
 };
 
-export default DataTable;
+export default DataTableAddress;

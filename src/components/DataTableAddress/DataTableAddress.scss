@@ -1,0 +1,60 @@
+.dataTableAddress {
+    display: flex;
+    align-items: flex-start;
+    tbody {
+        border-top-width: 1px !important;
+        border-top-width: 0 !important;
+    }
+    tbody tr td, thead tr th {
+        border-bottom-color: #a0e2d3 !important;
+        padding: 4px 2px;
+    }
+    .title {
+        width: 150px;
+        position: relative;
+        top: 4px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 10px;
+    }
+    .show {
+        cursor: pointer;
+        color: #5d6aaa;
+    }
+    thead tr th {
+        font-weight: normal;
+    }
+    tbody tr td:nth-child(1) {
+        width: 320px;
+    }
+    tbody tr td:nth-child(2) {
+        width: 140px;
+    }
+    tbody tr td:nth-child(3) {
+        width: 50px;
+    }
+    tbody tr td:nth-child(4) {
+        width: 65px;
+    }
+    tbody tr td:nth-child(5) .labelValue {
+        background-color: #96bde4;
+    }
+    tbody tr td:nth-child(6) .labelValue {
+        background-color: #5d6aaa;
+    }
+    tbody tr:first-child td span {
+        font-weight: bold;
+    }
+    .labelValue {
+        font-size: 12px;
+        text-align: center;
+        font-weight: bold;
+        height: 18px;
+        width: 16px;
+        border-radius: 2px;
+        color: white;
+        margin: 0;
+        position: relative;
+        top: 4px;
+    }
+}

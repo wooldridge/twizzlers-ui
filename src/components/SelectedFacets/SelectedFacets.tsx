@@ -10,7 +10,7 @@ type Props = {
 
 /**
  * Component for showing selected facets in current search query.
- * Select facet information is provided by {@link SearchContext}.
+ * Selected facet information is provided by {@link SearchContext}.
  *
  * @component
  * @example
