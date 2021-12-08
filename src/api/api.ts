@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import persons from "../mocks/persons.json";
 import {searchResults} from "../mocks/results";
 import {summary} from "../mocks/summary";
@@ -6,8 +6,15 @@ import {saved} from "../mocks/saved";
 import {detail} from "../mocks/detail";
 import _ from "lodash";
 
+// TODO make async/await
+export const getSearchResults = (query) => { 
+  const results = axios.post(`/api/explore`, query); // TODO
+  console.log("getSearchResults", query, results);
+  return results;
+};
+
 // export const getSearchResults = async (query) => { // TODO
-export const getSearchResults = (query) => {
+export const getSearchResultsOld = (query) => {
   // return await axios.get(`/api/searchResults`); // TODO
   console.log("getSearchResults", query);
   const results = _.clone(searchResults);
