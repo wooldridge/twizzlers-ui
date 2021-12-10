@@ -42,10 +42,10 @@ export const configResults = {
             "extracted.person.ssn"
         ],
         categories: "extracted.person.sources",
-        // timestamp: {
-        //     value: "createdOn",
-        //     label: "Created On:"
-        // },
+        timestamp: {
+            value: "extracted.person.createdOn",
+            label: "Created On:"
+        },
         status: "extracted.person.status"
     }
 };
