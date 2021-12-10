@@ -68,7 +68,7 @@ const Facets: React.FC<Props> = (props) => {
           <div className={styles.title}>{f.value}</div>
           <ul className={styles.values}>
             {/* Show each facet value (and count) */}
-            {searchContext.searchResults.facets && searchContext.searchResults.facets[f.value] !== undefined ?
+            {searchContext.searchResults?.facets && searchContext.searchResults.facets[f.value] !== undefined ?
               getFacetValues(f.value, searchContext.searchResults.facets[f.value].facetValues, f.disabled) :
               null
             }

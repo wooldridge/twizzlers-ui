@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { SearchContext } from "../store/SearchContext";
+import React from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Snippet from "../components/Snippet/Snippet";
 import SelectedFacets from "../components/SelectedFacets/SelectedFacets";
@@ -10,11 +9,6 @@ import _ from "lodash";
 type Props = {};
 
 const Search: React.FC<Props> = (props) => {
-
-  const searchContext = useContext(SearchContext);
-  if (_.isEmpty(searchContext.searchResults)) {
-    searchContext.handleSearch(searchContext.qtext);
-  }
 
   return (
     <div className={styles.search}>

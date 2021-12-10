@@ -161,7 +161,7 @@ const Snippet: React.FC<Props> = (props) => {
 
   return (
     <div>
-      {(searchContext.searchResults.result && searchContext.searchResults.result.length) > 0 ? (
+      {(searchContext.searchResults?.result?.length) > 0 ? (
         <div>{getResults()}</div>
       ) : null
       }
