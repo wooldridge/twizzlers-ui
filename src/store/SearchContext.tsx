@@ -12,15 +12,6 @@ interface SearchContextInterface {
   handleFacetString: any;
   handleSaved: any;
 }
-// interface QueryInterface {
-//   start: number;
-//   pageLength: number;
-//   qtext: string;
-//   facetStrings: {
-//     name: string;
-//     values: string[];
-//   }[];
-// }
 interface QueryInterface {
   searchText: string;
   entityTypeIds: string[];
@@ -74,47 +65,39 @@ const SearchProvider: React.FC = ({ children }) => {
   const [searchResults, setSearchResults] = useState<any>({});
   const [newSearch, setNewSearch] = useState<boolean>(false);
 
-  const buildQuery = (start, pageLength, _qtext):QueryInterface => {
-    // let query = {
-    //   start: start,
-    //   pageLength: pageLength,
-    //   qtext: qtext,
-    //   facetStrings: []
-    // };
-    // facetStrings.forEach(fs => {
-    //   let parts = fs.split(":");
-    //   if (query.facetStrings[parts[0]]) {
-    //     query.facetStrings[parts[0]].push(parts[1]);
-    //   } else {
-    //     query.facetStrings[parts[0]] = [parts[1]];
-    //   }
-    // });
-    // Sample payload
-    // {
-    //   "searchText": "Georges",
-    //   "entityTypeIds": ["person"],
-    //   "selectedFacets": {}
-    // }
+  const buildQuery = (start, pageLength, _qtext, _facetStrings):QueryInterface => {
     let query = {
       searchText: _qtext,
       entityTypeIds: ["person"],
       selectedFacets: {}
     };
+    if (facetStrings && facetStrings.length > 0) {
+      facetStrings.forEach(fs => {
+        let parts = fs.split(":");
+        if (query.selectedFacets[parts[0]]) {
+          query.selectedFacets[parts[0]].push(parts[1]);
+        } else {
+          query.selectedFacets[parts[0]] = [parts[1]];
+        }
+      });
+    }
     return query;
   };
 
   useEffect(() => {
     if (newSearch) {
       setNewSearch(false);
-      let sr = getSearchResults(buildQuery(startInit, pageLengthInit, qtext));
-      console.log("SearchContext getSearchResults", sr);
-      sr.then((result) => {
-        console.log("SearchContext getSearchResults result", result);
+      let newQuery = buildQuery(startInit, pageLengthInit, qtext, facetStrings);
+      let sr = getSearchResults(newQuery);
+      sr.then(result => {
+        setSearchResults(result?.data.searchResults.response);
+        setReturned(result?.data.searchResults.response.total);
+        // TODO need total records in database in result
+        setTotal(5);
         setNewSearch(false);
+      }).catch(error => {
+        console.error(error);
       })
-      // setSearchResults(sr);
-      // setReturned(sr.returned);
-      // setTotal(sr.total);
     }
   }, [newSearch]);
 
@@ -123,9 +106,7 @@ const SearchProvider: React.FC = ({ children }) => {
       navigate("/search"); // Handle search submit from another view
     }
     setQtext(qtext);
-    let sr = await getSearchResults(buildQuery(startInit, pageLengthInit, qtext));
-    console.log("setSearchResults", sr?.data.searchResults.response);
-    setSearchResults(sr?.data.searchResults.response);
+    setNewSearch(true);
   };
 
   const handleSearchOld = (qtext) => {
@@ -136,7 +117,18 @@ const SearchProvider: React.FC = ({ children }) => {
     setNewSearch(true);
   };
 
-  const handleFacetString = (name, value, selected) => {
+  const handleFacetString = async (name, value, selected) => {
+    if (selected) {
+      let newFacetString = name + ":" + value;
+      setFacetStrings(prevState => [...prevState, newFacetString]);
+    } else {
+      let newFacetStrings = facetStrings.filter(f => (f !== (name + ":" + value)));
+      setFacetStrings(newFacetStrings);
+    }
+    setNewSearch(true);
+  };
+
+  const handleFacetStringOld = (name, value, selected) => {
     if (selected) {
       let newFacetString = name + ":" + value;
       setFacetStrings(prevState => [...prevState, newFacetString]);
@@ -148,7 +140,6 @@ const SearchProvider: React.FC = ({ children }) => {
   };
 
   const handleSaved = (opts) => {
-    console.log("handleSaved", opts);
     setQtext(opts.qtext);
     setFacetStrings(opts.facetStrings);
     if (location.pathname !== "/search") {

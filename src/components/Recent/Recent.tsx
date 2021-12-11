@@ -3,20 +3,11 @@ import { DetailContext } from "../../store/DetailContext";
 import styles from "./Recent.module.scss";
 import _ from "lodash";
 import {ExclamationTriangleFill} from "react-bootstrap-icons";
+import {colors} from "../../config/colors";
 
 type Props = {
   data: any;
   config: any
-};
-
-// TODO store color-to-source mapping in config
-const sourceColors = {
-  "New York Times": "#cfe3e9",
-  "USA Today": "#f7e9d5",
-  "Los Angeles Times": "#f6e4e0",
-  "Wall Street Journal": "#f1f6dc",
-  "Washington Post": "#cfe3e9",
-  "Chicago Tribune": "#f7e9d5",
 };
 
 /**
@@ -59,13 +50,10 @@ const sourceColors = {
  */
 const Recent: React.FC<Props> = (props) => {
 
-  console.log("props.recent", props.data);
-
   const detailContext = useContext(DetailContext);
 
   const handleNameClick = (e) => {
     console.log("handleNameClick", e);
-    console.log("detailContext", detailContext);
     detailContext.handleDetail(e.target.id);
   };
 
@@ -86,8 +74,6 @@ const Recent: React.FC<Props> = (props) => {
   };
 
   const getRecent = () => {
-    console.log("props.data", props.data);
-    console.log("props.config", props.config);
     let res = props.data.map((recent, index) => {
       let items = props.config.items.map((it, index) => {
         return (
@@ -125,7 +111,7 @@ const Recent: React.FC<Props> = (props) => {
             <div className={styles.categories}>
               {getArrayValue(props.config.categories, recent).map((s, i) => {
                 return (
-                  <div key={"category-" + i} style={{backgroundColor: sourceColors[s]}}>{s}</div>
+                  <div key={"category-" + i} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
                 )
               })}
             </div>

@@ -39,23 +39,25 @@ const Facets: React.FC<Props> = (props) => {
     searchContext.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
-  const getFacetValues = (facet, facetValues, disabled=false) => {
-    let result = facetValues.map((fv, index) => {
-      return (
-        <li key={"facetValue-" + index}>
-          <Form.Check 
-            type={"checkbox"}
-            checked={searchContext.facetStrings.includes(facet + ":" + fv.name)}
-            disabled={disabled ? disabled : false}
-            id={facet + ":" + fv.name}
-            label={fv.name}
-            className="shadow-none"
-            onChange={handleSelect}
-          />
-          <div className={styles.count}>{fv.count.toLocaleString()}</div>
-        </li>
-      )
-    });
+  const getFacetValues = (facet, facetObjects, disabled=false) => {
+    let facetObj = facetObjects.find(obj => obj.name === facet);
+    let result = facetObj["facet-value"] ? 
+      facetObj["facet-value"].map((fv, index) => {
+        return (
+          <li key={"facetValue-" + index}>
+            <Form.Check 
+              type={"checkbox"}
+              checked={searchContext.facetStrings && searchContext.facetStrings.includes(facet + ":" + fv.name)}
+              disabled={disabled ? disabled : false}
+              id={facet + ":" + fv.name}
+              label={fv.name}
+              className="shadow-none"
+              onChange={handleSelect}
+            />
+            <div className={styles.count}>{fv.count.toLocaleString()}</div>
+          </li>
+        )
+      }) : null;
     return <div>{result}</div>
   }
 
@@ -68,8 +70,8 @@ const Facets: React.FC<Props> = (props) => {
           <div className={styles.title}>{f.value}</div>
           <ul className={styles.values}>
             {/* Show each facet value (and count) */}
-            {searchContext.searchResults?.facets && searchContext.searchResults.facets[f.value] !== undefined ?
-              getFacetValues(f.value, searchContext.searchResults.facets[f.value].facetValues, f.disabled) :
+            {searchContext.searchResults?.facet && searchContext.searchResults.facet?.length > 0 ?
+              getFacetValues(f.value, searchContext.searchResults.facet, f.disabled) :
               null
             }
           </ul>

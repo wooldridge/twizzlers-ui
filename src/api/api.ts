@@ -115,7 +115,6 @@ const getRandomInt = (min, max) => {
 export const getRecent = (opts) => {
   // return await axios.get(`/api/getRecent`); // TODO
   const rand = getRandomInt(1, 90);
-  console.log("getRecent rand", rand);
   console.log("getRecent", opts);
   const myPersons = _.clone(persons);
   let personsSlice = myPersons.slice(rand, rand+5);

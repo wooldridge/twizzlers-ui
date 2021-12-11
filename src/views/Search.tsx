@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
-import Snippet from "../components/Snippet/Snippet";
+import ResultsList from "../components/ResultsList/ResultsList";
 import SelectedFacets from "../components/SelectedFacets/SelectedFacets";
 import styles from "./Search.module.scss";
 import {configResults} from "../config/results.js";
@@ -17,7 +17,7 @@ const Search: React.FC<Props> = (props) => {
       </aside>
       <div className={styles.snippet}>
         <SelectedFacets />
-        <Snippet config={configResults.snippet} />
+        <ResultsList config={configResults.snippet} />
       </div>
     </div>
   );

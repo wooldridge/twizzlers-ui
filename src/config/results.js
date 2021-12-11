@@ -9,16 +9,16 @@ export const configResults = {
         facets: [
             {
                 type: "category",
-                value: "Entities",
+                value: "Collection",
                 disabled: true
             },
             {
                 type: "category",
-                value: "Sources"
+                value: "sources"
             },
             {
                 type: "category",
-                value: "Status"
+                value: "status"
             }
         ]
     },
