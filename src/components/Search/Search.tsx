@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Saved from "../../components/Saved/Saved";
+import {configSearchbox} from "../../config/searchbox.js";
 import styles from "./Search.module.scss";
 
 type Props = {
@@ -23,7 +24,7 @@ const Search: React.FC<Props> = (props) => {
     <div className="search">
       <div className={styles.newSearch}>
         <h4>New Search</h4>
-        <SearchBox width="100%" />
+        <SearchBox config={configSearchbox} width="100%" />
       </div>
       <div className={styles.divider}>- or -</div>
       <div className={styles.savedSearches}>

@@ -4,6 +4,7 @@ import { getSearchResults } from "../api/api";
 
 interface SearchContextInterface {
   qtext: string;
+  entityType: any;
   facetStrings: string[];
   searchResults: any;
   returned: number;
@@ -20,6 +21,7 @@ interface QueryInterface {
   
 const defaultState = {
   qtext: "",
+  entityType: "",
   facetStrings: [],
   searchResults: {},
   returned: 0,
@@ -61,6 +63,7 @@ const SearchProvider: React.FC = ({ children }) => {
   const [returned, setReturned] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [qtext, setQtext] = useState<string>("");
+  const [entityType, setEntityType] = useState<any>("");
   const [facetStrings, setFacetStrings] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const [newSearch, setNewSearch] = useState<boolean>(false);
@@ -68,7 +71,7 @@ const SearchProvider: React.FC = ({ children }) => {
   const buildQuery = (start, pageLength, _qtext, _facetStrings):QueryInterface => {
     let query = {
       searchText: _qtext,
-      entityTypeIds: ["person"],
+      entityTypeIds: Array.isArray(entityType) ? entityType : [entityType],
       selectedFacets: {}
     };
     if (facetStrings && facetStrings.length > 0) {
@@ -101,11 +104,12 @@ const SearchProvider: React.FC = ({ children }) => {
     }
   }, [newSearch]);
 
-  const handleSearch = async (qtext) => {
+  const handleSearch = async (qtext, entityType) => {
     if (location.pathname !== "/search") {
       navigate("/search"); // Handle search submit from another view
     }
     setQtext(qtext);
+    setEntityType(entityType);
     setNewSearch(true);
   };
 
@@ -152,6 +156,7 @@ const SearchProvider: React.FC = ({ children }) => {
     <SearchContext.Provider
       value={{
         qtext,
+        entityType,
         facetStrings,
         searchResults,
         returned,
