@@ -24,7 +24,7 @@ const Search: React.FC<Props> = (props) => {
     <div className="search">
       <div className={styles.newSearch}>
         <h4>New Search</h4>
-        <SearchBox config={configSearchbox} width="100%" />
+        <SearchBox config={configSearchbox} button="vertical" width="100%" />
       </div>
       <div className={styles.divider}>- or -</div>
       <div className={styles.savedSearches}>

@@ -9,7 +9,6 @@ import _ from "lodash";
 export const getSearchResults = async (query) => { 
   try {
     const response = await axios.post(`/api/explore`, query);
-    console.log("getSearchResults", query, response);
     if (response && response.status === 200) {
       return response;
     }
@@ -19,23 +18,10 @@ export const getSearchResults = async (query) => {
   }
 };
 
-// export const getMappingFunctions = async () => {
-//   try {
-//     let response = await axios.get(`/api/artifacts/mapping/functions`);
-
-//     if (response && response.status === 200) {
-//       return response;
-//     }
-//   } catch (error) {
-//     let message = error;
-//     console.error("Error getting functions", message);
-//   }
-// };
-
 // export const getSearchResults = async (query) => { // TODO
 export const getSearchResultsOld = (query) => {
   // return await axios.get(`/api/searchResults`); // TODO
-  console.log("getSearchResults", query);
+  //console.log("getSearchResults", query);
   const results = _.clone(searchResults);
   results["start"] = query.start;
   results["pageLength"] = query.pageLength;
@@ -82,14 +68,14 @@ export const getSearchResultsOld = (query) => {
 // export const getSummary = async (opts) => { // TODO
 export const getSummary = (opts) => {
   // return await axios.get(`/api/summary`); // TODO
-  console.log("getSummary", opts, summary);
+  //console.log("getSummary", opts, summary);
   return summary;
 };
 
 // export const getSaved = async (opts) => { // TODO
 export const getSaved = (opts) => {
   // return await axios.get(`/api/saved`); // TODO
-  console.log("getSaved", opts, saved);
+  //console.log("getSaved", opts, saved);
   return saved;
 };
 
@@ -115,7 +101,7 @@ const getRandomInt = (min, max) => {
 export const getRecent = (opts) => {
   // return await axios.get(`/api/getRecent`); // TODO
   const rand = getRandomInt(1, 90);
-  console.log("getRecent", opts);
+  //console.log("getRecent", opts);
   const myPersons = _.clone(persons);
   let personsSlice = myPersons.slice(rand, rand+5);
   const rand2 = getRandomInt(0, 5);

@@ -16,18 +16,38 @@ type Props = {
 
 /**
  * Component for showing search input box. Includes record type dropdown menu and optional submit button.
- * Searches are executed by {@link SearchContext}.
+ * Submitted searches are executed by {@link SearchContext}.
  *
  * @component
  * @prop {object} config - Configuration object.
  * @prop {object[]} config.items - Array of menu item objects.
  * @prop {string} config.items.label - Menu item label.
  * @prop {string|string[]} config.items.value - Menu item value (as string or array of strings).
- * @prop {string} button - Whether to display a submit button ("true" or "false"). Default is "false".
- * @prop {string} buttonAlign - Button alignment ("vertical" or "horizontal"). Default is "horizontal".
+ * @prop {string} config.items.default - Set to "true" if menu item should be selected as the default. Optional.
+ * @prop {string} button - Display an aligned submit button ("vertical" or "horizontal"). Optional.
  * @prop {string} width - Width of search box (as CSS width value). Default is "100%".
  * @example
- * <SearchBox width="80%" />
+ * // Configuration Object
+ * const menuConfig = { 
+ *     items: [
+ *         {
+ *             label: "All",
+ *             value: ["ent1", "ent2"]
+ *         },
+ *         {
+ *             label: "Default Item",
+ *             value: "ent1",
+ *             default: "true"
+ *         },
+ *         {
+ *             label: "Another Item",
+ *             value: "ent2"
+ *         }
+ *     ]
+ * };
+ * @example
+ * // JSX
+ * <SearchBox config={menuConfig} button="true" buttonAlign="vertical" width="80%" />
  */
 const SearchBox: React.FC<Props> = (props) => {
 
@@ -39,7 +59,7 @@ const SearchBox: React.FC<Props> = (props) => {
   let items: any = [];
   if (props.config && props.config.items && props.config.items.length > 0) {
     items = props.config.items;
-    let found = items.find(item => item.default === true);
+    let found = items.find(item => item.default === "true");
     selectedInit = found ? found.label : items[0].label;
   }
 
@@ -64,8 +84,8 @@ const SearchBox: React.FC<Props> = (props) => {
   };
 
   // Get entity value ("person") for a selected menu label ("Person")
-  const getEntityVal = selected => {
-    let found = items.find(item => item.label === selected);
+  const getEntityVal = sel => {
+    let found = items.find(item => item.label === sel);
     return found ? found.value : "";
   }
 
@@ -104,23 +124,25 @@ const SearchBox: React.FC<Props> = (props) => {
         <DropdownButton
           variant="outline-secondary"
           title={selected}
+          data-testid="searchBoxDropdown"
           id="searchBoxDropdown"
           onSelect={handleSelect}
         >
           {menuItems}
         </DropdownButton> }
         <FormControl
+          data-testid="searchBox"
           className="shadow-none"
           value={qtext}
           onKeyDown={(e) => handleEnter(e) }
           onChange={handleChange}
         />
-        { props.button !== "true" && 
-          <Search color="#999" size={18} className="searchIcon" />
+        { !props.button && 
+          <Search color="#999" size={18} className="searchIcon" data-testid="searchIcon" />
         }
-        { props.button === "true" && 
-          <div className={props.buttonAlign ? props.buttonAlign : "horizontal"}>
-            <button className="submit" onClick={handleButton}>Search</button>
+        { props.button && 
+          <div className={props.button}>
+            <button data-testid="submit" className="submit" onClick={handleButton}>Search</button>
           </div>
         }
       </InputGroup>
