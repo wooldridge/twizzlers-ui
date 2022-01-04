@@ -47,7 +47,7 @@ type Props = {
  * };
  * @example
  * // JSX
- * <SearchBox config={menuConfig} button="true" buttonAlign="vertical" width="80%" />
+ * <SearchBox config={menuConfig} button="vertical" width="80%" />
  */
 const SearchBox: React.FC<Props> = (props) => {
 
