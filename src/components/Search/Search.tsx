@@ -26,11 +26,11 @@ const Search: React.FC<Props> = (props) => {
         <h4>New Search</h4>
         <SearchBox config={configSearchbox} button="vertical" width="100%" />
       </div>
-      <div className={styles.divider}>- or -</div>
+      {/* <div className={styles.divider}>- or -</div>
       <div className={styles.savedSearches}>
         <h4>Saved Searches</h4>
         <Saved data={props.data} config={props.config.saved} />
-      </div>
+      </div> */}
     </div>
   );
 };

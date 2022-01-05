@@ -33,26 +33,49 @@ const DetailProvider: React.FC = ({ children }) => {
   const [detail, setDetail] = useState<any>({});
   const [newDetail, setNewDetail] = useState<boolean>(false);
 
+  // TODO determine if useEffect is needed like in searchContext
   useEffect(() => {
     if (newDetail) {
-      console.log(location.pathname, detailId);
-      let data = getDetail(detailId);
-      // Only execute if detail data exists
-      if (data) {
-        if (location.pathname !== "/detail/" + detailId) {
-          navigate("/detail/" + detailId); // Detail click from another view
-        }
-        setDetail(data);
-        console.log("useEffect setDetail", detail);
+      setNewDetail(false);
+      let newQuery = {
+          "searchText": "",
+          "entityTypeIds": ["person"],
+          "selectedFacets": {
+              "personId": [detailId]
+          }
       }
+      let sr = getDetail(newQuery);
+      sr.then(result => {
+        setDetail(result?.data.searchResults.response);
+        setNewDetail(false);
+      }).catch(error => {
+        console.error(error);
+      })
     }
-    setNewDetail(false);
   }, [newDetail]);
 
   const handleDetail = (id) => {
     console.log("handleDetail", id);
+    if (location.pathname !== "/detail/" + id) {
+      navigate("/detail/" + id); // Detail click from another view
+    }
     setDetailId(id);
-    setNewDetail(true);
+    // TODO using search results endpoint for now filtered by ID
+    let newQuery = {
+        "searchText": "",
+        "entityTypeIds": ["person"],
+        "selectedFacets": {
+            "personId": [id]
+        }
+    }
+    let sr = getDetail(newQuery);
+    sr.then(result => {
+      setDetail(result?.data.searchResults.response);
+      // setNewDetail(false);
+    }).catch(error => {
+      console.error(error);
+    })
+    // setNewDetail(true);
   };
 
   return (

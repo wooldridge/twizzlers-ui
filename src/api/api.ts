@@ -79,8 +79,20 @@ export const getSaved = (opts) => {
   return saved;
 };
 
+export const getDetail = async (query) => {
+  try {
+    const response = await axios.post(`/api/explore`, query);
+    if (response && response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    let message = error;
+    console.error("Error: getDetail", message);
+  }
+};
+
 // export const getDetail = async (opts) => { // TODO
-export const getDetail = (opts) => {
+export const getDetailOld = (opts) => {
   // return await axios.get(`/api/saved`); // TODO
   const result = _.clone(detail);
   const person = persons.find(p => p.entityInstance.personId === parseInt(opts));

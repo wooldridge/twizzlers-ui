@@ -57,7 +57,8 @@ const Relationships: React.FC<Props> = (props) => {
         },
     };
 
-    const currentId = detailContext.detail["entityInstanceProperties"]["personId"];
+    //const currentId = detailContext.detail.result[0].extracted.person["personId"];
+    const currentId = props.id;
     const imageArr = [
         "https://cdn1.marklogic.com/wp-content/uploads/2020/04/JamesKenwood-headshot-600x600-1.jpg",
         "https://cdn1.marklogic.com/wp-content/uploads/2021/07/chuck-hollis.jpeg",

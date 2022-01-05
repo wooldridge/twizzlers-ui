@@ -83,13 +83,13 @@ const Detail: React.FC<Props> = (props) => {
             </div>
             <div className="col-lg-5">
 
-              <Section title="Relationships">
+              {/* <Section title="Relationships">
                 <Relationships id={id ? parseInt(id) : 0} />
               </Section>
 
               <Section title="Occupations">
                 <Occupations />
-              </Section>
+              </Section> */}
 
             </div>
           </div>

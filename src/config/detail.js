@@ -1,17 +1,17 @@
 export const configDetail = { 
     heading: {
-        id: "entityInstance.customerId",
+        id: "result[0].extracted.person.personId",
         thumbnail: {
-            src: "entityInstanceProperties.image",
+            src: "result[0].extracted.person.image",
             width: 100,
             height: 100
         },
-        title: "entityInstanceProperties.name"
+        title: "result[0].extracted.person.name"
     },
     personal: {
         name: {
             title: "Name",
-            property: "entityInstanceProperties.name",
+            property: "result[0].extracted.person.name",
             width: 300,
             labels: [
                 {
@@ -28,7 +28,7 @@ export const configDetail = {
         },
         phone: {
             title: "Phone Number",
-            property: "entityInstanceProperties.phone",
+            property: "result[0].extracted.person.phone",
             width: 300,
             labels: [
                 {
@@ -45,7 +45,7 @@ export const configDetail = {
         },
         email: {
             title: "Email",
-            property: "entityInstanceProperties.email",
+            property: "result[0].extracted.person.email",
             width: 300,
             labels: [
                 {
@@ -66,19 +66,19 @@ export const configDetail = {
             cols: [
                 {
                     title: "Street",
-                    value: "entityInstanceProperties.address.street"
+                    value: "result[0].extracted.person.address.street"
                 },
                 {
                     title: "City",
-                    value: "entityInstanceProperties.address.city"
+                    value: "result[0].extracted.person.address.city"
                 },
                 {
                     title: "State",
-                    value: "entityInstanceProperties.address.state"
+                    value: "result[0].extracted.person.address.state"
                 },
                 {
                     title: "Zip",
-                    value: "entityInstanceProperties.address.zip.fiveDigit"
+                    value: "result[0].extracted.person.address.zip.fiveDigit"
                 }
             ],
             labels: [

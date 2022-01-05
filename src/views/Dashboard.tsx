@@ -30,7 +30,7 @@ const Dashboard: React.FC<Props> = (props) => {
 
         <div className="row">
 
-          <Metrics data={summary.metrics} config={configDashboard.metrics} />
+          {/* <Metrics data={summary.metrics} config={configDashboard.metrics} /> */}
 
         </div>
 
@@ -46,13 +46,13 @@ const Dashboard: React.FC<Props> = (props) => {
 
           <div className="col-lg">
 
-            <Section title="What's New with Entities">
+            {/* <Section title="What's New with Entities">
               <New />
             </Section>
 
             <Section title="Recently Visited">
               <Recent data={recent} config={configDashboard.recent} />
-            </Section>
+            </Section> */}
 
           </div>
 
