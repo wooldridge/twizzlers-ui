@@ -1,4 +1,5 @@
 import axios from "axios";
+import {endpoints} from "../config/endpoints.js";
 import persons from "../mocks/persons.json";
 import {searchResults} from "../mocks/results";
 import {summary} from "../mocks/summary";
@@ -8,7 +9,7 @@ import _ from "lodash";
 
 export const getSearchResults = async (query) => { 
   try {
-    const response = await axios.post(`/api/explore`, query);
+    const response = await axios.post(endpoints.searchResults, query);
     if (response && response.status === 200) {
       return response;
     }
@@ -81,7 +82,7 @@ export const getSaved = (opts) => {
 
 export const getDetail = async (query) => {
   try {
-    const response = await axios.post(`/api/explore`, query);
+    const response = await axios.post(endpoints.detail, query);
     if (response && response.status === 200) {
       return response;
     }
