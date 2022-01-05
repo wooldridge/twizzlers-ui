@@ -6,7 +6,7 @@ import ErrorHandler from "./store/ErrorHandler";
 import Dashboard from "./views/Dashboard";
 import Detail from "./views/Detail";
 import Search from "./views/Search";
-import Header from "./components/Header/Header";
+import Header from "./views/Header";
 import "./App.scss";
 
 type Props = {};
