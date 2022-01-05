@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Address from "../Address/Address";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
 import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
@@ -9,6 +10,10 @@ import _ from "lodash";
 type Props = {
   config?: any;
 };
+
+const COMPONENTS = {
+  Address: Address
+}
 
 /**
  * Component for showing search results in list format.
@@ -59,39 +64,42 @@ const ResultsList: React.FC<Props> = (props) => {
 
   const handleNameClick = (e) => {
     console.log("handleNameClick", e);
-    console.log("detailContext", detailContext);
+
     detailContext.handleDetail(e.target.id);
   };
 
   // TODO different than displayValue?
-  const getValue = (key, res) => {
-    let val = _.get(res, key);
+  const getValue = (key, results) => {
+    let val = _.get(results, key);
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
   };
 
-  const getArrayValue = (key, res) => {
-    let val = _.get(res, key);
+  const getArrayValue = (key, results) => {
+    let val = _.get(results, key);
     return Array.isArray(val) ? val : [val];
   };
 
-  const displayValue = (key, res) => {
-    let val = _.get(res, key);
+  const displayValue = (key, results) => {
+    let val = _.get(results, key);
     return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
   };
 
-  const displayDate = (key, res) => {
-    let val = _.get(res, key);
+  const displayDate = (key, results) => {
+    let val = _.get(results, key);
     let parts = val.split("T");
     return _.isNil(parts[0]) ? null : parts[0];
   };
 
   const getResults = () => {
-    let res = searchContext.searchResults.result.map((res, index) => {
+    let results = searchContext.searchResults.result.map((results, index) => {
       let items = props.config.items.map((it, index) => {
+        if (it.component) {
+          return React.createElement(COMPONENTS[it.component], { config: it.data, data: results}, null);
+        }
         let val = _.isObject(it) ? it.value : it;
         return (
           <div key={"item-" + index} className={styles.items}>
-            <span className={styles[it.class]} style={it.style}>{displayValue(val, res)}</span>
+            <span className={styles[it.class]} style={it.style}>{displayValue(val, results)}</span>
           </div>
         );
       });
@@ -100,28 +108,20 @@ const ResultsList: React.FC<Props> = (props) => {
           <div className={styles.thumbnail}>
             {props.config.thumbnail ? 
             <img
-              src={getValue(props.config.thumbnail.src, res)}
-              alt={getValue(props.config.title, res)}
+              src={getValue(props.config.thumbnail.src, results)}
+              alt={getValue(props.config.title, results)}
             ></img> : null}
           </div>
           <div className={styles.details}>
-            <div className={styles.title} id={getValue(props.config.id, res)} onClick={handleNameClick}>
-              {displayValue(props.config.title, res)}
+            <div className={styles.title} id={getValue(props.config.id, results)} onClick={handleNameClick}>
+              {displayValue(props.config.title, results)}
             </div>
             <div className={styles.subtitle}>
-              {props.config.address ? 
-              <div className={styles.address}>
-                {displayValue(props.config.address.street, res)},&nbsp;
-                {displayValue(props.config.address.city, res)},&nbsp;
-                {displayValue(props.config.address.state, res)}&nbsp;
-                {displayValue(props.config.address.zip[0], res)}-
-                {displayValue(props.config.address.zip[1], res)}
-              </div> : null}
               {items}
             </div>
             {props.config.categories ? 
             <div className={styles.categories}>
-              {getArrayValue(props.config.categories, res).map(s => {
+              {getArrayValue(props.config.categories, results).map(s => {
                 return (
                   <div key={"cat-" + index} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
                 )
@@ -131,12 +131,12 @@ const ResultsList: React.FC<Props> = (props) => {
           <div className={styles.actions}>
             {props.config.timestamp ? 
             <div className={styles.timestamp}>
-              {props.config.timestamp.label} {displayDate(props.config.timestamp.value, res)}
+              {props.config.timestamp.label} {displayDate(props.config.timestamp.value, results)}
             </div> : null}
             <div className={styles.icons}>
               {props.config.status ? 
               <div className={styles.status}>
-                {displayValue(props.config.status, res)}
+                {displayValue(props.config.status, results)}
               </div> : null}
               <GearFill color="#5d6aaa" size={16} />
               <CodeSlash color="#5d6aaa" size={16} />
@@ -146,7 +146,7 @@ const ResultsList: React.FC<Props> = (props) => {
         </div>
       );
     });
-    return res;
+    return results;
   };
 
   return (

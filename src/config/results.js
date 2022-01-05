@@ -30,13 +30,17 @@ export const configResults = {
             height: 100
         },
         title: "extracted.person.name",
-        address: {
-            street: "extracted.person.address.street",
-            city: "extracted.person.address.city",
-            state: "extracted.person.address.state",
-            zip: ["extracted.person.address.zip.fiveDigit", "extracted.person.address.zip.plusFour"]
-        },
         items: [
+            { 
+                component: "Address", 
+                data: {
+                    street1: "extracted.person.address.street",
+                    city: "extracted.person.address.city",
+                    state: "extracted.person.address.state",
+                    postal1: "extracted.person.address.zip.fiveDigit",
+                    postal2: "extracted.person.address.zip.plusFour"
+                }
+            },
             { value: "extracted.person.phone", class: "phone"},
             { value: "extracted.person.email", class: "email"},
             "extracted.person.ssn"
