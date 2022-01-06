@@ -17,7 +17,7 @@ const Search: React.FC<Props> = (props) => {
       </aside>
       <div className={styles.snippet}>
         <SelectedFacets />
-        <ResultsList config={configResults.snippet} />
+        <ResultsList config={configResults.results} />
       </div>
     </div>
   );

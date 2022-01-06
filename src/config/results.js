@@ -22,7 +22,7 @@ export const configResults = {
             }
         ]
     },
-    snippet: {
+    results: {
         id: "extracted.person.personId",
         thumbnail: {
             src: "extracted.person.image",
@@ -46,9 +46,9 @@ export const configResults = {
                     textOverflow: "ellipsis"
                 }
             },
-            { value: "extracted.person.phone", class: "phone"},
-            { value: "extracted.person.email", class: "email"},
-            "extracted.person.ssn"
+            { value: "extracted.person.phone", className: "phone" },
+            { value: "extracted.person.email", className: "email" },
+            { value: "extracted.person.ssn" }
         ],
         categories: "extracted.person.sources",
         timestamp: {

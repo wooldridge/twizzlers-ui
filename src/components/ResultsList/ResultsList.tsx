@@ -3,7 +3,7 @@ import Address from "../Address/Address";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
 import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
-import styles from "./ResultsList.module.scss";
+import "./ResultsList.scss";
 import {colors} from "../../config/colors";
 import _ from "lodash";
 
@@ -21,41 +21,51 @@ const COMPONENTS = {
  *
  * @component
  * @prop {object} config  Configuration object.
- * @prop {string} config.id  Path to ID.
+ * @prop {string} config.id  Path to ID. Passed as identifier to Detail view. 
  * @prop {object} config.thumbnail  Thumbnail configuration object.
  * @prop {string} config.thumbnail.src  Thumbnail source URL.
  * @prop {string} config.thumbnail.width  Thumbnail width (in pixels).
  * @prop {string} config.thumbnail.height  Thumbnail height (in pixels).
- * @prop {string} config.title  Path to title.
- * @prop {string} config.createOn  Path to date of creation.
- * @prop {object} config.address  Address configuration object.
- * @prop {string} config.address.street  Path to street.
- * @prop {string} config.address.city  Path to city.
- * @prop {string} config.address.state  Path to state.
- * @prop {string[]} config.address.zip  Array of paths to 5-digit and 4-digit codes.
- * @prop {string} config.phone  Path to phone.
- * @prop {string} config.email  Path to email.
- * @prop {string[]} config.items  Array of display value paths.
+ * @prop {string} config.title  Path to title. Clicking title takes you to Detail view.
+ * @prop {object[]} config.items  Array of item configuration objects.
+ * @prop {string} config.items[].value  Path to item value.
+ * @prop {string} config.items[].className  CSS class name to apply to item.
+ * @prop {string} config.items[].component  Name of component to instatiate for item.
+ * @prop {object} config.items[].config  Object of configuration properties for component
+ * @prop {object} config.timestamp  Timestamp configuration object.
+ * @prop {string} config.timestamp.value  Path to timestamp.
+ * @prop {string} config.timestamp.label  Label prefix for timestamp.
+ * @prop {string} config.status  Path to status.
  * @example
- * {
- *   id: "personId",
+ * // Configuration
+ * const searchResultsConfig = { 
+ *   id: "extracted.person.id",
  *   thumbnail: {
- *       src: "image",
+ *       src: "extracted.person.image",
  *       width: 100,
  *       height: 100
  *   },
- *   title: "name",
- *   createdOn: "createdOn",
- *   address: {
- *       street: "address.street",
- *       city: "address.city",
- *       state: "address.state",
- *       zip: ["address.zip.fiveDigit", "address.zip.plusFour"]
+ *   title: "extracted.person.name",
+ *   items: [
+ *       {
+ *          component: "Address", 
+ *          config: {
+ *            city: "extracted.person.address.city",
+ *            state: "extracted.person.address.state"
+ *          }
+ *       },
+ *       {value: "extracted.person.phone", className: "phone"},
+ *       {value: "extracted.person.ssn"}
+ *   ],
+ *   timestamp: {
+ *       value: "extracted.person.createdOn",
+ *       label: "Time is"
  *   },
- *   phone: "phone",
- *   email: "email",
- *   items: ["ssn", "status"]
+ *   status: "extracted.person.status"
  * }
+ * @example
+ * // JSX
+ * <ResultsList config={searchResultsConfig} />
  */
 const ResultsList: React.FC<Props> = (props) => {
 
@@ -63,8 +73,6 @@ const ResultsList: React.FC<Props> = (props) => {
   const detailContext = useContext(DetailContext);
 
   const handleNameClick = (e) => {
-    console.log("handleNameClick", e);
-
     detailContext.handleDetail(e.target.id);
   };
 
@@ -94,48 +102,61 @@ const ResultsList: React.FC<Props> = (props) => {
     let results = searchContext.searchResults.result.map((results, index) => {
       let items = props.config.items.map((it, index) => {
         if (it.component) {
-          return React.createElement(COMPONENTS[it.component], { config: it.config, data: results, styles: it.styles }, null);
+          // Component
+          return (
+            <div key={"item-" + index} className="item">
+              {React.createElement(COMPONENTS[it.component], { config: it.config, data: results, styles: it.styles }, null)}
+            </div>
+          );
+        } else if (_.isObject(it)) {
+          // Object
+          return (
+            <div key={"item-" + index} className="item">
+              <span className={it.className} style={it.style ? it.style : null}>{displayValue(it.value, results)}</span>
+            </div>
+          )
+        } else {
+          // String
+          return (
+            <div key={"item-" + index} className="item">
+              <span>{displayValue(it, results)}</span>
+            </div>
+          )
         }
-        let val = _.isObject(it) ? it.value : it;
-        return (
-          <div key={"item-" + index} className={styles.items}>
-            <span className={styles[it.class]} style={it.style}>{displayValue(val, results)}</span>
-          </div>
-        );
       });
       return (
-        <div key={"result-" + index} className={styles.result}>
-          <div className={styles.thumbnail}>
+        <div key={"result-" + index} className="result">
+          <div className="thumbnail">
             {props.config.thumbnail ? 
             <img
               src={getValue(props.config.thumbnail.src, results)}
               alt={getValue(props.config.title, results)}
             ></img> : null}
           </div>
-          <div className={styles.details}>
-            <div className={styles.title} id={getValue(props.config.id, results)} onClick={handleNameClick}>
+          <div className="details">
+            <div className="title" id={getValue(props.config.id, results)} onClick={handleNameClick}>
               {displayValue(props.config.title, results)}
             </div>
-            <div className={styles.subtitle}>
+            <div className="subtitle">
               {items}
             </div>
             {props.config.categories ? 
-            <div className={styles.categories}>
-              {getArrayValue(props.config.categories, results).map(s => {
+            <div className="categories">
+              {getArrayValue(props.config.categories, results).map((s, index2) => {
                 return (
-                  <div key={"cat-" + index} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
+                  <div key={"category-" + index2} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
                 )
               })}
             </div> : null}
           </div>
-          <div className={styles.actions}>
+          <div className="actions">
             {props.config.timestamp ? 
-            <div className={styles.timestamp}>
+            <div className="timestamp">
               {props.config.timestamp.label} {displayDate(props.config.timestamp.value, results)}
             </div> : null}
-            <div className={styles.icons}>
+            <div className="icons">
               {props.config.status ? 
-              <div className={styles.status}>
+              <div className="status">
                 {displayValue(props.config.status, results)}
               </div> : null}
               {/* <GearFill color="#5d6aaa" size={16} />
@@ -150,10 +171,10 @@ const ResultsList: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <div className="resultsList">
       {(searchContext.searchResults?.result?.length) > 0 ? (
         <div>{getResults()}</div>
-      ) : null
+      ) : <div className="noResults">No results</div>
       }
     </div>
   );
