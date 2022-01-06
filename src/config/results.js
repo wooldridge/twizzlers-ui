@@ -53,7 +53,7 @@ export const configResults = {
         categories: "extracted.person.sources",
         timestamp: {
             value: "extracted.person.createdOn",
-            label: "Created On:"
+            label: "Created on"
         },
         status: "extracted.person.status"
     }

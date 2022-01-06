@@ -23,20 +23,29 @@ const Address: React.FC<Props> = (props) => {
     };
 
     const display = (val, pre, post) => {
-        return val ? (<span>{"".concat(pre, val, post)}</span>) : null;
+        return val ? "".concat(pre, val, post) : "";
     }
 
     const addressStyle = props.styles ? props.styles : {};
 
+    const street1 = getValue(props.config.street1, props.data) || null;
+    const street2 = getValue(props.config.street2, props.data) || null;
+    const city = getValue(props.config.city, props.data) || null;
+    const state = getValue(props.config.state, props.data) || null;
+    const postal1 = getValue(props.config.postal1, props.data) || null;
+    const postal2 = getValue(props.config.postal2, props.data) || null;
+
+    const addrFormatted = display(street1, "", ", ") +
+                          display(street2, "", ", ") +
+                          display(city, "", ", ") +
+                          display(state, "", ", ") +
+                          display(postal1, "", "") +
+                          display(postal2, "-", "");
+
     return (
-        <div className="Address" style={addressStyle}>
-            {display(getValue(props.config.street1, props.data), "", ", ")}
-            {display(getValue(props.config.street2, props.data), "", ", ")}
-            {display(getValue(props.config.city, props.data), "", ", ")}
-            {display(getValue(props.config.state, props.data), "", " ")}
-            {display(getValue(props.config.postal1, props.data), "", "")}
-            {display(getValue(props.config.postal2, props.data), "-", "")}
-        </div>
+        <span className="Address" style={addressStyle} title={addrFormatted}>
+            {addrFormatted}
+        </span>
     );
 };
 

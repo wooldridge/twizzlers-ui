@@ -102,24 +102,20 @@ const ResultsList: React.FC<Props> = (props) => {
     let results = searchContext.searchResults.result.map((results, index) => {
       let items = props.config.items.map((it, index) => {
         if (it.component) {
-          // Component
           return (
             <div key={"item-" + index} className="item">
-              {React.createElement(COMPONENTS[it.component], { config: it.config, data: results, styles: it.styles }, null)}
+              {React.createElement(
+                COMPONENTS[it.component], 
+                { config: it.config, data: results, styles: it.styles }, null
+              )}
             </div>
           );
-        } else if (_.isObject(it)) {
-          // Object
-          return (
-            <div key={"item-" + index} className="item">
-              <span className={it.className} style={it.style ? it.style : null}>{displayValue(it.value, results)}</span>
-            </div>
-          )
         } else {
-          // String
           return (
             <div key={"item-" + index} className="item">
-              <span>{displayValue(it, results)}</span>
+              <span className={it.className} style={it.style ? it.style : null} title={displayValue(it.value, results)}>
+                {displayValue(it.value, results)}
+              </span>
             </div>
           )
         }
