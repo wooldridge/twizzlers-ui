@@ -94,7 +94,7 @@ const ResultsList: React.FC<Props> = (props) => {
     let results = searchContext.searchResults.result.map((results, index) => {
       let items = props.config.items.map((it, index) => {
         if (it.component) {
-          return React.createElement(COMPONENTS[it.component], { config: it.data, data: results}, null);
+          return React.createElement(COMPONENTS[it.component], { config: it.config, data: results, styles: it.styles }, null);
         }
         let val = _.isObject(it) ? it.value : it;
         return (

@@ -5,6 +5,7 @@ import _ from "lodash";
 type Props = {
   config?: any;
   data?: any;
+  styles?: any;
 };
 
 /**
@@ -25,8 +26,10 @@ const Address: React.FC<Props> = (props) => {
         return val ? (<span>{"".concat(pre, val, post)}</span>) : null;
     }
 
+    const addressStyle = props.styles ? props.styles : {};
+
     return (
-        <div className="Address">
+        <div className="Address" style={addressStyle}>
             {display(getValue(props.config.street1, props.data), "", ", ")}
             {display(getValue(props.config.street2, props.data), "", ", ")}
             {display(getValue(props.config.city, props.data), "", ", ")}

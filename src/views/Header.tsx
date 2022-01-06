@@ -21,7 +21,7 @@ const Header: React.FC<Props> = (props) => {
           <Link to="/">{configHeader.title}</Link>
         </span>
         <Menus config={configHeader.menus} />
-        <SearchBox config={configSearchbox} button="horizontal" width="600px" />
+        <SearchBox config={configSearchbox} width="600px" />
       </div>
       <div className={styles.account}>
         <PersonCircle color="#ccc" size={28} />
