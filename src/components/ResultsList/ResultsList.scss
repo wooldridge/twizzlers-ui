@@ -66,6 +66,9 @@
         > div {
             display: inline-block;
         }
+        .timestamp {
+            white-space: nowrap;
+        }
         .actions {
             display: flex;
             flex-flow: column wrap;
