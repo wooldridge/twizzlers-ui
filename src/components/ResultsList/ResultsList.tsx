@@ -26,16 +26,18 @@ const COMPONENTS = {
  * @prop {string} config.thumbnail.src  Path to thumbnail source URL.
  * @prop {string} config.thumbnail.width  Thumbnail width (in pixels).
  * @prop {string} config.thumbnail.height  Thumbnail height (in pixels).
- * @prop {string} config.title  Path to title. Clicking title in UI takes you to Detail view for that result.
+ * @prop {string} config.title  Path to title associated with record. Clicking title in UI takes you to 
+ * Detail view for that result.
  * @prop {object[]} config.items  Array of item configuration objects. Item can be value-based or component-based.
  * @prop {string} config.items.value  Path to value-based item.
  * @prop {string} config.items.className  CSS class name to apply to item value.
  * @prop {string} config.items.component  Name of component used to render component-based item.
  * @prop {object} config.items.config  Object of configuration properties for item component.
+ * @prop {string} config.categories  Path to categories associated with record.
  * @prop {object} config.timestamp  Timestamp configuration object.
  * @prop {string} config.timestamp.value  Path to timestamp.
  * @prop {string} config.timestamp.label  Label prefix for timestamp.
- * @prop {string} config.status  Path to status.
+ * @prop {string} config.status  Path to status associated with record.
  * @example
  * // Configuration
  * const searchResultsConfig = { 
@@ -47,6 +49,7 @@ const COMPONENTS = {
  *   },
  *   title: "extracted.person.name",
  *   items: [
+ *       // One component-based item
  *       {
  *          component: "Address", 
  *          config: {
@@ -54,9 +57,11 @@ const COMPONENTS = {
  *            state: "extracted.person.address.state"
  *          }
  *       },
+ *       // Two value-based items
  *       {value: "extracted.person.phone", className: "phone"},
  *       {value: "extracted.person.ssn"}
  *   ],
+ *   categories: "extracted.person.sources",
  *   timestamp: {
  *       value: "extracted.person.createdOn",
  *       label: "Time is"
