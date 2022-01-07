@@ -34,8 +34,6 @@ const resultsListConfig = {
 const searchResults = {
     "result": [
         {
-            "index": 1,
-            "uri": "101.xml",
             "extracted": {
                 "person": {
                     "id": "101",
@@ -50,6 +48,18 @@ const searchResults = {
                     "ssn": "123-45-6789",
                     "sources": ["source1", "source2"],
                     "createdOn": "2020-01-01T08:00:00-07:00"
+                }
+            }
+        },
+        {
+            "extracted": {
+                "person": {
+                    "id": "102",
+                    "name": "Jane Doe",
+                    "phone": "987-654-3210",
+                    "status": "inactive",
+                    "sources": [],
+                    "createdOn": "1999-01-01T08:00:00"
                 }
             }
         }
@@ -89,7 +99,7 @@ const detailContextValue = {
 
 describe("ResultsList component", () => {
 
-    test("Verify list appears and title is clickable when results returned", () => {
+    test("Verify list items appear and titles are clickable when results returned", () => {
         const {getByText, getByAltText} = render(
             <SearchContext.Provider value={searchContextValue}>
                 <DetailContext.Provider value={detailContextValue}>
@@ -100,14 +110,15 @@ describe("ResultsList component", () => {
         let title = getByText("John Doe");
         expect(getByAltText("John Doe")).toBeInTheDocument(); // Image
         expect(title).toBeInTheDocument(); // Title
-        expect(getByText("Anytown,")).toBeInTheDocument(); // Subtitle (address)
-        expect(getByText("CA")).toBeInTheDocument(); // Subtitle (address)
+        expect(getByText("Anytown, CA")).toBeInTheDocument(); // Subtitle (address)
         expect(getByText("123-456-7890")).toBeInTheDocument(); // Subtitle 
         expect(getByText("123-45-6789")).toBeInTheDocument(); // Subtitle 
         expect(getByText("active")).toBeInTheDocument(); // Status
         expect(getByText("Time is 2020-01-01")).toBeInTheDocument(); // Timestamp
         userEvent.click(title);
         expect(detailContextValue.handleDetail).toHaveBeenCalledWith("101");
+        userEvent.click(getByText("Jane Doe"));
+        expect(detailContextValue.handleDetail).toHaveBeenCalledWith("102");
     });
 
     test("Verify messaging appears when no results returned", () => {

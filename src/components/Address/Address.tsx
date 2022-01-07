@@ -35,10 +35,10 @@ const Address: React.FC<Props> = (props) => {
     const postal1 = getValue(props.config.postal1, props.data) || null;
     const postal2 = getValue(props.config.postal2, props.data) || null;
 
-    const addrFormatted = display(street1, "", ", ") +
-                          display(street2, "", ", ") +
-                          display(city, "", ", ") +
-                          display(state, "", ", ") +
+    const addrFormatted = display(street1, "", (street2 || city) ? ", " : "") +
+                          display(street2, "", city ? ", " : "") +
+                          display(city, "", state ? ", " : "") +
+                          display(state, "", " ") +
                           display(postal1, "", "") +
                           display(postal2, "-", "");
 

@@ -100,7 +100,7 @@ const ResultsList: React.FC<Props> = (props) => {
 
   const getResults = () => {
     let results = searchContext.searchResults.result.map((results, index) => {
-      let items = props.config.items.map((it, index) => {
+      let items = props.config.items && props.config.items.map((it, index) => {
         if (it.component) {
           return (
             <div key={"item-" + index} className="item">
