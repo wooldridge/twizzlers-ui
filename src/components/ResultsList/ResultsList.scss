@@ -1,4 +1,7 @@
 .resultsList {
+    .result:hover {
+        background-color: #ebf9f6;
+    }
     .result {
         display: flex;
         align-items: flex-start;
