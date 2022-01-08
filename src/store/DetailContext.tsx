@@ -56,9 +56,6 @@ const DetailProvider: React.FC = ({ children }) => {
 
   const handleDetail = (id) => {
     console.log("handleDetail", id);
-    if (location.pathname !== "/detail/" + id) {
-      navigate("/detail/" + id); // Detail click from another view
-    }
     setDetailId(id);
     // TODO using search results endpoint for now filtered by ID
     let newQuery = {
@@ -71,6 +68,9 @@ const DetailProvider: React.FC = ({ children }) => {
     let sr = getDetail(newQuery);
     sr.then(result => {
       setDetail(result?.data.searchResults.response);
+      if (location.pathname !== "/detail/" + id) {
+        navigate("/detail/" + id); // Detail click from another view
+      }
       // setNewDetail(false);
     }).catch(error => {
       console.error(error);

@@ -98,6 +98,9 @@ const SearchProvider: React.FC = ({ children }) => {
         // TODO need total records in database in result
         setTotal(5);
         setNewSearch(false);
+        if (location.pathname !== "/search") {
+          navigate("/search"); // Handle search submit from another view
+        }
       }).catch(error => {
         console.error(error);
       })
@@ -105,9 +108,6 @@ const SearchProvider: React.FC = ({ children }) => {
   }, [newSearch]);
 
   const handleSearch = async (qtext, entityType) => {
-    if (location.pathname !== "/search") {
-      navigate("/search"); // Handle search submit from another view
-    }
     setQtext(qtext);
     setEntityType(entityType);
     setNewSearch(true);
