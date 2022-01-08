@@ -1,50 +1,78 @@
 .dataTable {
     display: flex;
     align-items: flex-start;
-    tbody {
-        border-top-width: 1px !important;
-        border-top-width: 0 !important;
-    }
-    td, th {
-        border-bottom-color: #a0e2d3 !important;
-    }
-    .title {
+
+    div.label {
         width: 150px;
         position: relative;
         top: 4px;
         display: flex;
         justify-content: space-between;
-        margin-right: 10px;
+        margin-right: 2px;
+        span.title {
+            flex-basis: 100%;
+            margin-right: 4px;
+        }
+        span.hide {
+            cursor: pointer;
+            color: #5d6aaa;
+            display: inline-block;
+            margin: 0 8px 0 0;
+        }
     }
-    .show {
-        cursor: pointer;
-        color: #5d6aaa;
+
+    td.icon {
+        border-bottom-width: 0 !important;
     }
-    tbody tr td {
-        padding: 4px 2px;
+
+    td.icon div {
+        margin: -1px 1px 0 0;
+        padding: 0;
     }
-    tbody tr:first-child td:first-child {
-        width: 100%;
+    tbody {
+        border-top-width: 0 !important;
+        td, th {
+            border-bottom-color: #a0e2d3 !important;
+        }
+        tr td {
+            padding: 4px 2px;
+        }
+        tr {
+            td.value {
+                width: 100%;
+            }
+            td.value div {
+                color: #212529;
+            }
+            td:nth-last-child(2) div {
+                background-color: #96bde4;
+            }
+            td:nth-last-child(1) div {
+                background-color: #5d6aaa;
+            }
+            td.metadata div {
+                font-size: 12px;
+                text-align: center;
+                font-weight: bold;
+                height: 18px;
+                width: 16px;
+                border-radius: 2px;
+                color: white;
+                margin: 0;
+                position: relative;
+                top: 4px;
+            }
+        }
+        tr:first-child td.value div {
+            font-weight: bold;
+        }
+    } 
+
+    .hide tbody tr {
+        display: none;
     }
-    tbody tr td:nth-child(2) .labelValue {
-        background-color: #96bde4;
+    .hide tbody tr:first-child {
+        display: table-row;
     }
-    tbody tr td:nth-child(3) .labelValue {
-        background-color: #5d6aaa;
-    }
-    tbody tr:first-child td:first-child span {
-        font-weight: bold;
-    }
-    .labelValue {
-        font-size: 12px;
-        text-align: center;
-        font-weight: bold;
-        height: 18px;
-        width: 16px;
-        border-radius: 2px;
-        color: white;
-        margin: 0;
-        position: relative;
-        top: 4px;
-    }
+
 }

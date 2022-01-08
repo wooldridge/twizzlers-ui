@@ -99,6 +99,7 @@ const ResultsList: React.FC<Props> = (props) => {
 
   const displayDate = (key, results) => {
     let val = _.get(results, key);
+    val = _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     let parts = val.split("T");
     return _.isNil(parts[0]) ? null : parts[0];
   };

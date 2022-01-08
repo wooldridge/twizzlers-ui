@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import styles from "./DataTableAddress.module.scss";
 import "./DataTableAddress.scss";
-import {ArrowBarDown, GeoAltFill} from "react-bootstrap-icons";
+import {ArrowBarDown, ArrowBarUp, GeoAltFill} from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import _ from "lodash";
@@ -11,7 +11,7 @@ import GeoMap from "../GeoMap/GeoMap"
 
 type Props = {
   data?: any;
-  config?: any
+  config?: any;
 };
 
 /**
@@ -20,6 +20,7 @@ type Props = {
  * @component
  * @prop {object} data - Data payload.
  * @prop {object} config  Data table configuration object.
+ * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
  * @prop {string} config.width - Width of table (in pixels).
  * @prop {object[]} config.cols - Configuration objects for columns.
@@ -56,16 +57,33 @@ type Props = {
  */
 const DataTableAddress: React.FC<Props> = (props) => {
 
+    const [hide, setHide] = useState<boolean>(false);
+
+    const handleHide = (e) => {
+        setHide(!hide);
+    };
+
+    const getArrayValue = (key, data) => {
+        let val = _.get(data, key);
+        return Array.isArray(val) ? val : [val];
+    };
+
     let tableStyle = {
         width: props.config.width ? props.config.width + 'px' : "100%"
     };
 
     let data = _.isArray(props.data) ? props.data : [props.data];
+    const addressData = props.config.addressPath ? getArrayValue(props.config.addressPath, props.data) : props.data;
+    console.log("props.config.addressPath", props.config.addressPath);
+    console.log("props.config.addressPath", props.data);
+    console.log("addressData", addressData);
 
     const displayValue = (key, res) => {
         let val = _.get(res, key);
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     };
+
+    let hideClass = hide ? "hide" : "";
 
     const popover = (
         <Popover id="mapPopover">
@@ -77,14 +95,14 @@ const DataTableAddress: React.FC<Props> = (props) => {
 
     return (
         <div className="dataTableAddress">
-            <div className="title">
-                <span>{props.config.title}</span>
-                {data.length > 1 ?
-                    <span className="show">
-                        <ArrowBarDown color="#5d6aaa" size={18} />
+            <div className="label">
+                <span className="title">{props.config.title}</span>
+                {addressData.length > 1 ?
+                    <span className="hide" onClick={handleHide}>
+                        {hide ? <ArrowBarDown color="#5d6aaa" size={18} /> : <ArrowBarUp color="#5d6aaa" size={18} />}
                     </span> : null}
             </div>
-            <Table size="sm" hover style={tableStyle}>
+            <Table size="sm" hover style={tableStyle} id={props.config.id} className={hideClass}>
             <thead>
                 <tr>
                     {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
@@ -92,7 +110,7 @@ const DataTableAddress: React.FC<Props> = (props) => {
                             <th key={"head-" + i}>{col.title}</th>
                         );
                     })}
-                    {_.isArray(props.config.labels) && props.config.labels.map((col, i2) => {
+                    {_.isArray(props.config.metadata) && props.config.metadata.map((col, i2) => {
                         return (
                             <th key={"head-" + (i2 + props.config.cols.length)}></th>
                         );
@@ -101,18 +119,20 @@ const DataTableAddress: React.FC<Props> = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((d, i) => {
+                {addressData.map((d, i) => {
                 return (
                     <tr key={"row-" + i}>
                         {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
                             return (
-                                <td key={"data-" + i}><span className={styles.rowValue}>{displayValue(col.value, d)}</span></td>
+                                <td key={"data-" + i} className="value">
+                                    <span>{displayValue(col.value, d)}</span>
+                                </td>
                             );
                         })}
-                        {_.isArray(props.config.labels) && props.config.labels.map((label, i2) => {
+                        {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
                             return (
-                                <td key={"label-" + (i2 + props.config.cols.length)}>
-                                    <div className="labelValue">{label.value}</div>
+                                <td key={"metadata-" + (i2 + props.config.cols.length)} className="metadata">
+                                    <div>{meta.value}</div>
                                 </td>
                             );
                         })}

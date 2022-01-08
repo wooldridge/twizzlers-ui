@@ -10,10 +10,11 @@ export const configDetail = {
     },
     personal: {
         name: {
+            id: "name",
             title: "Name",
             property: "result[0].extracted.person.name",
             width: 300,
-            labels: [
+            metadata: [
                 {
                     type: "block",
                     color: "#96bde4",
@@ -27,10 +28,12 @@ export const configDetail = {
             ]
         },
         phone: {
+            id: "phone",
             title: "Phone Number",
             property: "result[0].extracted.person.phone",
+            icon: "phone",
             width: 300,
-            labels: [
+            metadata: [
                 {
                     type: "block",
                     color: "#96bde4",
@@ -44,10 +47,12 @@ export const configDetail = {
             ]
         },
         email: {
+            id: "email",
             title: "Email",
             property: "result[0].extracted.person.email",
-            width: 300,
-            labels: [
+            icon: "email",
+            width: 400,
+            metadata: [
                 {
                     type: "block",
                     color: "#96bde4",
@@ -61,27 +66,29 @@ export const configDetail = {
             ]
         },
         address: {
+            id: "address",
             title: "Address",
             width: 600,
+            addressPath: "extracted.person.address",
             cols: [
                 {
                     title: "Street",
-                    value: "result[0].extracted.person.address.street"
+                    value: "street"
                 },
                 {
                     title: "City",
-                    value: "result[0].extracted.person.address.city"
+                    value: "city"
                 },
                 {
                     title: "State",
-                    value: "result[0].extracted.person.address.state"
+                    value: "state"
                 },
                 {
                     title: "Zip",
-                    value: "result[0].extracted.person.address.zip.fiveDigit"
+                    value: "zip.fiveDigit"
                 }
             ],
-            labels: [
+            metadata: [
                 {
                     type: "block",
                     color: "#96bde4",
