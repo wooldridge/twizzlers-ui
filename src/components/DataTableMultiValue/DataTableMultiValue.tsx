@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
-import styles from "./DataTableAddress.module.scss";
-import "./DataTableAddress.scss";
+import "./DataTableMultiValue.scss";
 import {ArrowBarDown, ArrowBarUp, GeoAltFill} from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -55,7 +54,7 @@ type Props = {
  *   ]
  * }
  */
-const DataTableAddress: React.FC<Props> = (props) => {
+const DataTableMultiValue: React.FC<Props> = (props) => {
 
     const [hide, setHide] = useState<boolean>(false);
 
@@ -72,11 +71,7 @@ const DataTableAddress: React.FC<Props> = (props) => {
         width: props.config.width ? props.config.width + 'px' : "100%"
     };
 
-    let data = _.isArray(props.data) ? props.data : [props.data];
-    const addressData = props.config.addressPath ? getArrayValue(props.config.addressPath, props.data) : props.data;
-    console.log("props.config.addressPath", props.config.addressPath);
-    console.log("props.config.addressPath", props.data);
-    console.log("addressData", addressData);
+    const data = props.config.dataPath ? getArrayValue(props.config.dataPath, props.data) : props.data;
 
     const displayValue = (key, res) => {
         let val = _.get(res, key);
@@ -94,10 +89,10 @@ const DataTableAddress: React.FC<Props> = (props) => {
     );
 
     return (
-        <div className="dataTableAddress">
+        <div className="dataTableMultiValue">
             <div className="label">
                 <span className="title">{props.config.title}</span>
-                {addressData.length > 1 ?
+                {data.length > 1 ?
                     <span className="hide" onClick={handleHide}>
                         {hide ? <ArrowBarDown color="#5d6aaa" size={18} /> : <ArrowBarUp color="#5d6aaa" size={18} />}
                     </span> : null}
@@ -119,7 +114,7 @@ const DataTableAddress: React.FC<Props> = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {addressData.map((d, i) => {
+                {data.map((d, i) => {
                 return (
                     <tr key={"row-" + i}>
                         {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
@@ -152,4 +147,4 @@ const DataTableAddress: React.FC<Props> = (props) => {
     );
 };
 
-export default DataTableAddress;
+export default DataTableMultiValue;

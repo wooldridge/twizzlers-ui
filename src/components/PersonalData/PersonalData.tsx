@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import { DetailContext } from "../../store/DetailContext";
-import DataTable from "../DataTable/DataTable";
-import DataTableAddress from "../DataTableAddress/DataTableAddress";
+import DataTableValue from "../DataTableValue/DataTableValue";
+import DataTableMultiValue from "../DataTableMultiValue/DataTableMultiValue";
 import styles from "./PersonalData.module.scss";
 
 type Props = {
@@ -15,10 +15,10 @@ const PersonalData: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.personal}>
-        <DataTable config={props.config.name} data={detailContext.detail.result[0].extracted.person.name} />
-        <DataTable config={props.config.phone} data={detailContext.detail.result[0].extracted.person.phone} />
-        <DataTable config={props.config.email} data={detailContext.detail.result[0].extracted.person.email} />
-        <DataTableAddress config={props.config.address} data={detailContext.detail.result[0]} />
+        <DataTableValue config={props.config.name} data={detailContext.detail.result[0].extracted.person.name} />
+        <DataTableValue config={props.config.phone} data={detailContext.detail.result[0].extracted.person.phone} />
+        <DataTableValue config={props.config.email} data={detailContext.detail.result[0].extracted.person.email} />
+        <DataTableMultiValue config={props.config.address} data={detailContext.detail.result[0]} />
     </div>
   );
 };

@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
-import styles from "./DataTable.module.scss";
-import "./DataTable.scss";
+import "./DataTableValue.scss";
 import {ArrowBarDown, ArrowBarUp, EnvelopeFill, TelephoneFill} from "react-bootstrap-icons";
 import _ from "lodash";
 
@@ -11,7 +10,7 @@ type Props = {
 };
 
 /**
- * Component for showing one or more values for a property in a tabular view.
+ * Component for showing one or more values for a single property value in a tabular view.
  *
  * @component
  * @prop {object} data - Data payload.
@@ -38,7 +37,7 @@ type Props = {
  *   ]
  * }
  */
-const DataTable: React.FC<Props> = (props) => {
+const DataTableValue: React.FC<Props> = (props) => {
 
     const [hide, setHide] = useState<boolean>(false);
 
@@ -55,7 +54,7 @@ const DataTable: React.FC<Props> = (props) => {
     let data = _.isArray(props.data) ? props.data : [props.data];
 
     return (
-        <div className="dataTable">
+        <div className="dataTableValue">
             <div className="label">
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
@@ -95,4 +94,4 @@ const DataTable: React.FC<Props> = (props) => {
     );
 };
 
-export default DataTable;
+export default DataTableValue;

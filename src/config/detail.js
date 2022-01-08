@@ -69,7 +69,7 @@ export const configDetail = {
             id: "address",
             title: "Address",
             width: 600,
-            addressPath: "extracted.person.address",
+            dataPath: "extracted.person.address",
             cols: [
                 {
                     title: "Street",
