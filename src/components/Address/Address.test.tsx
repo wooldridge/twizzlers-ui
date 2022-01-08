@@ -30,6 +30,24 @@ const data2 = {
     }
 };
 
+// If multiple addresses returned, addressPath points to array
+const configArray = { 
+    addressPath: "address",
+    street1: "street1",
+    street2: "street2",
+    city: "city",
+    state: "state",
+    postal1: "postal1",
+    postal2: "postal2"
+};
+
+const dataArray = { 
+    address: [
+        data.address,
+        data2.address
+    ]
+};
+
 describe("Address component", () => {
 
     test("Verify address is rendered", () => {
@@ -43,6 +61,13 @@ describe("Address component", () => {
         const {getByText} = render(<Address config={config} data={data2} />);
         expect(getByText(data.address.street1 + ", " + data.address.city + ", " 
             + data.address.state + " " + data.address.postal1)).toBeInTheDocument();
+    });
+
+    test("Verify first address is rendered for address array", () => {
+        const {getByText} = render(<Address config={configArray} data={dataArray} />);
+        expect(getByText(data.address.street1 + ", " + data.address.street2 + 
+            ", " + data.address.city + ", " + data.address.state + " " + 
+            data.address.postal1 + "-" + data.address.postal2)).toBeInTheDocument();
     });
 
 });

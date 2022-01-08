@@ -34,11 +34,12 @@ export const configResults = {
             { 
                 component: "Address", 
                 config: {
-                    street1: "extracted.person.address.street",
-                    city: "extracted.person.address.city",
-                    state: "extracted.person.address.state",
-                    postal1: "extracted.person.address.zip.fiveDigit",
-                    postal2: "extracted.person.address.zip.plusFour"
+                    addressPath: "extracted.person.address",
+                    street1: "street",
+                    city: "city",
+                    state: "state",
+                    postal1: "zip.fiveDigit",
+                    postal2: "zip.plusFour"
                 },
                 styles: {
                     width: "350px",

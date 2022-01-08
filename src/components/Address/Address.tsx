@@ -28,12 +28,15 @@ const Address: React.FC<Props> = (props) => {
 
     const addressStyle = props.styles ? props.styles : {};
 
-    const street1 = getValue(props.config.street1, props.data) || null;
-    const street2 = getValue(props.config.street2, props.data) || null;
-    const city = getValue(props.config.city, props.data) || null;
-    const state = getValue(props.config.state, props.data) || null;
-    const postal1 = getValue(props.config.postal1, props.data) || null;
-    const postal2 = getValue(props.config.postal2, props.data) || null;
+    // Get address-containing object (if array, use first element)
+    const addressData = props.config.addressPath ? getValue(props.config.addressPath, props.data) : props.data;
+
+    const street1 = getValue(props.config.street1, addressData) || null;
+    const street2 = getValue(props.config.street2, addressData) || null;
+    const city = getValue(props.config.city, addressData) || null;
+    const state = getValue(props.config.state, addressData) || null;
+    const postal1 = getValue(props.config.postal1, addressData) || null;
+    const postal2 = getValue(props.config.postal2, addressData) || null;
 
     const addrFormatted = display(street1, "", (street2 || city) ? ", " : "") +
                           display(street2, "", city ? ", " : "") +
