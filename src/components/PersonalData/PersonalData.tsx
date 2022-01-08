@@ -18,7 +18,7 @@ const PersonalData: React.FC<Props> = (props) => {
         <DataTableValue config={props.config.name} />
         <DataTableValue config={props.config.phone} />
         <DataTableValue config={props.config.email} />
-        <DataTableMultiValue config={props.config.address} data={detailContext.detail.result[0]} />
+        <DataTableMultiValue config={props.config.address} />
     </div>
   );
 };

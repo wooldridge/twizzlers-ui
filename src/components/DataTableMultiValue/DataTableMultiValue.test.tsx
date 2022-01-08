@@ -1,14 +1,23 @@
-import DataTableValue from "./DataTableValue";
+import DataTableMultiValue from "./DataTableMultiValue";
 import { DetailContext } from "../../store/DetailContext";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { debug } from "console";
 
 const configMultiple = {
-    id: "phone", 
-    title: "Phone Number", 
-    dataPath: "result[0].extracted.person.phone", 
-    icon: "phone",
+    id: "address",
+    title: "Address",
+    width: 600,
+    dataPath: "result[0].extracted.person.address",
+    cols: [
+        {
+            title: "City",
+            value: "city"
+        },
+        {
+            title: "State",
+            value: "state"
+        }
+    ],
     metadata: [
         {
             type: "block",
@@ -24,9 +33,24 @@ const configMultiple = {
 };
 
 const configSingular = {
-    id: "ssn", 
-    title: "SSN", 
-    dataPath: "result[0].extracted.person.ssn",
+    id: "school",
+    title: "School",
+    width: 600,
+    dataPath: "result[0].extracted.person.school",
+    cols: [
+        {
+            title: "Name",
+            value: "name"
+        },
+        {
+            title: "City",
+            value: "city"
+        },
+        {
+            title: "Year",
+            value: "year"
+        }
+    ],
     metadata: [
         {
             type: "block",
@@ -39,7 +63,7 @@ const configSingular = {
             value: "4"
         }
     ]
-};
+};;
 
 const detail = {
 	"result": [
@@ -60,10 +84,13 @@ const detail = {
                             "state": "CA"
 		                }
                     ],
-		            "status": ["active"],
-		            "ssn": ["123-45-6789"],
-		            "sources": ["source1", "source2"],
-		            "createdOn": ["2020-01-01T08:00:00-07:00"]
+		            "school": [
+                        {
+                            "name": "Anytown High School",
+                            "city": "Anytown",
+                            "year": "2022"
+                        }
+                    ]
 		        }
 		    }
 		}
@@ -75,38 +102,36 @@ const detailContextValue = {
     handleDetail: jest.fn()
 };
 
-describe("DataTableValue component", () => {
+describe("DataTableMultiValue component", () => {
 
-    test("Verify data table renders with a property with multiple values and an icon", () => {
+    test("Verify data table renders with a property object with multiple values", () => {
         const {getByText, queryAllByText, getByTestId} = render(
             <DetailContext.Provider value={detailContextValue}>
-                <DataTableValue config={configMultiple} />
+                <DataTableMultiValue config={configMultiple} />
             </DetailContext.Provider>
         );
         expect(getByText(configMultiple.title)).toBeInTheDocument();
         expect(getByTestId("hideUp")).toBeInTheDocument();
-        expect(getByTestId("icon-" + configMultiple.icon)).toBeInTheDocument();
-        expect(getByText("123-456-7890")).toBeInTheDocument();
-        expect(getByText("321-654-9876")).toBeInTheDocument();
-        expect(queryAllByText(configMultiple.metadata[0].value).length > 0);
-        expect(queryAllByText(configMultiple.metadata[1].value).length > 0);
+        expect(getByText("Anytown")).toBeInTheDocument();
+        expect(getByText("Anyville")).toBeInTheDocument();
+        expect(queryAllByText("CA").length === 2);
         userEvent.click(getByTestId("hideUp"));
         expect(getByTestId("hideDown")).toBeInTheDocument();
         userEvent.click(getByTestId("hideDown"));
         expect(getByTestId("hideUp")).toBeInTheDocument();
     });
 
-    test("Verify data table renders with a property with a single value", () => {
-        const {getByText, queryAllByText, queryByTestId} = render(
+    test("Verify data table renders with a property object with a single value", () => {
+        const {getByText, queryByTestId} = render(
             <DetailContext.Provider value={detailContextValue}>
-                <DataTableValue config={configSingular} />
+                <DataTableMultiValue config={configSingular} />
             </DetailContext.Provider>
         );
         expect(getByText(configSingular.title)).toBeInTheDocument();
         expect(queryByTestId("hideUp")).not.toBeInTheDocument();
-        expect(getByText("123-45-6789")).toBeInTheDocument();
-        expect(queryAllByText(configMultiple.metadata[0].value).length > 0);
-        expect(queryAllByText(configMultiple.metadata[1].value).length > 0);
+        expect(getByText("Anytown High School")).toBeInTheDocument();
+        expect(getByText("Anytown")).toBeInTheDocument();
+        expect(getByText("2022")).toBeInTheDocument();
     });
 
 });

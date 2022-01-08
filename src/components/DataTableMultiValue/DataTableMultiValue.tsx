@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Table from "react-bootstrap/Table";
+import { DetailContext } from "../../store/DetailContext";
 import "./DataTableMultiValue.scss";
 import {ArrowBarDown, ArrowBarUp, GeoAltFill} from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
@@ -9,7 +10,6 @@ import GeoMap from "../GeoMap/GeoMap"
 
 
 type Props = {
-  data?: any;
   config?: any;
 };
 
@@ -56,6 +56,7 @@ type Props = {
  */
 const DataTableMultiValue: React.FC<Props> = (props) => {
 
+    const detailContext = useContext(DetailContext);
     const [hide, setHide] = useState<boolean>(false);
 
     const handleHide = (e) => {
@@ -71,7 +72,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
         width: props.config.width ? props.config.width + 'px' : "100%"
     };
 
-    const data = props.config.dataPath ? getArrayValue(props.config.dataPath, props.data) : props.data;
+    const data = getArrayValue(props.config.dataPath, detailContext.detail);
 
     const displayValue = (key, res) => {
         let val = _.get(res, key);
@@ -94,10 +95,20 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
                     <span className="hide" onClick={handleHide}>
-                        {hide ? <ArrowBarDown color="#5d6aaa" size={18} /> : <ArrowBarUp color="#5d6aaa" size={18} />}
+                        {hide ? 
+                        <ArrowBarDown 
+                            data-testid="hideDown"
+                            color="#5d6aaa" 
+                            size={18} 
+                        /> : 
+                        <ArrowBarUp 
+                            data-testid="hideUp"
+                            color="#5d6aaa" 
+                            size={18} 
+                        />}
                     </span> : null}
             </div>
-            <Table size="sm" hover style={tableStyle} id={props.config.id} className={hideClass}>
+            <Table size="sm" style={tableStyle} id={props.config.id} className={hideClass}>
             <thead>
                 <tr>
                     {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {

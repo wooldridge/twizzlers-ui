@@ -12,7 +12,7 @@ export const configDetail = {
         name: {
             id: "name",
             title: "Name",
-            property: "result[0].extracted.person.name",
+            dataPath: "result[0].extracted.person.name",
             width: 300,
             metadata: [
                 {
@@ -30,7 +30,7 @@ export const configDetail = {
         phone: {
             id: "phone",
             title: "Phone Number",
-            property: "result[0].extracted.person.phone",
+            dataPath: "result[0].extracted.person.phone",
             icon: "phone",
             width: 300,
             metadata: [
@@ -49,7 +49,7 @@ export const configDetail = {
         email: {
             id: "email",
             title: "Email",
-            property: "result[0].extracted.person.email",
+            dataPath: "result[0].extracted.person.email",
             icon: "email",
             width: 400,
             metadata: [
@@ -69,7 +69,7 @@ export const configDetail = {
             id: "address",
             title: "Address",
             width: 600,
-            dataPath: "extracted.person.address",
+            dataPath: "result[0].extracted.person.address",
             cols: [
                 {
                     title: "Street",

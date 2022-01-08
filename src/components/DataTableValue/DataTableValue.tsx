@@ -16,7 +16,7 @@ type Props = {
  * @prop {object} config - Data table configuration object.
  * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
- * @prop {string} config.property - Path to values in payload.
+ * @prop {string} config.dataPath - Path to values in payload.
  * @prop {string} config.width - Width of table (in pixels).
  * @prop {object[]} config.labels - Configuration objects for label icons.
  * @prop {string} config.labels[].type - Label type (e.g. "block").
@@ -25,7 +25,7 @@ type Props = {
  * @example
  * {
  *   title: "Name",
- *   property: "path.to.name",
+ *   dataPath: "path.to.name",
  *   width: 300,
  *   labels: [
  *     {
@@ -54,7 +54,7 @@ const DataTableValue: React.FC<Props> = (props) => {
         let val = _.get(results, key);
         return Array.isArray(val) ? val : [val];
     };
-    let data = getArrayValue(props.config.property, detailContext.detail);
+    const data = getArrayValue(props.config.dataPath, detailContext.detail);
 
     const getIcon = (type) => {
         if (type === "phone") {
