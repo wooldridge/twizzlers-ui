@@ -15,9 +15,9 @@ const PersonalData: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.personal}>
-        <DataTableValue config={props.config.name} data={detailContext.detail.result[0].extracted.person.name} />
-        <DataTableValue config={props.config.phone} data={detailContext.detail.result[0].extracted.person.phone} />
-        <DataTableValue config={props.config.email} data={detailContext.detail.result[0].extracted.person.email} />
+        <DataTableValue config={props.config.name} />
+        <DataTableValue config={props.config.phone} />
+        <DataTableValue config={props.config.email} />
         <DataTableMultiValue config={props.config.address} data={detailContext.detail.result[0]} />
     </div>
   );

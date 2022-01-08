@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Table from "react-bootstrap/Table";
+import { DetailContext } from "../../store/DetailContext";
 import "./DataTableValue.scss";
 import {ArrowBarDown, ArrowBarUp, EnvelopeFill, TelephoneFill} from "react-bootstrap-icons";
 import _ from "lodash";
 
 type Props = {
-  data?: any;
   config?: any
 };
 
@@ -13,7 +13,6 @@ type Props = {
  * Component for showing one or more values for a single property value in a tabular view.
  *
  * @component
- * @prop {object} data - Data payload.
  * @prop {object} config - Data table configuration object.
  * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
@@ -39,6 +38,7 @@ type Props = {
  */
 const DataTableValue: React.FC<Props> = (props) => {
 
+    const detailContext = useContext(DetailContext);
     const [hide, setHide] = useState<boolean>(false);
 
     const handleHide = (e) => {
@@ -46,12 +46,27 @@ const DataTableValue: React.FC<Props> = (props) => {
     };
 
     let hideClass = hide ? "hide" : "";
-
     let tableStyle = {
         width: props.config.width ? props.config.width + 'px' : "100%"
     };
 
-    let data = _.isArray(props.data) ? props.data : [props.data];
+    const getArrayValue = (key, results) => {
+        let val = _.get(results, key);
+        return Array.isArray(val) ? val : [val];
+    };
+    let data = getArrayValue(props.config.property, detailContext.detail);
+
+    const getIcon = (type) => {
+        if (type === "phone") {
+            return (<div>
+                <TelephoneFill color="#5fc9aa" size={14} data-testid={"icon-"+ type} />
+            </div>);
+        } else if (type === "email") {
+            return (<div>
+                <EnvelopeFill color="#5fc9aa" size={14} data-testid={"icon-"+ type} />
+            </div>);
+        }
+    };
 
     return (
         <div className="dataTableValue">
@@ -59,36 +74,42 @@ const DataTableValue: React.FC<Props> = (props) => {
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
                     <span className="hide" onClick={handleHide}>
-                        {hide ? <ArrowBarDown color="#5d6aaa" size={18} /> : <ArrowBarUp color="#5d6aaa" size={18} />}
+                        {hide ? 
+                        <ArrowBarDown 
+                            data-testid="hideDown"
+                            color="#5d6aaa" 
+                            size={18} 
+                        /> : 
+                        <ArrowBarUp 
+                            data-testid="hideUp"
+                            color="#5d6aaa" 
+                            size={18} 
+                        />}
                     </span> : null}
             </div>
-            <Table size="sm" hover style={tableStyle} id={props.config.id} className={hideClass}>
-            <tbody>
-                {data.map((d, i) => {
-                return (
-                    <tr key={"row-" + i}>
-                        {props.config.icon === "phone" ?
-                            <td key={"icon-" + i} className="icon">
-                                {i === 0 ? <div><TelephoneFill color="#5fc9aa" size={14} /></div> : null}
-                            </td> : null}
-                        {props.config.icon === "email" ?
-                            <td key={"icon-" + i} className="icon">
-                                {i === 0 ? <div><EnvelopeFill color="#5fc9aa" size={14} /></div> : null}
-                            </td> : null}
-                        <td key={"data-" + i} className="value">
-                            <div>{d}</div>
-                        </td>
-                        {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
+            <Table size="sm" style={tableStyle} id={props.config.id} className={hideClass}>
+                <tbody>
+                    {data.map((d, i) => {
                         return (
-                            <td key={"metadata-" + i2} className="metadata">
-                                <div>{meta.value}</div>
-                            </td>
+                            <tr key={"row-" + i}>
+                                {props.config.icon &&
+                                <td key={"icon-" + i} className="icon">
+                                    {i === 0 ? getIcon(props.config.icon) : null}
+                                </td>}
+                                <td key={"data-" + i} className="value">
+                                    <div>{d}</div>
+                                </td>
+                                {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
+                                return (
+                                    <td key={"metadata-" + i2} className="metadata">
+                                        <div>{meta.value}</div>
+                                    </td>
+                                );
+                                })}
+                            </tr>
                         );
-                        })}
-                    </tr>
-                );
-                })}
-            </tbody>
+                    })}
+                </tbody>
             </Table>
         </div>
     );
