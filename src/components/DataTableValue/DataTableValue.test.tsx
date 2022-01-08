@@ -2,18 +2,43 @@ import DataTableValue from "./DataTableValue";
 import { DetailContext } from "../../store/DetailContext";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { debug } from "console";
 
 const configMultiple = {
     id: "phone", 
     title: "Phone Number", 
     property: "result[0].extracted.person.phone", 
-    icon: "phone"
+    icon: "phone",
+    metadata: [
+        {
+            type: "block",
+            color: "#96bde4",
+            value: "B"
+        },
+        {
+            type: "block",
+            color: "#5d6aaa",
+            value: "4"
+        }
+    ]
 };
 
 const configSingular = {
     id: "ssn", 
     title: "SSN", 
-    property: "result[0].extracted.person.ssn"
+    property: "result[0].extracted.person.ssn",
+    metadata: [
+        {
+            type: "block",
+            color: "#96bde4",
+            value: "B"
+        },
+        {
+            type: "block",
+            color: "#5d6aaa",
+            value: "4"
+        }
+    ]
 };
 
 const detail = {
@@ -53,7 +78,7 @@ const detailContextValue = {
 describe("DataTableValue component", () => {
 
     test("Verify data table renders with a property with multiple values and an icon", () => {
-        const {getByText, getByTestId} = render(
+        const {getByText, queryAllByText, getByTestId} = render(
             <DetailContext.Provider value={detailContextValue}>
                 <DataTableValue config={configMultiple} />
             </DetailContext.Provider>
@@ -63,6 +88,8 @@ describe("DataTableValue component", () => {
         expect(getByTestId("icon-" + configMultiple.icon)).toBeInTheDocument();
         expect(getByText("123-456-7890")).toBeInTheDocument();
         expect(getByText("321-654-9876")).toBeInTheDocument();
+        expect(queryAllByText(configMultiple.metadata[0].value).length > 0);
+        expect(queryAllByText(configMultiple.metadata[1].value).length > 0);
         userEvent.click(getByTestId("hideUp"));
         expect(getByTestId("hideDown")).toBeInTheDocument();
         userEvent.click(getByTestId("hideDown"));
@@ -70,7 +97,7 @@ describe("DataTableValue component", () => {
     });
 
     test("Verify data table renders with a property with a single value", () => {
-        const {getByText, queryByTestId} = render(
+        const {getByText, queryAllByText, queryByTestId} = render(
             <DetailContext.Provider value={detailContextValue}>
                 <DataTableValue config={configSingular} />
             </DetailContext.Provider>
@@ -78,6 +105,8 @@ describe("DataTableValue component", () => {
         expect(getByText(configSingular.title)).toBeInTheDocument();
         expect(queryByTestId("hideUp")).not.toBeInTheDocument();
         expect(getByText("123-45-6789")).toBeInTheDocument();
+        expect(queryAllByText(configMultiple.metadata[0].value).length > 0);
+        expect(queryAllByText(configMultiple.metadata[1].value).length > 0);
     });
 
 });
