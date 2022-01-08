@@ -11,6 +11,7 @@
                 width: 70px;
                 height: 70px;
                 margin-right: 20px;
+                border-radius: 4px;
             }
         }
         .details {
@@ -21,7 +22,7 @@
                 font-size: 18px;
                 font-weight: bold;
                 text-decoration: none;
-                color: #5d6aaa;
+                color: #394494;
                 cursor: pointer;
             }
             div.subtitle {
@@ -47,7 +48,7 @@
             }
             .email {
                 width: 180px;
-                color: #5d6aaa;
+                color: #394494;
             }
             .categories {
                 position: absolute;

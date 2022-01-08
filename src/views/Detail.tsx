@@ -43,7 +43,7 @@ const Detail: React.FC<Props> = (props) => {
     return (
       <div className={styles.heading}>
       <div className={styles.icon} onClick={handleBackClick}>
-        <ArrowLeft color="#5d6aaa" size={28} />
+        <ArrowLeft color="#394494" size={28} />
       </div>
       <div className={styles.title}>
         {displayValue(config.title, detailContext.detail)}

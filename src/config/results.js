@@ -3,7 +3,7 @@ export const configResults = {
         meter: {
             colors: {
                 all: "#cccccc",
-                filters: "#5fc9aa"
+                filters: "#1ACCA8"
             }
         },
         facets: [

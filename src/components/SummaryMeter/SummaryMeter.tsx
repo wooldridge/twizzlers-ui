@@ -93,7 +93,7 @@ const SummaryMeter: React.FC<Props> = (props) => {
         type: "solidgauge",
         data: [
           {
-            color: "#5fc9aa",
+            color: props.config.colors.filters,
             radius: "100%",
             innerRadius: "60%",
             y: searchContext.returned

@@ -161,9 +161,9 @@ const ResultsList: React.FC<Props> = (props) => {
               <div className="status">
                 {displayValue(props.config.status, results)}
               </div> : null}
-              {/* <GearFill color="#5d6aaa" size={16} />
+              <GearFill color="#5d6aaa" size={16} />
               <CodeSlash color="#5d6aaa" size={16} />
-              <ArrowRepeat color="#5d6aaa" size={16} /> */}
+              <ArrowRepeat color="#5d6aaa" size={16} />
             </div>
           </div>
         </div>
