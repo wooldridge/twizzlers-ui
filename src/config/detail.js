@@ -3,8 +3,8 @@ export const configDetail = {
         id: "result[0].extracted.person.personId",
         thumbnail: {
             src: "result[0].extracted.person.image",
-            width: 100,
-            height: 100
+            width: "70px",
+            height: "70px"
         },
         title: "result[0].extracted.person.name"
     },
@@ -13,7 +13,7 @@ export const configDetail = {
             id: "name",
             title: "Name",
             dataPath: "result[0].extracted.person.name",
-            width: 300,
+            width: "350px",
             metadata: [
                 {
                     type: "block",
@@ -32,7 +32,7 @@ export const configDetail = {
             title: "Phone Number",
             dataPath: "result[0].extracted.person.phone",
             icon: "phone",
-            width: 300,
+            width: "400px",
             metadata: [
                 {
                     type: "block",
@@ -67,7 +67,7 @@ export const configDetail = {
         address: {
             id: "address",
             title: "Address",
-            width: 600,
+            width: "600px",
             dataPath: "result[0].extracted.person.address",
             cols: [
                 {

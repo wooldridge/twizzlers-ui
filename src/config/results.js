@@ -26,8 +26,8 @@ export const configResults = {
         id: "extracted.person.personId",
         thumbnail: {
             src: "extracted.person.image",
-            width: 100,
-            height: 100
+            width: "70px",
+            height: "70px"
         },
         title: "extracted.person.name",
         items: [
