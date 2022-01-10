@@ -93,7 +93,7 @@ const DataTableValue: React.FC<Props> = (props) => {
                 <tbody>
                     {data.map((d, i) => {
                         return (
-                            <tr key={"row-" + i}>
+                            <tr key={"row-" + i} className={data.length === 1 ? "singular" : ""}>
                                 {props.config.icon &&
                                 <td key={"icon-" + i} className="icon">
                                     {i === 0 ? getIcon(props.config.icon) : null}
