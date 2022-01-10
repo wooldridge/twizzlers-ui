@@ -47,12 +47,12 @@ const DataTableValue: React.FC<Props> = (props) => {
 
     let hideClass = hide ? "hide" : "";
     let tableStyle = {
-        width: props.config.width ? props.config.width + 'px' : "100%"
+        width: (props.config && props.config.width) ? props.config.width + 'px' : "auto"
     };
 
     const getArrayValue = (key, results) => {
-        let val = _.get(results, key);
-        return Array.isArray(val) ? val : [val];
+        let val = _.get(results, key, null);
+        return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
     const data = getArrayValue(props.config.dataPath, detailContext.detail);
 
@@ -70,6 +70,7 @@ const DataTableValue: React.FC<Props> = (props) => {
 
     return (
         <div className="dataTableValue">
+            {data &&
             <div className="label">
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
@@ -86,8 +87,9 @@ const DataTableValue: React.FC<Props> = (props) => {
                             size={18} 
                         />}
                     </span> : null}
-            </div>
-            <Table size="sm" style={tableStyle} id={props.config.id} className={hideClass}>
+            </div>}
+            {data && data.length > 0 &&
+            <Table size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
                 <tbody>
                     {data.map((d, i) => {
                         return (
@@ -110,7 +112,7 @@ const DataTableValue: React.FC<Props> = (props) => {
                         );
                     })}
                 </tbody>
-            </Table>
+            </Table>}
         </div>
     );
 };

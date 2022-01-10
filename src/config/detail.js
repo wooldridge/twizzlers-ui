@@ -51,7 +51,6 @@ export const configDetail = {
             title: "Email",
             dataPath: "result[0].extracted.person.email",
             icon: "email",
-            width: 400,
             metadata: [
                 {
                     type: "block",

@@ -2,7 +2,6 @@ import DataTableValue from "./DataTableValue";
 import { DetailContext } from "../../store/DetailContext";
 import {render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { debug } from "console";
 
 const configMultiple = {
     id: "phone", 
@@ -39,6 +38,12 @@ const configSingular = {
             value: "4"
         }
     ]
+};
+
+const configNoExist = {
+    id: "noexist", 
+    title: "No Exist", 
+    dataPath: "result[0].extracted.person.noexist",
 };
 
 const detail = {
@@ -107,6 +112,16 @@ describe("DataTableValue component", () => {
         expect(getByText("123-45-6789")).toBeInTheDocument();
         expect(queryAllByText(configMultiple.metadata[0].value).length > 0);
         expect(queryAllByText(configMultiple.metadata[1].value).length > 0);
+    });
+
+    test("Verify data table does not render with a property that does not exist in the results", () => {
+        const {queryByText, queryByTestId} = render(
+            <DetailContext.Provider value={detailContextValue}>
+                <DataTableValue config={configNoExist} />
+            </DetailContext.Provider>
+        );
+        expect(queryByText(configNoExist.title)).not.toBeInTheDocument();
+        expect(queryByTestId(configNoExist.id)).not.toBeInTheDocument();
     });
 
 });

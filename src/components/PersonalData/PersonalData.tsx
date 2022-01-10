@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import { DetailContext } from "../../store/DetailContext";
+import React from "react";
 import DataTableValue from "../DataTableValue/DataTableValue";
 import DataTableMultiValue from "../DataTableMultiValue/DataTableMultiValue";
 import styles from "./PersonalData.module.scss";
@@ -11,8 +10,6 @@ type Props = {
 
 const PersonalData: React.FC<Props> = (props) => {
 
-  const detailContext = useContext(DetailContext);
-
   return (
     <div className={styles.personal}>
         <DataTableValue config={props.config.name} />
@@ -21,6 +18,7 @@ const PersonalData: React.FC<Props> = (props) => {
         <DataTableMultiValue config={props.config.address} />
     </div>
   );
+
 };
 
 export default PersonalData;
