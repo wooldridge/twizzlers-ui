@@ -63,7 +63,13 @@ const configSingular = {
             value: "4"
         }
     ]
-};;
+};
+
+const configNoExist = {
+    id: "noexist", 
+    title: "No Exist", 
+    dataPath: "result[0].extracted.person.noexist",
+};
 
 const detail = {
 	"result": [
@@ -132,6 +138,16 @@ describe("DataTableMultiValue component", () => {
         expect(getByText("Anytown High School")).toBeInTheDocument();
         expect(getByText("Anytown")).toBeInTheDocument();
         expect(getByText("2022")).toBeInTheDocument();
+    });
+
+    test("Verify data table does not render with a property object that does not exist in the results", () => {
+        const {queryByText, queryByTestId} = render(
+            <DetailContext.Provider value={detailContextValue}>
+                <DataTableMultiValue config={configNoExist} />
+            </DetailContext.Provider>
+        );
+        expect(queryByText(configNoExist.title)).not.toBeInTheDocument();
+        expect(queryByTestId(configNoExist.id)).not.toBeInTheDocument();
     });
 
 });

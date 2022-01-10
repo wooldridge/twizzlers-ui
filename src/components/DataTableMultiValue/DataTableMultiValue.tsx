@@ -64,14 +64,9 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
     };
 
     const getArrayValue = (key, data) => {
-        let val = _.get(data, key);
-        return Array.isArray(val) ? val : [val];
+        let val = _.get(data, key, null);
+        return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
-
-    let tableStyle = {
-        width: props.config.width ? props.config.width + 'px' : "100%"
-    };
-
     const data = getArrayValue(props.config.dataPath, detailContext.detail);
 
     const displayValue = (key, res) => {
@@ -79,6 +74,9 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     };
 
+    let tableStyle = {
+        width: props.config.width ? props.config.width + 'px' : "100%"
+    };
     let hideClass = hide ? "hide" : "";
 
     const popover = (
@@ -91,6 +89,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
 
     return (
         <div className="dataTableMultiValue">
+            {data &&
             <div className="label">
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
@@ -107,8 +106,9 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                             size={18} 
                         />}
                     </span> : null}
-            </div>
-            <Table size="sm" style={tableStyle} id={props.config.id} className={hideClass}>
+            </div>}
+            {data && data.length > 0 &&
+            <Table size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
             <thead>
                 <tr>
                     {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
@@ -153,7 +153,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                 );
                 })}
             </tbody>
-            </Table>
+            </Table>}
         </div>
     );
 };
