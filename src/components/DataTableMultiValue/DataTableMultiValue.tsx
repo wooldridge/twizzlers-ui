@@ -22,17 +22,19 @@ type Props = {
  * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
  * @prop {string} config.width - Width of table (as CSS width value).
+ * @prop {string} dataPath - Path to object values in payload.
  * @prop {object[]} config.cols - Configuration objects for columns.
  * @prop {string} config.cols[].title - Column heading title.
- * @prop {string} config.cols[].value - Path to value in data payload.
- * @prop {object[]} config.labels - Configuration objects for label icons.
- * @prop {string} config.labels[].type - Label type (e.g. "block").
- * @prop {string} config.labels[].color - Label color (HTML color code).
- * @prop {string} config.labels[].value - Label value.
+ * @prop {string} config.cols[].value - Path to value in data payload (relative to dataPath).
+ * @prop {object[]} config.metadata - Configuration objects for value metadata.
+ * @prop {string} config.metadata[].type - Metadata type (e.g. "block").
+ * @prop {string} config.metadata[].color - Metadata color (HTML color code).
+ * @prop {string} config.metadata[].value - Metadata value.
  * @example
  * {
  *   title: "Address",
- *   width: 600,
+ *   width: "600px",
+ *   dataPath: "path.to.address",
  *   cols: [
  *      {
  *          title: "Street",
@@ -45,7 +47,7 @@ type Props = {
  *          value: "path.to.city"
  *      }
  *   ],
- *   labels: [
+ *   metadata: [
  *     {
  *       type: "block",
  *       color: "#96bde4",
@@ -108,7 +110,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                     </span> : null}
             </div>}
             {data && data.length > 0 &&
-            <Table size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
+            <Table id={props.config.id} size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
             <thead>
                 <tr>
                     {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {

@@ -16,18 +16,18 @@ type Props = {
  * @prop {object} config - Data table configuration object.
  * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
- * @prop {string} config.dataPath - Path to values in payload.
+ * @prop {string} config.dataPath - Path to value in payload.
  * @prop {string} config.width - Width of table (in pixels).
- * @prop {object[]} config.labels - Configuration objects for label icons.
- * @prop {string} config.labels[].type - Label type (e.g. "block").
- * @prop {string} config.labels[].color - Label color (HTML color code).
- * @prop {string} config.labels[].value - Label value.
+ * @prop {object[]} config.metadata - Configuration objects for value metadata.
+ * @prop {string} config.metadata[].type - Metadata type (e.g. "block").
+ * @prop {string} config.metadata[].color - Metadata color (HTML color code).
+ * @prop {string} config.metadata[].value - Metadata value.
  * @example
  * {
  *   title: "Name",
  *   dataPath: "path.to.name",
- *   width: 300,
- *   labels: [
+ *   width: "300px",
+ *   metadata: [
  *     {
  *       type: "block",
  *       color: "#96bde4",
@@ -89,7 +89,7 @@ const DataTableValue: React.FC<Props> = (props) => {
                     </span> : null}
             </div>}
             {data && data.length > 0 &&
-            <Table size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
+            <Table id={props.config.id} size="sm" style={tableStyle} className={hideClass} data-testid={"table-"+ props.config.id}>
                 <tbody>
                     {data.map((d, i) => {
                         return (
