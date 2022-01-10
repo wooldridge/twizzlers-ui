@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Table from "react-bootstrap/Table";
 import { DetailContext } from "../../store/DetailContext";
 import "./DataTableValue.scss";
-import {ArrowBarDown, ArrowBarUp, EnvelopeFill, TelephoneFill} from "react-bootstrap-icons";
+import {ArrowBarDown, ArrowBarRight, EnvelopeFill, TelephoneFill} from "react-bootstrap-icons";
 import _ from "lodash";
 
 type Props = {
@@ -76,12 +76,12 @@ const DataTableValue: React.FC<Props> = (props) => {
                 {data.length > 1 ?
                     <span className="hide" onClick={handleHide}>
                         {hide ? 
-                        <ArrowBarDown 
+                        <ArrowBarRight 
                             data-testid="hideDown"
                             color="#5d6aaa" 
                             size={18} 
                         /> : 
-                        <ArrowBarUp 
+                        <ArrowBarDown 
                             data-testid="hideUp"
                             color="#5d6aaa" 
                             size={18} 

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Table from "react-bootstrap/Table";
 import { DetailContext } from "../../store/DetailContext";
 import "./DataTableMultiValue.scss";
-import {ArrowBarDown, ArrowBarUp, GeoAltFill} from "react-bootstrap-icons";
+import {ArrowBarDown, ArrowBarRight, GeoAltFill} from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import _ from "lodash";
@@ -95,12 +95,12 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                 {data.length > 1 ?
                     <span className="hide" onClick={handleHide}>
                         {hide ? 
-                        <ArrowBarDown 
+                        <ArrowBarRight 
                             data-testid="hideDown"
                             color="#5d6aaa" 
                             size={18} 
                         /> : 
-                        <ArrowBarUp 
+                        <ArrowBarDown 
                             data-testid="hideUp"
                             color="#5d6aaa" 
                             size={18} 
