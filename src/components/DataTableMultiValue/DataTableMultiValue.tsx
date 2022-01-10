@@ -21,7 +21,7 @@ type Props = {
  * @prop {object} config  Data table configuration object.
  * @prop {object} config.id - ID for table, added as element id attribute.
  * @prop {string} config.title - Table label.
- * @prop {string} config.width - Width of table (in pixels).
+ * @prop {string} config.width - Width of table (as CSS width value).
  * @prop {object[]} config.cols - Configuration objects for columns.
  * @prop {string} config.cols[].title - Column heading title.
  * @prop {string} config.cols[].value - Path to value in data payload.
@@ -75,7 +75,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
     };
 
     let tableStyle = {
-        width: props.config.width ? props.config.width + 'px' : "100%"
+        width: props.config.width ? props.config.width : "auto"
     };
     let hideClass = hide ? "hide" : "";
 

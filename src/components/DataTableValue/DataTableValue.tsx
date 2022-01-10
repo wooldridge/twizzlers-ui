@@ -47,7 +47,7 @@ const DataTableValue: React.FC<Props> = (props) => {
 
     let hideClass = hide ? "hide" : "";
     let tableStyle = {
-        width: (props.config && props.config.width) ? props.config.width + 'px' : "auto"
+        width: (props.config && props.config.width) ? props.config.width : "auto"
     };
 
     const getArrayValue = (key, results) => {
