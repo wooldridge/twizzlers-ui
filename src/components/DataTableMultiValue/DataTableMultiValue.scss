@@ -22,9 +22,19 @@
         }
     }
 
+    tbody tr.singular td {
+        border-bottom-width: 0 !important;
+    }
+
     thead tr th {
         font-weight: normal;
     }
+    thead {
+        th:nth-last-child(3), th:nth-last-child(2), th:nth-last-child(1) {
+            width: 1%;
+        }
+    }
+
     tbody tr:first-child td span {
         font-weight: bold;
     }
@@ -35,29 +45,10 @@
         white-space: nowrap;
     }
 
-    /* TODO move widths to config */
-    tbody {
-        tr td:nth-child(1) {
-            width: 320px;
-        }
-        tr td:nth-child(2) {
-            width: 140px;
-        }
-        tr td:nth-child(3) {
-            width: 50px;
-        }
-        tr td:nth-child(4) {
-            width: 65px;
-        }
-    }
-
     tbody {
         border-top-width: 0 !important;
-        td:nth-last-child(3) div {
-            background-color: #96bde4;
-        }
-        td:nth-last-child(2) div {
-            background-color: #5d6aaa;
+        td:nth-last-child(3), td:nth-last-child(2), td:nth-last-child(1) {
+            width: 1%;
         }
         td.metadata div {
             font-size: 12px;

@@ -104,7 +104,7 @@ const DataTableValue: React.FC<Props> = (props) => {
                                 {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
                                 return (
                                     <td key={"metadata-" + i2} className="metadata">
-                                        <div>{meta.value}</div>
+                                        <div style={{backgroundColor: meta.color ? meta.color : "lightgray"}}>{meta.value}</div>
                                     </td>
                                 );
                                 })}

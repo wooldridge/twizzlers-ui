@@ -26,25 +26,27 @@ type Props = {
  * @prop {object[]} config.cols - Configuration objects for columns.
  * @prop {string} config.cols[].title - Column heading title.
  * @prop {string} config.cols[].value - Path to value in data payload (relative to dataPath).
+ * @prop {string} config.cols[].width - Width of column (as CSS width value).
  * @prop {object[]} config.metadata - Configuration objects for value metadata.
  * @prop {string} config.metadata[].type - Metadata type (e.g. "block").
  * @prop {string} config.metadata[].color - Metadata color (HTML color code).
  * @prop {string} config.metadata[].value - Metadata value.
  * @example
  * {
+ *   id: "address",
  *   title: "Address",
  *   width: "600px",
  *   dataPath: "path.to.address",
  *   cols: [
  *      {
  *          title: "Street",
- *          type: "text",
- *          value: "path.to.street"
+ *          value: "path.to.street",
+ *          width: "320px"
  *      },
  *      {
  *          title: "City",
- *          type: "text",
- *          value: "path.to.city"
+ *          value: "path.to.city",
+ *          width: "160px"
  *      }
  *   ],
  *   metadata: [
@@ -129,10 +131,10 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
             <tbody>
                 {data.map((d, i) => {
                 return (
-                    <tr key={"row-" + i}>
+                    <tr key={"row-" + i} className={data.length === 1 ? "singular" : ""}>
                         {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
                             return (
-                                <td key={"data-" + i} className="value">
+                                <td key={"data-" + i} className="value" style={{width: col.width}}>
                                     <span>{displayValue(col.value, d)}</span>
                                 </td>
                             );
@@ -140,7 +142,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                         {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
                             return (
                                 <td key={"metadata-" + (i2 + props.config.cols.length)} className="metadata">
-                                    <div>{meta.value}</div>
+                                    <div style={{backgroundColor: meta.color ? meta.color : "lightgray"}}>{meta.value}</div>
                                 </td>
                             );
                         })}
