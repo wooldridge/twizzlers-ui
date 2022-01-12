@@ -1,4 +1,4 @@
-export const configResults = { 
+export const configSearch = { 
     sidebar: {
         meter: {
             colors: {
