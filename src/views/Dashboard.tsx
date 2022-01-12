@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
-import New from "../components/New/New";
 import Metrics from "../components/Metrics/Metrics";
-import Section from "../components/Section/Section";
-import Search from "../components/Search/Search";
+import SearchBox from "../components/SearchBox/SearchBox";
+import Saved from "../components/Saved/Saved";
+import New from "../components/New/New";
 import Recent from "../components/Recent/Recent";
+import Section from "../components/Section/Section";
 import {configDashboard} from "../config/dashboard.js";
+import {configSearchbox} from "../config/searchbox.js";
 import {getRecent} from "../api/api";
 import {getSaved} from "../api/api";
 import {getSummary} from "../api/api";
@@ -30,7 +32,7 @@ const Dashboard: React.FC<Props> = (props) => {
 
         <div className="row">
 
-          {/* <Metrics data={summary.metrics} config={configDashboard.metrics} /> */}
+          <Metrics data={summary.metrics} config={configDashboard.metrics} />
 
         </div>
 
@@ -39,20 +41,28 @@ const Dashboard: React.FC<Props> = (props) => {
           <div className="col-lg">
 
             <Section title="Search">
-              <Search data={saved} config={configDashboard} />
+              <div className={styles.newSearch}>
+                <h4 style={{marginBottom: "20px"}}>New Search</h4>
+                <SearchBox config={configSearchbox} button="vertical" width="100%" />
+              </div>
+              <div className={styles.divider}>- or -</div>
+              <div style={{marginTop: "20px"}}>
+                <h4>Saved Searches</h4>
+                <Saved data={saved} config={configDashboard.saved} />
+              </div>
             </Section>
 
           </div>
 
           <div className="col-lg">
 
-            {/* <Section title="What's New with Entities">
+            <Section title="What's New with Entities">
               <New />
             </Section>
 
             <Section title="Recently Visited">
               <Recent data={recent} config={configDashboard.recent} />
-            </Section> */}
+            </Section>
 
           </div>
 
