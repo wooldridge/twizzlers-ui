@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DetailContext } from "../store/DetailContext";
 import Occupations from "../components/Occupations/Occupations";
-import PersonalData from "../components/PersonalData/PersonalData";
 import Relationships from "../components/Relationships/Relationships";
+import DataTableValue from "../components/DataTableValue/DataTableValue";
+import DataTableMultiValue from "../components/DataTableMultiValue/DataTableMultiValue";
 import Section from "../components/Section/Section";
 import {configDetail} from "../config/detail.js";
 import { ArrowLeft } from "react-bootstrap-icons";
@@ -77,7 +78,12 @@ const Detail: React.FC<Props> = (props) => {
             <div className="col-lg-7">
 
               <Section title="Personal Info">
-                <PersonalData config={configDetail.personal}/>
+                <DataTableValue config={configDetail.personal.name} />
+                <DataTableValue config={configDetail.personal.phone} />
+                <DataTableValue config={configDetail.personal.email} />
+                <DataTableValue config={configDetail.personal.ssn} />
+                <DataTableMultiValue config={configDetail.personal.address} />
+                <DataTableMultiValue config={configDetail.personal.school} />
               </Section>
 
             </div>
