@@ -53,7 +53,7 @@ export const configSearch = {
         ],
         categories: {
             value: "extracted.person.sources",
-            colors: "sourceColors"
+            colors: "sourcesColors"
         },
         timestamp: {
             value: "extracted.person.createdOn",

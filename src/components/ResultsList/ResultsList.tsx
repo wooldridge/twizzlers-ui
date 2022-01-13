@@ -24,16 +24,18 @@ const COMPONENTS = {
  * @prop {string} config.id  Path to ID. Passed as identifier to Detail view. 
  * @prop {object} config.thumbnail  Thumbnail configuration object.
  * @prop {string} config.thumbnail.src  Path to thumbnail source URL.
- * @prop {string} config.thumbnail.width  Thumbnail width (in pixels).
- * @prop {string} config.thumbnail.height  Thumbnail height (in pixels).
- * @prop {string} config.title  Path to title associated with record. Clicking title in UI takes you to 
+ * @prop {string} config.thumbnail.width  Thumbnail width (as CSS width value).
+ * @prop {string} config.thumbnail.height  Thumbnail height (as CSS width value).
+ * @prop {string} config.title  Path to title associated with record. Clicking title in UI takes you to the 
  * Detail view for that result.
  * @prop {object[]} config.items  Array of item configuration objects. Item can be value-based or component-based.
  * @prop {string} config.items.value  Path to value-based item.
  * @prop {string} config.items.className  CSS class name to apply to item value.
  * @prop {string} config.items.component  Name of component used to render component-based item.
  * @prop {object} config.items.config  Object of configuration properties for item component.
- * @prop {string} config.categories  Path to categories associated with record.
+ * @prop {object} config.categories  Categories configuration object.
+ * @prop {string} config.categories.value  Path to categories.
+ * @prop {string} config.categories.colors  Key to colors configuration object in colors.js.
  * @prop {object} config.timestamp  Timestamp configuration object.
  * @prop {string} config.timestamp.value  Path to timestamp.
  * @prop {string} config.timestamp.label  Label prefix for timestamp.
@@ -44,12 +46,12 @@ const COMPONENTS = {
  *   id: "extracted.person.id",
  *   thumbnail: {
  *       src: "extracted.person.image",
- *       width: 100,
- *       height: 100
+ *       width: "70px",
+ *       height: "70px"
  *   },
  *   title: "extracted.person.name",
  *   items: [
- *       // One component-based item
+ *       // Component-based item example
  *       {
  *          component: "Address", 
  *          config: {
@@ -57,11 +59,14 @@ const COMPONENTS = {
  *            state: "extracted.person.address.state"
  *          }
  *       },
- *       // Two value-based items
+ *       // Value-based item examples
  *       {value: "extracted.person.phone", className: "phone"},
  *       {value: "extracted.person.ssn"}
  *   ],
- *   categories: "extracted.person.sources",
+ *   categories: {
+ *       value: "extracted.person.sources",
+ *       colors: "sourcesColors"
+ *   },
  *   timestamp: {
  *       value: "extracted.person.createdOn",
  *       label: "Time is"

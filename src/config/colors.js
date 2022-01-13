@@ -1,5 +1,5 @@
 export const colors = { 
-    sourceColors: {
+    sourcesColors: {
         "New York Times": "#d5e1de",
         "USA Today": "#ebe1fa",
         "Los Angeles Times": "#cae4ea",
