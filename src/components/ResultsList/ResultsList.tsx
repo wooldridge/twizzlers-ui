@@ -83,6 +83,12 @@ const ResultsList: React.FC<Props> = (props) => {
   const detailContext = useContext(DetailContext);
 
   const catColors = colors[props.config.categories.colors] ? colors[props.config.categories.colors] : {};
+  let thumbStyle = {
+    width: (props.config && props.config.thumbnail && props.config.thumbnail.width) ? 
+      props.config.thumbnail.width : "auto",
+    height: (props.config && props.config.thumbnail && props.config.thumbnail.height) ? 
+      props.config.thumbnail.height : "auto"
+  };
 
   const handleNameClick = (e) => {
     detailContext.handleDetail(e.target.id);
@@ -140,6 +146,7 @@ const ResultsList: React.FC<Props> = (props) => {
             <img
               src={getValue(props.config.thumbnail.src, results)}
               alt={getValue(props.config.title, results)}
+              style={thumbStyle}
             ></img> : null}
           </div>
           <div className="details">

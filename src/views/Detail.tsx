@@ -27,6 +27,13 @@ const Detail: React.FC<Props> = (props) => {
     detailContext.handleDetail(id);
   }
 
+  let thumbStyle = {
+    width: (configDetail.heading.thumbnail && configDetail.heading.thumbnail.width) ? 
+    configDetail.heading.thumbnail.width : "auto",
+    height: (configDetail.heading.thumbnail && configDetail.heading.thumbnail.height) ? 
+    configDetail.heading.thumbnail.height : "auto"
+  };
+
   // TODO different than displayValue?
   const getValue = (key, res) => {
     let val = _.get(res, key);
@@ -53,6 +60,7 @@ const Detail: React.FC<Props> = (props) => {
         <img
             src={getValue(config.thumbnail.src, detailContext.detail)}
             alt={getValue(config.title, detailContext.detail)}
+            style={thumbStyle}
         ></img>
       </div>}
     </div>
