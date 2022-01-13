@@ -23,7 +23,7 @@ type Props = {
  * @prop {object[]} config.items - Array of menu item objects.
  * @prop {string} config.items.label - Menu item label.
  * @prop {string|string[]} config.items.value - Menu item value (as string or array of strings).
- * @prop {string} config.items.default - Set to "true" if menu item should be selected as the default. Optional.
+ * @prop {boolean} config.items.default - Set to true if menu item should be selected as the default. Optional.
  * @prop {string} button - Display an aligned submit button ("vertical" or "horizontal"). Optional.
  * @prop {string} width - Width of search box (as CSS width value). Default is "100%".
  * @example
@@ -37,7 +37,7 @@ type Props = {
  *         {
  *             label: "Default Item",
  *             value: "ent1",
- *             default: "true"
+ *             default: true
  *         },
  *         {
  *             label: "Another Item",
@@ -59,7 +59,7 @@ const SearchBox: React.FC<Props> = (props) => {
   let items: any = [];
   if (props.config && props.config.items && props.config.items.length > 0) {
     items = props.config.items;
-    let found = items.find(item => item.default === "true");
+    let found = items.find(item => item.default === true);
     selectedInit = found ? found.label : items[0].label;
   }
 

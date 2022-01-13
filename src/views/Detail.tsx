@@ -49,12 +49,12 @@ const Detail: React.FC<Props> = (props) => {
       <div className={styles.title}>
         {displayValue(config.title, detailContext.detail)}
       </div>
-      <div className={styles.thumbnail}>
+      {config.thumbnail && <div className={styles.thumbnail}>
         <img
             src={getValue(config.thumbnail.src, detailContext.detail)}
             alt={getValue(config.title, detailContext.detail)}
         ></img>
-      </div>
+      </div>}
     </div>
     );
   };

@@ -54,7 +54,7 @@ const DataTableValue: React.FC<Props> = (props) => {
         let val = _.get(results, key, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
-    const data = getArrayValue(props.config.dataPath, detailContext.detail);
+    const data = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
 
     const getIcon = (type) => {
         if (type === "phone") {

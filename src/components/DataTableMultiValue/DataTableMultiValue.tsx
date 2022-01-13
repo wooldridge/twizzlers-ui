@@ -71,17 +71,17 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
         let val = _.get(data, key, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
-    const data = getArrayValue(props.config.dataPath, detailContext.detail);
+    const data = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
 
     const displayValue = (key, res) => {
         let val = _.get(res, key);
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     };
 
-    let tableStyle = {
-        width: props.config.width ? props.config.width : "auto"
-    };
     let hideClass = hide ? "hide" : "";
+    let tableStyle = {
+        width: (props.config && props.config.width) ? props.config.width : "auto"
+    };
 
     const popover = (
         <Popover id="mapPopover">
