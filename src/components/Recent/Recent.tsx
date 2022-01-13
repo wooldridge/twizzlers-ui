@@ -111,7 +111,7 @@ const Recent: React.FC<Props> = (props) => {
             <div className={styles.categories}>
               {getArrayValue(props.config.categories, recent).map((s, i) => {
                 return (
-                  <div key={"category-" + i} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
+                  <div key={"category-" + i} style={{backgroundColor: colors["sourcesColors"][s]}}>{s}</div>
                 )
               })}
             </div>
