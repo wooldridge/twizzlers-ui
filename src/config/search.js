@@ -51,7 +51,10 @@ export const configSearch = {
             { value: "extracted.person.email", className: "email" },
             { value: "extracted.person.ssn" }
         ],
-        categories: "extracted.person.sources",
+        categories: {
+            value: "extracted.person.sources",
+            colors: "sourceColors"
+        },
         timestamp: {
             value: "extracted.person.createdOn",
             label: "Created on"

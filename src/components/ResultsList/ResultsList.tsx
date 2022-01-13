@@ -77,6 +77,8 @@ const ResultsList: React.FC<Props> = (props) => {
   const searchContext = useContext(SearchContext);
   const detailContext = useContext(DetailContext);
 
+  const catColors = colors[props.config.categories.colors] ? colors[props.config.categories.colors] : {};
+
   const handleNameClick = (e) => {
     detailContext.handleDetail(e.target.id);
   };
@@ -144,9 +146,12 @@ const ResultsList: React.FC<Props> = (props) => {
             </div>
             {props.config.categories ? 
             <div className="categories">
-              {getArrayValue(props.config.categories, results).map((s, index2) => {
+              {getArrayValue(props.config.categories.value, results).map((s, index2) => {
                 return (
-                  <div key={"category-" + index2} style={{backgroundColor: colors.sourceColors[s]}}>{s}</div>
+                  <div 
+                    key={"category-" + index2} 
+                    style={{backgroundColor: catColors[s]}}
+                  >{s}</div>
                 )
               })}
             </div> : null}
