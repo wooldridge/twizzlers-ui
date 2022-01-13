@@ -19,9 +19,9 @@ type Props = {
  * @prop {string} config.dataPath - Path to value in payload.
  * @prop {string} config.width - Width of table (as CSS width value).
  * @prop {object[]} config.metadata - Configuration objects for value metadata.
- * @prop {string} config.metadata[].type - Metadata type (e.g. "block").
- * @prop {string} config.metadata[].color - Metadata color (HTML color code).
- * @prop {string} config.metadata[].value - Metadata value.
+ * @prop {string} config.metadata.type - Metadata type (e.g. "block").
+ * @prop {string} config.metadata.color - Metadata color (HTML color code).
+ * @prop {string} config.metadata.value - Metadata value.
  * @example
  * {
  *   title: "Name",

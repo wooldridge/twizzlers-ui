@@ -24,13 +24,13 @@ type Props = {
  * @prop {string} config.width - Width of table (as CSS width value).
  * @prop {string} dataPath - Path to object values in payload.
  * @prop {object[]} config.cols - Configuration objects for columns.
- * @prop {string} config.cols[].title - Column heading title.
- * @prop {string} config.cols[].value - Path to value in data payload (relative to dataPath).
- * @prop {string} config.cols[].width - Width of column (as CSS width value).
+ * @prop {string} config.cols.title - Column heading title.
+ * @prop {string} config.cols.value - Path to value in data payload (relative to dataPath).
+ * @prop {string} config.cols.width - Width of column (as CSS width value).
  * @prop {object[]} config.metadata - Configuration objects for value metadata.
- * @prop {string} config.metadata[].type - Metadata type (e.g. "block").
- * @prop {string} config.metadata[].color - Metadata color (HTML color code).
- * @prop {string} config.metadata[].value - Metadata value.
+ * @prop {string} config.metadata.type - Metadata type (e.g. "block").
+ * @prop {string} config.metadata.color - Metadata color (HTML color code).
+ * @prop {string} config.metadata.value - Metadata value.
  * @example
  * {
  *   id: "address",
