@@ -2,3 +2,21 @@ li .form-check-input:checked {
     background-color: #394494;;
     border-color: none;
 }
+
+.meterTotal {
+    position: relative;
+    top: -4px;
+    height: 20px;
+    width: 100px;
+    background-color: transparent;
+    transform: rotate(180deg);
+    padding: 0 5px;
+}
+
+.meterValue {
+    position: relative;
+    height: 10px;
+    width: 40px;
+    background-color: #1ACCA8;
+    border-radius: 4px;
+}

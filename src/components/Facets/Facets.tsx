@@ -45,15 +45,22 @@ const Facets: React.FC<Props> = (props) => {
       facetObj["facet-value"].map((fv, index) => {
         return (
           <li key={"facetValue-" + index}>
-            <Form.Check 
-              type={"checkbox"}
-              checked={searchContext.facetStrings && searchContext.facetStrings.includes(facet + ":" + fv.name)}
-              disabled={disabled ? disabled : false}
-              id={facet + ":" + fv.name}
-              label={fv.name}
-              className="shadow-none"
-              onChange={handleSelect}
-            />
+            <div className={styles.label}>
+              <Form.Check 
+                type={"checkbox"}
+                checked={searchContext.facetStrings && searchContext.facetStrings.includes(facet + ":" + fv.name)}
+                disabled={disabled ? disabled : false}
+                id={facet + ":" + fv.name}
+                label={fv.name}
+                className="shadow-none"
+                onChange={handleSelect}
+              />
+            </div>
+            <div className="meterTotal">
+              <div className="meterValue" 
+                   style={{width: (fv.count*100/searchContext.total).toString().concat("%")}}
+              ></div>
+            </div>
             <div className={styles.count}>{fv.count.toLocaleString()}</div>
           </li>
         )
