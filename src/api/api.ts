@@ -8,8 +8,13 @@ import {detail} from "../mocks/detail";
 import _ from "lodash";
 
 export const getSearchResults = async (query) => { 
+  let config = {
+    headers: {
+      userid: "f01783b1-c5f3-4a9e-8538-77f1e950d6fd"
+    }
+  }
   try {
-    const response = await axios.post(endpoints.searchResults, query);
+    const response = await axios.post(endpoints.searchResults, query, config);
     if (response && response.status === 200) {
       return response;
     }
