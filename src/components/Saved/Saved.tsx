@@ -65,7 +65,7 @@ const Saved: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className={styles.saved}>
+    <div className={styles.saved.concat(" saved")}>
       <Table hover>
         <thead>
           <tr>
