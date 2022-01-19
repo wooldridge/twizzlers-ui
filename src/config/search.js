@@ -1,12 +1,14 @@
 export const configSearch = { 
-    sidebar: {
-        meter: {
-            colors: {
-                all: "#cccccc",
-                filters: "#1ACCA8"
-            }
-        },
-        facets: [
+    meter: {
+        colors: {
+            all: "#cccccc",
+            filters: "#1ACCA8"
+        }
+    },
+    facets: {
+        selected: "#1acca8",
+        unselected: "#ddd",
+        items: [
             {
                 type: "category",
                 value: "Collection",

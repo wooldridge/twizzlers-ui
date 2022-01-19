@@ -1,22 +1,51 @@
-li .form-check-input:checked {
-    background-color: #394494;;
-    border-color: none;
-}
-
-.meterTotal {
-    position: relative;
-    top: 8px;
-    height: 9px;
-    width: 100%;
-    background-color: transparent;
-    transform: rotate(180deg);
-    padding: 0 5px;
-}
-
-.meterValue {
-    position: relative;
-    height: 9px;
-    width: 40px;
-    background-color: #1ACCA8;
-    border-radius: 4px;
+.facets {
+    padding-left: 30px;
+    font-size: 15px;
+    .title {
+        text-transform: uppercase;
+        padding-bottom: 10px;
+        font-weight: bold;
+        color: #666;
+    }
+    tbody {
+        tr {
+            border-bottom-width: 0 !important;
+        }
+        td.label {
+            .form-check-input:checked {
+                background-color: #394494;;
+                border-color: none;
+            }
+            label {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 140px;
+            }
+        }
+        td.meter {
+            width: 100%;
+            .total {
+                position: relative;
+                top: -5px;
+                height: 9px;
+                width: 100%;
+                background-color: transparent;
+                transform: rotate(180deg);
+                padding: 0 2px;
+                .count {
+                    position: relative;
+                    height: 9px;
+                    width: 40px;
+                    border-radius: 4px;
+                }
+            }
+        }
+        td.count {
+            position: relative;
+            top: -5px;
+            font-size: 13px;
+            text-align: right;
+        }
+    }
 }
