@@ -7,20 +7,23 @@ export const configSearch = {
     },
     facets: {
         selected: "#1acca8",
-        unselected: "#ddd",
+        unselected: "#dfdfdf",
         items: [
             {
                 type: "category",
                 value: "Collection",
+                tooltip: "Filter by entity.",
                 disabled: true
             },
             {
                 type: "category",
-                value: "sources"
+                value: "sources",
+                tooltip: "Filter by source."
             },
             {
                 type: "category",
-                value: "status"
+                value: "status",
+                tooltip: "Filter by status."
             }
         ]
     },

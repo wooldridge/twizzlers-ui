@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { SearchContext } from "../../store/SearchContext";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import {InfoCircleFill} from "react-bootstrap-icons";
 import "./Facets.scss";
 
 type Props = {
@@ -46,7 +49,7 @@ const Facets: React.FC<Props> = (props) => {
       facetObj["facet-value"].map((fv, index) => {
         //let value = Math.floor(Math.random() * (total + 1));
         return (
-          <tr key={"facetValue-" + index}>
+          <tr className="facetValue" key={"facetValue-" + index}>
             <td className="label">
               <Form.Check 
                 type={"checkbox"}
@@ -77,22 +80,42 @@ const Facets: React.FC<Props> = (props) => {
     return <div>{result}</div>
   }
 
+  const getTooltip = (content) => {
+    return <Tooltip>{content}</Tooltip>
+  }
+
   return (
     <div className="facets">
       {/* Show each facet */}
       {props.config.items && props.config.items.map((f, index) => {
         return ( 
-        <div key={"facet-" + index}>
-          <div className="title">{f.value}</div>
-          <Table size="sm" style={{width: "300px", padding: "0"}}>
-            <tbody>
-              {/* Show each facet value (and count) */}
-              {searchContext.searchResults?.facet && searchContext.searchResults.facet?.length > 0 ?
-                getFacetValues(f.value, searchContext.searchResults.facet, f.disabled) :
-                null
-              }
-            </tbody>
-          </Table>
+        <div className="facet" key={"facet-" + index}>
+          <div className="title">
+            {f.value}
+            <OverlayTrigger
+              key={f.value}
+              placement="right"
+              overlay={getTooltip(f.tooltip)}
+            >
+              <InfoCircleFill 
+                data-testid="infoCircle"
+                color="#5d6aaa" 
+                size={21}
+                className="facetInfo" 
+              />
+            </OverlayTrigger>
+          </div>
+          <div className="facetValues">
+            <Table size="sm" style={{width: "300px", padding: "0"}}>
+              <tbody>
+                {/* Show each facet value (and count) */}
+                {searchContext.searchResults?.facet && searchContext.searchResults.facet?.length > 0 ?
+                  getFacetValues(f.value, searchContext.searchResults.facet, f.disabled) :
+                  null
+                }
+              </tbody>
+            </Table>
+          </div>
       </div> ) 
     })}
     </div> 
