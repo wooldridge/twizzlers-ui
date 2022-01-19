@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { UserContext } from "../store/UserContext";
 import { getSearchResults } from "../api/api";
 
 interface SearchContextInterface {
@@ -52,6 +53,8 @@ export const SearchContext = React.createContext<SearchContextInterface>(default
 
 const SearchProvider: React.FC = ({ children }) => {
 
+  const userContext = useContext(UserContext);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -91,7 +94,7 @@ const SearchProvider: React.FC = ({ children }) => {
     if (newSearch) {
       setNewSearch(false);
       let newQuery = buildQuery(startInit, pageLengthInit, qtext, facetStrings);
-      let sr = getSearchResults(newQuery);
+      let sr = getSearchResults(newQuery, userContext.userid);
       sr.then(result => {
         setSearchResults(result?.data.searchResults.response);
         setReturned(result?.data.searchResults.response.total);

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { UserContext } from "../store/UserContext";
 import { getDetail } from "../api/api";
 
 interface DetailContextInterface {
@@ -26,6 +27,8 @@ export const DetailContext = React.createContext<DetailContextInterface>(default
 
 const DetailProvider: React.FC = ({ children }) => {
 
+  const userContext = useContext(UserContext);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,7 +47,7 @@ const DetailProvider: React.FC = ({ children }) => {
               "personId": [detailId]
           }
       }
-      let sr = getDetail(newQuery);
+      let sr = getDetail(newQuery, userContext.userid);
       sr.then(result => {
         setDetail(result?.data.searchResults.response);
         setNewDetail(false);
@@ -65,7 +68,7 @@ const DetailProvider: React.FC = ({ children }) => {
             "personId": [id]
         }
     }
-    let sr = getDetail(newQuery);
+    let sr = getDetail(newQuery, userContext.userid);
     sr.then(result => {
       setDetail(result?.data.searchResults.response);
       if (location.pathname !== "/detail/" + id) {

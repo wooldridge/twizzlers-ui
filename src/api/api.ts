@@ -7,10 +7,10 @@ import {saved} from "../mocks/saved";
 import {detail} from "../mocks/detail";
 import _ from "lodash";
 
-export const getSearchResults = async (query) => { 
+export const getSearchResults = async (query, userid) => { 
   let config = {
     headers: {
-      userid: "f01783b1-c5f3-4a9e-8538-77f1e950d6fd"
+      userid: userid ? userid : null
     }
   }
   try {
@@ -85,9 +85,14 @@ export const getSaved = (opts) => {
   return saved;
 };
 
-export const getDetail = async (query) => {
+export const getDetail = async (query, userid) => {
+  let config = {
+    headers: {
+      userid: userid ? userid : null
+    }
+  }
   try {
-    const response = await axios.post(endpoints.detail, query);
+    const response = await axios.post(endpoints.detail, query, config);
     if (response && response.status === 200) {
       return response;
     }
@@ -128,4 +133,18 @@ export const getRecent = (opts) => {
     return p;
   });
   return personsSlice;
+};
+
+export const getUserid = async () => { 
+  try {
+    //http://localhost:8888/api/explore/twizzlers/login
+    const response = await axios.get("/api/explore/twizzlers/login");
+    if (response && response.status === 200) {
+      console.log("getUserid", response);
+      return response;
+    }
+  } catch (error) {
+    let message = error;
+    console.error("Error: getUserid", message);
+  }
 };
