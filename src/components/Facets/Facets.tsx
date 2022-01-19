@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useLayoutEffect, useEffect, useRef } from "react";
 import { SearchContext } from "../../store/SearchContext";
 import Form from "react-bootstrap/Form";
+import Table from "react-bootstrap/Table";
 import styles from "./Facets.module.scss";
 import "./Facets.scss";
 
@@ -33,6 +34,8 @@ type Props = {
 const Facets: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
+  const targetRef: any = useRef(null);
+  const [valueWidth, setValueWidth] = useState<any>(null);
 
   const handleSelect = (e) => {
     let parts = e.target.id.split(":");
@@ -41,8 +44,10 @@ const Facets: React.FC<Props> = (props) => {
 
   const getFacetValues = (facet, facetObjects, disabled=false) => {
     let facetObj = facetObjects.find(obj => obj.name === facet);
+    let total = 20000;
     let result = facetObj["facet-value"] ? 
       facetObj["facet-value"].map((fv, index) => {
+        let random = Math.floor(Math.random() * (total + 1));
         return (
           <li key={"facetValue-" + index}>
             <div className={styles.label}>
@@ -52,24 +57,38 @@ const Facets: React.FC<Props> = (props) => {
                 disabled={disabled ? disabled : false}
                 id={facet + ":" + fv.name}
                 label={fv.name}
+                title={fv.name}
                 className="shadow-none"
                 onChange={handleSelect}
               />
             </div>
             <div className="meterTotal">
               <div className="meterValue" 
-                   style={{width: (fv.count*100/searchContext.total).toString().concat("%")}}
+                   style={{width: (random*100/total).toString().concat("%")}}
               ></div>
             </div>
-            <div className={styles.count}>{fv.count.toLocaleString()}</div>
+            <div className={styles.count.concat(" facetCount")} style={{width: valueWidth}}>{(random).toLocaleString()}</div>
           </li>
         )
       }) : null;
     return <div>{result}</div>
   }
 
+  useLayoutEffect(() => {
+  //useEffect(() => {
+    if (targetRef.current) {
+      let vals = targetRef.current!.getElementsByClassName("facetCount");
+      let maxWidth = 0;
+      for (let i = 0; i < vals.length; i++) {
+        maxWidth = vals[i].offsetWidth > maxWidth ? vals[i].offsetWidth : maxWidth;
+      }
+      // maxWidth = maxWidth + 50;
+      setValueWidth(maxWidth.toString().concat("px"));
+    }
+  }, [searchContext.searchResults]);
+
   return (
-    <div className={styles.facets}>
+    <div className={styles.facets} ref={targetRef}>
       {/* Show each facet */}
       {props.config && props.config.map((f, index) => {
         return ( 

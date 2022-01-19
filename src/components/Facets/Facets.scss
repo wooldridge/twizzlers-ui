@@ -5,9 +5,9 @@ li .form-check-input:checked {
 
 .meterTotal {
     position: relative;
-    top: -4px;
-    height: 20px;
-    width: 100px;
+    top: 8px;
+    height: 9px;
+    width: 100%;
     background-color: transparent;
     transform: rotate(180deg);
     padding: 0 5px;
@@ -15,7 +15,7 @@ li .form-check-input:checked {
 
 .meterValue {
     position: relative;
-    height: 10px;
+    height: 9px;
     width: 40px;
     background-color: #1ACCA8;
     border-radius: 4px;

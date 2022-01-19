@@ -1,5 +1,5 @@
 .facets {
-    width: 310px;
+    width: 290px;
     padding-left: 30px;
     font-size: 15px;
     .title {
@@ -13,8 +13,9 @@
         padding-left: 0;
         li {
             list-style-type: none;
+            display: inline-block;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             color: #333;
         }
         .label {
@@ -24,13 +25,17 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                width: 140px;
+                width: 120px;
             }
         }
         .count {
             //width: 80px;
-            font-size: 14px;
+            font-size: 13px;
             text-align: right;
+            position: relative;
+            top: 3px;
+            padding: 0;
+            margin: 0;
             // color: blue;
             // border: solid 1px gray;
         }
