@@ -8,6 +8,9 @@ export const configSearch = {
     facets: {
         selected: "#1acca8",
         unselected: "#dfdfdf",
+        displayThreshold: 3,
+        displayShort: 3,
+        displayLong: 5,
         items: [
             {
                 type: "category",
@@ -24,6 +27,21 @@ export const configSearch = {
                 type: "category",
                 value: "status",
                 tooltip: "Filter by status."
+            },
+            {
+                type: "category",
+                value: "email",
+                tooltip: "Filter by email."
+            },
+            {
+                type: "category",
+                value: "name",
+                tooltip: "Filter by name."
+            },
+            {
+                type: "category",
+                value: "personId",
+                tooltip: "Filter by ID."
             }
         ]
     },

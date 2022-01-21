@@ -1,30 +1,35 @@
 .facets {
-    padding-left: 30px;
+    padding-left: 25px;
     font-size: 15px;
+    .facet {
+        border-bottom: solid 1px #ddd;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+    .facet:first-child {
+        padding-top: 0;
+    }
+    .facet:last-child {
+        margin-bottom: 20px;
+    }
     .title {
         text-transform: uppercase;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
         font-weight: bold;
+        margin-left: 5px;
         color: #666;
         .facetInfo {
             display: inline-block;
             padding-left: 5px;
         }
     }
-    /* Vertically scrollable facet container */
     .facetValues {
-        max-height: 125px;
+        table {
+            margin-bottom: 0;
+            width: 320px;
+        }
         overflow-x: hidden;
         overflow-y: auto;
-    }
-    ::-webkit-scrollbar {
-        -webkit-appearance: none;
-        width: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        background-color: rgba(0,0,0,.2);
-        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
     }
     tbody {
         tr {
@@ -33,16 +38,17 @@
         td.label {
             .form-check {
                 margin-bottom: 0;
+                margin-left: 5px;
             }
             .form-check-input:checked {
-                background-color: #394494;;
+                background-color: #394494;
                 border-color: none;
             }
             label {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                width: 140px;
+                width: 160px;
             }
         }
         td.meter {
@@ -68,6 +74,23 @@
             top: -5px;
             font-size: 13px;
             text-align: right;
+        }
+    }
+    .moreLess {
+        font-size: 14px;
+        color: #394494;
+        margin-left: 5px;
+        cursor: pointer;
+        .doubleRight, .doubleLeft {
+            position: relative;
+            top: -1px;
+            display: inline-block;
+        }
+        .doubleRight {
+            margin-left: 2px;
+        }
+        .doubleLeft {
+            margin-right: 2px;
         }
     }
 }
