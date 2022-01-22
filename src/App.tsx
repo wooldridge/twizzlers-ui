@@ -17,7 +17,6 @@ const App: React.FC<Props> = (props) => {
   const userContext = useContext(UserContext);
 
   if (!userContext.userid) {
-    console.log("App handleLogin", userContext.userid);
     userContext.handleLogin();
   }
 

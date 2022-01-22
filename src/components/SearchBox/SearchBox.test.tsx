@@ -24,7 +24,7 @@ const menuConfig = {
         {
             label: "Default Item",
             value: "ent1",
-            default: "true"
+            default: true
         },
         {
             label: "Another Item",

@@ -46,12 +46,12 @@ const Facets: React.FC<Props> = (props) => {
   const [moreLess, setMoreLess] = useState<any>(moreLessInit);
 
   // Set up thresholds for more/less links
-  const displayThreshold = props.config.displayThreshold || 5;
+  const displayThreshold = props.config.displayThreshold || 3;
   let moreThreshold;
   if (props.config.items && props.config.items.length > displayThreshold) {
-    moreThreshold = props.config.displayShort || 5;
+    moreThreshold = props.config.displayShort || 3;
   } else {
-    moreThreshold = props.config.displayLong || 10;
+    moreThreshold = props.config.displayLong || 5;
   }
 
   const handleSelect = (e) => {
@@ -68,10 +68,10 @@ const Facets: React.FC<Props> = (props) => {
   }
 
   const displayFacetValues = (facetObj, disabled=false, moreLess) => {
-    let total = 2000000;
+    let total = 2000000; // for testing larger counts
     let result = facetObj["facet-value"] ? 
       facetObj["facet-value"].map((fv, index) => {
-        let value = Math.floor(Math.random() * (total + 1));
+        let value = Math.floor(Math.random() * (total + 1)); // for testing larger counts
         if (!(moreLess && index >= moreThreshold)) {
           return (
             <tr className="facetValue" key={"facetValue-" + index}>
@@ -81,6 +81,7 @@ const Facets: React.FC<Props> = (props) => {
                   checked={searchContext.facetStrings && searchContext.facetStrings.includes(facetObj.name + ":" + fv.name)}
                   disabled={disabled ? disabled : false}
                   id={facetObj.name + ":" + fv.name}
+                  data-testid={facetObj.name + ":" + fv.name}
                   label={fv.name}
                   title={fv.name}
                   className="shadow-none"
@@ -89,23 +90,25 @@ const Facets: React.FC<Props> = (props) => {
               </td>
               <td className="meter">
                 <div className="total">
-                  <div className="count" 
-                      style={{
-                        //width: (fv.count*100/searchContext.total).toString().concat("%"),
-                        width: (value*100/total).toString().concat("%"),
-                        backgroundColor: (searchContext.facetStrings && searchContext.facetStrings.includes(facetObj.name + ":" + fv.name)) ? 
-                          props.config.selected : props.config.unselected
-                      }}
+                  <div 
+                    className="count"
+                    data-testid={"meter-" + facetObj.name + ":" + fv.name}
+                    style={{
+                      width: (fv.count*100/searchContext.total).toString().concat("%"),
+                      // width: (value*100/total).toString().concat("%"), // for testing larger counts
+                      backgroundColor: (searchContext.facetStrings && searchContext.facetStrings.includes(facetObj.name + ":" + fv.name)) ? 
+                        props.config.selected : props.config.unselected
+                    }}
                   ></div>
                 </div>
               </td>
-              {/* <td className="count">{(fv.count).toLocaleString()}</td> */}
-              <td className="count">{(value).toLocaleString()}</td>
+              <td className="count">{(fv.count).toLocaleString()}</td>
+              {/* <td className="count">{(value).toLocaleString()}</td> */}
             </tr>
           )
         }
       }) : null;
-    return <div>{result}</div>
+    return <tbody>{result}</tbody>
   }
 
   const getTooltip = (content) => {
@@ -148,12 +151,10 @@ const Facets: React.FC<Props> = (props) => {
             {/* Show each facet value (and count) */}
             {searchContext.searchResults?.facet && searchContext.searchResults.facet?.length > 0 ?
             <Table size="sm" style={{padding: 0, margin: 0}}>
-              <tbody>
-                  {displayFacetValues(getFacetObj(f.value, searchContext.searchResults.facet), f.disabled, moreLess[f.value])}
-              </tbody>
+                {displayFacetValues(getFacetObj(f.value, searchContext.searchResults.facet), f.disabled, moreLess[f.value])}
             </Table> : null }
             {(getNumValues(f.value, searchContext.searchResults.facet) > moreThreshold) ? moreLess[f.value] ? 
-              <div className="moreLess" onClick={handleMoreLess(f.value)}>
+              <div className="moreLess" data-testid={"more-" + f.value} onClick={handleMoreLess(f.value)}>
                 {getNumValues(f.value, searchContext.searchResults.facet) - moreThreshold} more
                 <ChevronDoubleRight 
                   data-testid="doubleRight"
@@ -161,7 +162,7 @@ const Facets: React.FC<Props> = (props) => {
                   size={11}
                   className="doubleRight" 
                 /></div> :
-              <div className="moreLess" onClick={handleMoreLess(f.value)}>
+              <div className="moreLess" data-testid={"less-" + f.value} onClick={handleMoreLess(f.value)}>
                 <ChevronDoubleLeft 
                   data-testid="doubleLeft"
                   color="#5d6aaa" 
