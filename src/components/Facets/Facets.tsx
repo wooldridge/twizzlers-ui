@@ -16,10 +16,21 @@ type Props = {
  * Searches are executed by {@link SearchContext}.
  *
  * @component
- * @prop {object[]} config  Data table configuration object.
- * @prop {string} config[].type - Facet type (e.g., "category").
- * @prop {string} config[].value - Facet value.
- * @prop {boolean} config[].disabled - Is the facet disabled (optional, default to false).
+ * @prop {object[]} config Configuration object for all facets.
+ * @prop {string} config.selected  Color of select facet bar (as HTML color).
+ * @prop {string} config.selected  Color of unselect facet bar (as HTML color).
+ * @prop {number} config.displayThreshold  A threshold value cotrolling the maximum number of facet 
+ * values displayed without a more/less link.
+ * @prop {number} config.displayShort The maximum number of facet values displayed without a more/less
+ * link when the number of facets is at or below the `config.displayThreshold` value.
+ * @prop {number} config.displayLong The maximum number of facet values displayed without a more/less
+ * link when the number of facets is above the `config.displayThreshold` value.
+ * @prop {object[]} config.items Configuration objects for each facet.
+ * @prop {string} config.items.type - Type of facet ("category").
+ * @prop {string} config.items.name - Name of the facet.
+ * @prop {string} config.items.tooltip - Tooltip associated with the facet's information icon. If
+ * no value is provided, not icon is displayed.
+ * @prop {boolean} config.items.disabled - Whether the facet is disabled. Optional.
  * @example
  * [
  *   {
@@ -40,7 +51,7 @@ const Facets: React.FC<Props> = (props) => {
   let moreLessInit = {};
   const moreLessDefault = true;
   if (props.config.items) {
-    props.config.items.forEach(f => {moreLessInit[f.value] = moreLessDefault;});
+    props.config.items.forEach(f => {moreLessInit[f.name] = moreLessDefault;});
   }
 
   const [moreLess, setMoreLess] = useState<any>(moreLessInit);
@@ -133,36 +144,38 @@ const Facets: React.FC<Props> = (props) => {
         return ( 
         <div className="facet" key={"facet-" + index}>
           <div className="title">
-            {f.value}
-            <OverlayTrigger
-              key={f.value}
-              placement="right"
-              overlay={getTooltip(f.tooltip)}
-            >
-              <InfoCircleFill 
-                data-testid="infoCircle"
-                color="#5d6aaa" 
-                size={21}
-                className="facetInfo" 
-              />
-            </OverlayTrigger>
+            {f.name}
+            {f.tooltip &&
+              <OverlayTrigger
+                key={f.name}
+                placement="right"
+                overlay={getTooltip(f.tooltip)}
+              >
+                <InfoCircleFill 
+                  data-testid={"info-" + f.name}
+                  color="#5d6aaa" 
+                  size={21}
+                  className="facetInfo" 
+                />
+              </OverlayTrigger>
+            }
           </div>
           <div className="facetValues">
             {/* Show each facet value (and count) */}
             {searchContext.searchResults?.facet && searchContext.searchResults.facet?.length > 0 ?
             <Table size="sm" style={{padding: 0, margin: 0}}>
-                {displayFacetValues(getFacetObj(f.value, searchContext.searchResults.facet), f.disabled, moreLess[f.value])}
+                {displayFacetValues(getFacetObj(f.name, searchContext.searchResults.facet), f.disabled, moreLess[f.name])}
             </Table> : null }
-            {(getNumValues(f.value, searchContext.searchResults.facet) > moreThreshold) ? moreLess[f.value] ? 
-              <div className="moreLess" data-testid={"more-" + f.value} onClick={handleMoreLess(f.value)}>
-                {getNumValues(f.value, searchContext.searchResults.facet) - moreThreshold} more
+            {(getNumValues(f.name, searchContext.searchResults.facet) > moreThreshold) ? moreLess[f.name] ? 
+              <div className="moreLess" data-testid={"more-" + f.name} onClick={handleMoreLess(f.name)}>
+                {getNumValues(f.name, searchContext.searchResults.facet) - moreThreshold} more
                 <ChevronDoubleRight 
                   data-testid="doubleRight"
                   color="#5d6aaa" 
                   size={11}
                   className="doubleRight" 
                 /></div> :
-              <div className="moreLess" data-testid={"less-" + f.value} onClick={handleMoreLess(f.value)}>
+              <div className="moreLess" data-testid={"less-" + f.name} onClick={handleMoreLess(f.name)}>
                 <ChevronDoubleLeft 
                   data-testid="doubleLeft"
                   color="#5d6aaa" 

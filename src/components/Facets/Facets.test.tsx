@@ -1,6 +1,6 @@
 import Facets from "./Facets";
 import { SearchContext } from "../../store/SearchContext";
-import {render} from "@testing-library/react";
+import {render, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const configMultipleOver = {
@@ -10,14 +10,27 @@ const configMultipleOver = {
     displayShort: 2,
     displayLong: 3,
     items: [
-        { type: "category", value: "a", tooltip: "a tip" },
-        { type: "category", value: "b", tooltip: "b tip" },
-        { type: "category", value: "c", tooltip: "c tip" }
+        { type: "category", name: "a" },
+        { type: "category", name: "b" },
+        { type: "category", name: "c" }
     ]
 };
 
 const configMultipleUnder = Object.assign(
     {}, configMultipleOver, {displayThreshold: 4});
+
+const configMultipleTooltips = Object.assign(
+    {}, configMultipleOver, {
+        items: [
+            { type: "category", name: "a", tooltip: "a tip" },
+            { type: "category", name: "b" }
+        ]
+    });
+
+const configMultipleDisabled = Object.assign(
+    {}, configMultipleOver, {
+        items: [{ type: "category", name: "a", disabled: true }]
+    });
 
 const searchResults = {
     "facet": [
@@ -154,6 +167,32 @@ describe("Facets component", () => {
             expect(getByText(f.name)).toBeInTheDocument();
         });
         expect(document.querySelector(".facetValue")).not.toBeInTheDocument();
+    });
+
+    test("Verify facets are rendered with and without info icons and tooltips when so configured", async () => {
+        const {getByText, getByTestId, queryByTestId} = render(
+            <SearchContext.Provider value={searchContextValue}>
+                <Facets config={configMultipleTooltips} />
+            </SearchContext.Provider>
+        );
+        const tooltipExists = getByTestId("info-" + configMultipleTooltips.items[0].name);
+        expect(tooltipExists).toBeInTheDocument();
+        userEvent.hover(tooltipExists);
+        await waitFor(() => {
+            configMultipleTooltips.items[0].tooltip &&
+                expect(getByText(configMultipleTooltips.items[0].tooltip)).toBeInTheDocument();
+        });
+        expect(queryByTestId("info-" + configMultipleTooltips.items[1].name)).not.toBeInTheDocument();
+    });
+
+    test("Verify a facet is rendered disabled when so configured", () => {
+        const {getByText, getByTestId} = render(
+            <SearchContext.Provider value={searchContextValue}>
+                <Facets config={configMultipleDisabled} />
+            </SearchContext.Provider>
+        );
+        expect(getByText(configMultipleDisabled.items[0].name)).toBeInTheDocument();
+        expect(getByTestId("a:A1")).toBeDisabled();
     });
 
 });

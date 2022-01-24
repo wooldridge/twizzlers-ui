@@ -14,33 +14,33 @@ export const configSearch = {
         items: [
             {
                 type: "category",
-                value: "Collection",
+                name: "Collection",
                 tooltip: "Filter by entity.",
                 disabled: true
             },
             {
                 type: "category",
-                value: "sources",
-                tooltip: "Filter by source."
+                name: "sources",
+                // tooltip: "Filter by source."
             },
             {
                 type: "category",
-                value: "status",
+                name: "status",
                 tooltip: "Filter by status."
             },
             {
                 type: "category",
-                value: "email",
+                name: "email",
                 tooltip: "Filter by email."
             },
             {
                 type: "category",
-                value: "name",
+                name: "name",
                 tooltip: "Filter by name."
             },
             {
                 type: "category",
-                value: "personId",
+                name: "personId",
                 tooltip: "Filter by ID."
             }
         ]
