@@ -17,32 +17,41 @@ type Props = {
  *
  * @component
  * @prop {object[]} config Configuration object for all facets.
- * @prop {string} config.selected  Color of select facet bar (as HTML color).
- * @prop {string} config.selected  Color of unselect facet bar (as HTML color).
- * @prop {number} config.displayThreshold  A threshold value cotrolling the maximum number of facet 
+ * @prop {string} config.selected  Color of selected facet bar (as HTML color).
+ * @prop {string} config.selected  Color of unselected facet bar (as HTML color).
+ * @prop {number} config.displayThreshold  Threshold value cotrolling the maximum number of facet 
  * values displayed without a more/less link.
- * @prop {number} config.displayShort The maximum number of facet values displayed without a more/less
+ * @prop {number} config.displayShort Mximum number of facet values displayed without a more/less
  * link when the number of facets is at or below the `config.displayThreshold` value.
- * @prop {number} config.displayLong The maximum number of facet values displayed without a more/less
+ * @prop {number} config.displayLong Maximum number of facet values displayed without a more/less
  * link when the number of facets is above the `config.displayThreshold` value.
  * @prop {object[]} config.items Configuration objects for each facet.
  * @prop {string} config.items.type - Type of facet ("category").
  * @prop {string} config.items.name - Name of the facet.
  * @prop {string} config.items.tooltip - Tooltip associated with the facet's information icon. If
- * no value is provided, not icon is displayed.
+ * no value is provided, no icon is displayed.
  * @prop {boolean} config.items.disabled - Whether the facet is disabled. Optional.
  * @example
- * [
- *   {
- *     type: "category",
- *     value: "Widgets"
- *   },
- *   {
- *     type: "category",
- *     value: "Other Stuff",
- *     disabled: true
- *   }
- * ]
+ * facets: {
+ *  selected: "#1acca8",
+ *  unselected: "#dfdfdf",
+ *  displayThreshold: 3,
+ *  displayShort: 3,
+ *  displayLong: 5,
+ *  items: [
+ *    {
+ *      type: "category",
+ *      name: "Collection",
+ *      tooltip: "Filter by entity.",
+ *      disabled: true
+ *    },
+ *    {
+ *      type: "category",
+ *      name: "sources",
+ *      tooltip: "Filter by source."
+ *    }
+ *  ]
+ * }
  */
 const Facets: React.FC<Props> = (props) => {
 

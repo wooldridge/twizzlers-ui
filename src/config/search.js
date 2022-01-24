@@ -21,7 +21,7 @@ export const configSearch = {
             {
                 type: "category",
                 name: "sources",
-                // tooltip: "Filter by source."
+                tooltip: "Filter by source."
             },
             {
                 type: "category",
