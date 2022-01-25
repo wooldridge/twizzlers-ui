@@ -57,8 +57,8 @@ const Facets: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
 
-  let moreLessInit = {};
-  const moreLessDefault = true;
+  let moreLessInit: any = {};
+  const moreLessDefault: boolean = true;
   if (props.config.items) {
     props.config.items.forEach(f => {moreLessInit[f.name] = moreLessDefault;});
   }
@@ -66,8 +66,8 @@ const Facets: React.FC<Props> = (props) => {
   const [moreLess, setMoreLess] = useState<any>(moreLessInit);
 
   // Set up thresholds for more/less links
-  const displayThreshold = props.config.displayThreshold || 3;
-  let moreThreshold;
+  const displayThreshold: number = props.config.displayThreshold || 3;
+  let moreThreshold: number;
   if (props.config.items && props.config.items.length > displayThreshold) {
     moreThreshold = props.config.displayShort || 3;
   } else {
@@ -75,7 +75,7 @@ const Facets: React.FC<Props> = (props) => {
   }
 
   const handleSelect = (e) => {
-    let parts = e.target.id.split(":");
+    let parts: any = e.target.id.split(":");
     searchContext.handleFacetString(parts[0], parts[1], e.target.checked);
   };
 
@@ -88,10 +88,10 @@ const Facets: React.FC<Props> = (props) => {
   }
 
   const displayFacetValues = (facetObj, disabled=false, moreLess) => {
-    let total = 2000000; // for testing larger counts
+    let total = 2000000; // TODO Remove: for testing larger counts
     let result = facetObj["facet-value"] ? 
       facetObj["facet-value"].map((fv, index) => {
-        let value = Math.floor(Math.random() * (total + 1)); // for testing larger counts
+        let value = Math.floor(Math.random() * (total + 1)); // TODO Remove: for testing larger counts
         if (!(moreLess && index >= moreThreshold)) {
           return (
             <tr className="facetValue" key={"facetValue-" + index}>
@@ -115,7 +115,7 @@ const Facets: React.FC<Props> = (props) => {
                     data-testid={"meter-" + facetObj.name + ":" + fv.name}
                     style={{
                       width: (fv.count*100/searchContext.total).toString().concat("%"),
-                      // width: (value*100/total).toString().concat("%"), // for testing larger counts
+                      // width: (value*100/total).toString().concat("%"), // TODO Remove: for testing larger counts
                       backgroundColor: (searchContext.facetStrings && searchContext.facetStrings.includes(facetObj.name + ":" + fv.name)) ? 
                         props.config.selected : props.config.unselected
                     }}

@@ -68,18 +68,18 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
     };
 
     const getArrayValue = (key, data) => {
-        let val = _.get(data, key, null);
+        let val: any = _.get(data, key, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
-    const data = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
+    const data: any = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
 
     const displayValue = (key, res) => {
-        let val = _.get(res, key);
+        let val: any = _.get(res, key, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
     };
 
-    let hideClass = hide ? "hide" : "";
-    let tableStyle = {
+    let hideClass: string = hide ? "hide" : "";
+    let tableStyle: any = {
         width: (props.config && props.config.width) ? props.config.width : "auto"
     };
 

@@ -45,17 +45,18 @@ const DataTableValue: React.FC<Props> = (props) => {
         setHide(!hide);
     };
 
-    let hideClass = hide ? "hide" : "";
-    let tableStyle = {
-        width: (props.config && props.config.width) ? props.config.width : "auto"
-    };
-
     const getArrayValue = (key, results) => {
-        let val = _.get(results, key, null);
+        let val: any = _.get(results, key, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
     };
     const data = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
 
+    let hideClass: string = hide ? "hide" : "";
+    let tableStyle: any = {
+        width: (props.config && props.config.width) ? props.config.width : "auto"
+    };
+    
+    // TODO make icon configurable from any available in library
     const getIcon = (type) => {
         if (type === "phone") {
             return (<div>

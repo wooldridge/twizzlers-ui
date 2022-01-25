@@ -53,7 +53,7 @@ const SearchBox: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
 
-  let qtextInit = searchContext.qtext || "";
+  const qtextInit: string = searchContext.qtext || "";
   let selectedInit: string = "";
 
   let items: any = [];
