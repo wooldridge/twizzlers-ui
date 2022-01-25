@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { twizzlersLogin, hcLogin, hcGetSession } from "../api/api";
 import { auth } from "../config/auth";
 interface UserContextInterface {
@@ -29,12 +29,13 @@ export const UserContext = React.createContext<UserContextInterface>(defaultStat
 const UserProvider: React.FC = ({ children }) => {
 
   const [userid, setUserid] = useState<string>("");
+  const [authorities, setAuthorities] = useState<any>([]);
 
   const handleTwizzlersLogin = () => {
     let sr = twizzlersLogin();
     sr.then(result => {
         if (result && result.data) {
-            console.log("handleLogin result", result);
+            console.log("handleTwizzlersLogin result", result);
             setUserid(result.data);
         }
     }).catch(error => {
@@ -42,23 +43,38 @@ const UserProvider: React.FC = ({ children }) => {
     })
   };
 
+  useEffect(() => {
+    if (userid) {
+      console.log("useEffect userid", userid);
+      handleHCLogin();
+    }
+  }, [userid]);
+
   const handleHCLogin = () => {
-    let sr = hcLogin(auth.hubCentral.username, auth.hubCentral.password);
+    let sr = hcLogin(auth.hubCentral.username, auth.hubCentral.password, userid);
     sr.then(result => {
         if (result && result.data) {
-            console.log("handleLogin result", result);
+            console.log("handleHCLogin result", result);
             localStorage.setItem("loginResp", JSON.stringify(result.data));
+            setAuthorities(result.data.authorities);
         }
     }).catch(error => {
         console.error(error);
     })
   };
 
+  useEffect(() => {
+    if (authorities.length > 0) {
+      console.log("useEffect authorities", authorities);
+      handleHCGetSession();
+    }
+  }, [authorities]);
+
   const handleHCGetSession = () => {
-    let sr = hcGetSession();
+    let sr = hcGetSession(userid);
     sr.then(result => {
         if (result && result.data) {
-            console.log("hcGetSession result", result);
+            console.log("handleHCGetSession result", result);
         }
     }).catch(error => {
         console.error(error);

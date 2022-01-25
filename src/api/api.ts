@@ -147,12 +147,17 @@ export const twizzlersLogin = async () => {
   }
 };
 
-export const hcLogin = async (username, password) => { 
+export const hcLogin = async (username, password, userid) => { 
+  let config = {
+    headers: {
+      userid: userid ? userid : null
+    }
+  }
   try {
     const response = await axios.post("/api/login", {
       "username": username,
       "password": password
-    });
+    }, config);
     if (response && response.status === 200) {
       return response;
     }
@@ -162,9 +167,14 @@ export const hcLogin = async (username, password) => {
   }
 };
 
-export const hcGetSession = async () => { 
+export const hcGetSession = async (userid) => { 
+  let config = {
+    headers: {
+      userid: userid ? userid : null
+    }
+  }
   try {
-    const response = await axios.get("/api/environment/systemInfo");
+    const response = await axios.get("/api/environment/systemInfo", config);
     if (response && response.status === 200) {
       return response;
     }
