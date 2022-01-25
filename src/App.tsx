@@ -16,8 +16,14 @@ const App: React.FC<Props> = (props) => {
 
   const userContext = useContext(UserContext);
 
+  const authenticate = async () => {
+    await userContext.handleTwizzlersLogin();
+    await userContext.handleHCLogin();
+    await userContext.handleHCGetSession();
+  }
+
   if (!userContext.userid) {
-    userContext.handleLogin();
+    authenticate();
   }
 
   return (

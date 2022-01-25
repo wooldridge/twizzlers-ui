@@ -135,16 +135,41 @@ export const getRecent = (opts) => {
   return personsSlice;
 };
 
-export const getUserid = async () => { 
+export const twizzlersLogin = async () => { 
   try {
-    //http://localhost:8888/api/explore/twizzlers/login
     const response = await axios.get("/api/explore/twizzlers/login");
     if (response && response.status === 200) {
-      console.log("getUserid", response);
       return response;
     }
   } catch (error) {
     let message = error;
     console.error("Error: getUserid", message);
+  }
+};
+
+export const hcLogin = async (username, password) => { 
+  try {
+    const response = await axios.post("/api/login", {
+      "username": username,
+      "password": password
+    });
+    if (response && response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    let message = error;
+    console.error("Error: hcLogin", message);
+  }
+};
+
+export const hcGetSession = async () => { 
+  try {
+    const response = await axios.get("/api/environment/systemInfo");
+    if (response && response.status === 200) {
+      return response;
+    }
+  } catch (error) {
+    let message = error;
+    console.error("Error: hcGetSession", message);
   }
 };

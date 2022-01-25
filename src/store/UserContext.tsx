@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { getUserid } from "../api/api";
-
+import { twizzlersLogin, hcLogin, hcGetSession } from "../api/api";
+import { auth } from "../config/auth";
 interface UserContextInterface {
     userid: string;
-    handleLogin: any;
+    handleTwizzlersLogin: any;
+    handleHCLogin: any;
+    handleHCGetSession: any;
 }
   
 const defaultState = {
     userid: "",
-    handleLogin: () => {}
+    handleTwizzlersLogin: () => {},
+    handleHCLogin: () => {},
+    handleHCGetSession: () => {}
 };
 
 /**
@@ -26,8 +30,8 @@ const UserProvider: React.FC = ({ children }) => {
 
   const [userid, setUserid] = useState<string>("");
 
-  const handleLogin = () => {
-    let sr = getUserid();
+  const handleTwizzlersLogin = () => {
+    let sr = twizzlersLogin();
     sr.then(result => {
         if (result && result.data) {
             console.log("handleLogin result", result);
@@ -38,11 +42,36 @@ const UserProvider: React.FC = ({ children }) => {
     })
   };
 
+  const handleHCLogin = () => {
+    let sr = hcLogin(auth.hubCentral.username, auth.hubCentral.password);
+    sr.then(result => {
+        if (result && result.data) {
+            console.log("handleLogin result", result);
+            localStorage.setItem("loginResp", JSON.stringify(result.data));
+        }
+    }).catch(error => {
+        console.error(error);
+    })
+  };
+
+  const handleHCGetSession = () => {
+    let sr = hcGetSession();
+    sr.then(result => {
+        if (result && result.data) {
+            console.log("hcGetSession result", result);
+        }
+    }).catch(error => {
+        console.error(error);
+    })
+  };
+
   return (
     <UserContext.Provider
       value={{
         userid,
-        handleLogin
+        handleTwizzlersLogin,
+        handleHCLogin,
+        handleHCGetSession
       }}
     >
       {children}
