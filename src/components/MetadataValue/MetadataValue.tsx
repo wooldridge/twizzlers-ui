@@ -1,4 +1,5 @@
 import React from "react";
+import Chiclet from "../Chiclet/Chiclet";
 import DateTime from "../DateTime/DateTime";
 import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -44,10 +45,12 @@ const MetadataValue: React.FC<Props> = (props) => {
     const displayValue = (config, data) => {
         if (config.type === "datetime") {
             return <DateTime config={config} data={data} />
+        } else if (config.type === "chiclet") {
+            return <Chiclet config={config} data={data} />
         }
         let val: any = _.get(data, config.value, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : 
-            <span style={{backgroundColor: (config.type === "chiclet") ? metaColors[val] : ""}}>{val}</span>
+            <span>{val}</span>
         );
     };
 

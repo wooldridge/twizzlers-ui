@@ -32,7 +32,8 @@ export const configDetail = {
                         cols: [
                             {
                                 value: "name",
-                                type: "chiclet"
+                                type: "chiclet",
+                                colors: "sourcesColors"
                             },
                             {
                                 value: "timestamp",

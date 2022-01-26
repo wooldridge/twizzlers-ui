@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Address from "../Address/Address";
+import Chiclet from "../Chiclet/Chiclet";
 import DateTime from "../DateTime/DateTime";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
@@ -161,10 +162,11 @@ const ResultsList: React.FC<Props> = (props) => {
             <div className="categories">
               {getArrayValue(props.config.categories.value, results).map((s, index2) => {
                 return (
-                  <div 
+                  <Chiclet 
                     key={"category-" + index2} 
+                    config={props.config.categories}
                     style={{backgroundColor: catColors[s]}}
-                  >{s}</div>
+                  >{s}</Chiclet>
                 )
               })}
             </div> : null}

@@ -18,14 +18,16 @@ type Props = {
  */
 const DateTime: React.FC<Props> = (props) => {
 
-    const getValue = (key, data) => {
-        let val: any = _.get(data, key, null);
-        return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-    };
+    let val;
+    if (props.children) {
+        val = props.children;
+    } else {
+        val = _.get(props.data, props.config.value, null);
+        val = _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
+    }
 
     let formattedDateTime;
-    formattedDateTime = getValue(props.config.value, props.data);
-    formattedDateTime = dt.fromISO(formattedDateTime).toFormat(props.config.format);
+    formattedDateTime = dt.fromISO(val).toFormat(props.config.format);
     formattedDateTime = props.config.label ? props.config.label + " " + formattedDateTime : formattedDateTime;
 
     const dateTimeStyle: any = props.style ? props.style : {};
