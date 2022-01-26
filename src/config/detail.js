@@ -23,7 +23,7 @@ export const configDetail = {
                 {
                     type: "block",
                     color: "#5d6aaa",
-                    value: "4",
+                    value: "3",
                     popover: {
                         title: "Sources",
                         dataPath: "result[0].extracted.person.sources",
@@ -186,7 +186,7 @@ export const configDetail = {
                 {
                     type: "block",
                     color: "#5d6aaa",
-                    value: "4",
+                    value: "3",
                     popover: {
                         title: "Sources",
                         dataPath: "result[0].extracted.person.sources",
@@ -195,7 +195,8 @@ export const configDetail = {
                         cols: [
                             {
                                 value: "name",
-                                type: "chiclet"
+                                type: "chiclet",
+                                colors: "sourcesColors"
                             },
                             {
                                 value: "timestamp",

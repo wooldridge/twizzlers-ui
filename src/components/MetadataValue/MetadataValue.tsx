@@ -4,7 +4,6 @@ import DateTime from "../DateTime/DateTime";
 import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import {colors} from "../../config/colors";
 import "./MetadataValue.scss";
 import _ from "lodash";
 
@@ -38,9 +37,6 @@ const data = [
  * TBD
  */
 const MetadataValue: React.FC<Props> = (props) => {
-
-    const metaColors = props.config.popover ? 
-        colors[props.config.popover.colors] ? colors[props.config.popover.colors] : {} : {};
 
     const displayValue = (config, data) => {
         if (config.type === "datetime") {
