@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import MetadataValue from "../MetadataValue/MetadataValue";
 import Table from "react-bootstrap/Table";
 import { DetailContext } from "../../store/DetailContext";
 import "./DataTableValue.scss";
@@ -105,7 +106,7 @@ const DataTableValue: React.FC<Props> = (props) => {
                                 {_.isArray(props.config.metadata) && props.config.metadata.map((meta, i2) => {
                                 return (
                                     <td key={"metadata-" + i2} className="metadata">
-                                        <div style={{backgroundColor: meta.color ? meta.color : "lightgray"}}>{meta.value}</div>
+                                        <MetadataValue config={meta} />
                                     </td>
                                 );
                                 })}

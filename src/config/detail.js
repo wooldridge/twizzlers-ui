@@ -23,7 +23,23 @@ export const configDetail = {
                 {
                     type: "block",
                     color: "#5d6aaa",
-                    value: "4"
+                    value: "4",
+                    popover: {
+                        title: "Sources",
+                        dataPath: "result[0].extracted.person.sources",
+                        placement: "right",
+                        colors: "sourcesColors",
+                        cols: [
+                            {
+                                value: "name",
+                                type: "chiclet"
+                            },
+                            {
+                                value: "timestamp",
+                                type: "date"
+                            }
+                        ],
+                    }
                 }
             ]
         },
@@ -168,7 +184,23 @@ export const configDetail = {
                 {
                     type: "block",
                     color: "#5d6aaa",
-                    value: "4"
+                    value: "4",
+                    popover: {
+                        title: "Sources",
+                        dataPath: "result[0].extracted.person.sources",
+                        placement: "right",
+                        colors: "sourcesColors",
+                        cols: [
+                            {
+                                value: "name",
+                                type: "chiclet"
+                            },
+                            {
+                                value: "timestamp",
+                                type: "date"
+                            }
+                        ],
+                    }
                 }
             ]
         }
