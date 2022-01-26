@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { DetailContext } from "../../store/DetailContext";
 import styles from "./Recent.module.scss";
-import _ from "lodash";
+import { getValByPath, getValByPathAsArray } from "../../util/util";
 import {ExclamationTriangleFill} from "react-bootstrap-icons";
 import {colors} from "../../config/colors";
 
@@ -57,28 +57,12 @@ const Recent: React.FC<Props> = (props) => {
     detailContext.handleDetail(e.target.id);
   };
 
-  // TODO different than displayValue?
-  const getValue = (key, res) => {
-    let val = _.get(res, key);
-    return _.isNil(val) ? null : val;
-  };
-
-  const getArrayValue = (key, res) => {
-    let val = _.get(res, key);
-    return Array.isArray(val) ? val : [val];
-  };
-
-  const displayValue = (key, res) => {
-    let val = _.get(res, key);
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-  };
-
   const getRecent = () => {
     let res = props.data.map((recent, index) => {
       let items = props.config.items.map((it, index) => {
         return (
           <div key={"item-" + index} className={styles.item}>
-            {displayValue(it, recent)}
+            {getValByPath(recent, it)}
           </div>
         );
       });
@@ -89,27 +73,27 @@ const Recent: React.FC<Props> = (props) => {
           </div>
           <div className={styles.thumbnail}>
             <img
-              src={getValue(props.config.thumbnail.src, recent)}
-              alt={getValue(props.config.title, recent)}
+              src={getValByPath(recent, props.config.thumbnail.src)}
+              alt={getValByPath(recent, props.config.title)}
               style={{width: props.config.thumbnail.width, height: props.config.thumbnail.height}}
             ></img>
           </div>
           <div className={styles.text}>
-            <div className={styles.title} id={getValue(props.config.id, recent)} onClick={handleNameClick}>
-              {displayValue(props.config.title, recent)}
+            <div className={styles.title} id={getValByPath(recent, props.config.id)} onClick={handleNameClick}>
+              {getValByPath(recent, props.config.title)}
             </div>
             <div className={styles.address}>
-              {displayValue(props.config.address.street, recent)},&nbsp;
-              {displayValue(props.config.address.city, recent)},&nbsp;
-              {displayValue(props.config.address.state, recent)}&nbsp;
-              {displayValue(props.config.address.zip[0], recent)}-
-              {displayValue(props.config.address.zip[1], recent)}
+              {getValByPath(recent, props.config.address.street)},&nbsp;
+              {getValByPath(recent, props.config.address.city)},&nbsp;
+              {getValByPath(recent, props.config.address.state)}&nbsp;
+              {getValByPath(recent, props.config.address.zip[0])}-
+              {getValByPath(recent, props.config.address.zip[1])}
             </div>
             <div className={styles.items}>
               {items}
             </div>
             <div className={styles.categories}>
-              {getArrayValue(props.config.categories, recent).map((s, i) => {
+              {getValByPathAsArray(recent, props.config.categories).map((s, i) => {
                 return (
                   <div key={"category-" + i} style={{backgroundColor: colors["sourcesColors"][s]}}>{s}</div>
                 )

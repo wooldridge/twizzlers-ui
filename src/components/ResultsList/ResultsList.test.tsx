@@ -26,6 +26,8 @@ const resultsListConfig = {
     categories: "extracted.person.sources",
     timestamp: {
         value: "extracted.person.createdOn",
+        type: "datetime",
+        format: "yyyy-MM-dd",
         label: "Time is"
     },
     status: "extracted.person.status"

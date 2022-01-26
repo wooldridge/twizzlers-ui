@@ -6,6 +6,7 @@ import "./DataTableMultiValue.scss";
 import {ArrowBarDown, ArrowBarRight, GeoAltFill} from "react-bootstrap-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import { getValByPath, getValByPathAsArray } from "../../util/util";
 import _ from "lodash";
 import GeoMap from "../GeoMap/GeoMap"
 
@@ -68,16 +69,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
         setHide(!hide);
     };
 
-    const getArrayValue = (key, data) => {
-        let val: any = _.get(data, key, null);
-        return _.isNil(val) ? null : (Array.isArray(val) ? val : [val]);
-    };
-    const data: any = (props.config && props.config.dataPath) ? getArrayValue(props.config.dataPath, detailContext.detail) : null;
-
-    const displayValue = (key, res) => {
-        let val: any = _.get(res, key, null);
-        return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-    };
+    const data: any = (props.config && props.config.dataPath) ? getValByPathAsArray(detailContext.detail, props.config.dataPath) : null;
 
     let hideClass: string = hide ? "hide" : "";
     let tableStyle: any = {
@@ -94,7 +86,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
 
     return (
         <div className="dataTableMultiValue">
-            {data &&
+            {data && data.length > 0 &&
             <div className="label">
                 <span className="title">{props.config.title}</span>
                 {data.length > 1 ?
@@ -136,7 +128,7 @@ const DataTableMultiValue: React.FC<Props> = (props) => {
                         {_.isArray(props.config.cols) && props.config.cols.map((col, i) => {
                             return (
                                 <td key={"data-" + i} className="value" style={{width: col.width}}>
-                                    <span>{displayValue(col.value, d)}</span>
+                                    <span>{getValByPath(d, col.value, true)}</span>
                                 </td>
                             );
                         })}

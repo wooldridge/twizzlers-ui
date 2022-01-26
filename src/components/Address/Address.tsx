@@ -1,6 +1,6 @@
 import React from "react";
 import "./Address.scss";
-import _ from "lodash";
+import { getValByPath } from "../../util/util";
 
 type Props = {
   config?: any;
@@ -17,11 +17,6 @@ type Props = {
  */
 const Address: React.FC<Props> = (props) => {
 
-    const getValue = (key, data) => {
-        let val: any = _.get(data, key, null);
-        return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-    };
-
     const display = (val, pre, post) => {
         return val ? "".concat(pre, val, post) : "";
     }
@@ -29,14 +24,14 @@ const Address: React.FC<Props> = (props) => {
     const addressStyle: any = props.style ? props.style : {};
 
     // Get address-containing object (if array, use first element)
-    const addressData = props.config.addressPath ? getValue(props.config.addressPath, props.data) : props.data;
+    const addressData = props.config.addressPath ? getValByPath(props.data, props.config.addressPath, true) : props.data;
 
-    const street1: any = getValue(props.config.street1, addressData) || null;
-    const street2: any = getValue(props.config.street2, addressData) || null;
-    const city: any = getValue(props.config.city, addressData) || null;
-    const state: any = getValue(props.config.state, addressData) || null;
-    const postal1: any = getValue(props.config.postal1, addressData) || null;
-    const postal2: any = getValue(props.config.postal2, addressData) || null;
+    const street1: any = getValByPath(addressData, props.config.street1, true) || null;
+    const street2: any = getValByPath(addressData, props.config.street2, true) || null;
+    const city: any = getValByPath(addressData, props.config.city, true) || null;
+    const state: any = getValByPath(addressData, props.config.state, true) || null;
+    const postal1: any = getValByPath(addressData, props.config.postal1, true) || null;
+    const postal2: any = getValByPath(addressData, props.config.postal2, true) || null;
 
     const addrFormatted: string = display(street1, "", (street2 || city) ? ", " : "") +
                           display(street2, "", city ? ", " : "") +

@@ -9,6 +9,7 @@ import Section from "../components/Section/Section";
 import {configDetail} from "../config/detail.js";
 import { ArrowLeft } from "react-bootstrap-icons";
 import styles from "./Detail.module.scss";
+import { getValByPath } from "../util/util";
 import _ from "lodash";
 
 type Props = {};
@@ -33,18 +34,7 @@ const Detail: React.FC<Props> = (props) => {
     height: (configDetail.heading.thumbnail && configDetail.heading.thumbnail.height) ? 
     configDetail.heading.thumbnail.height : "auto"
   };
-
-  // TODO different than displayValue?
-  const getValue = (key, res) => {
-    let val = _.get(res, key);
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-  };
-
-  const displayValue = (key, res) => {
-    let val = _.get(res, key);
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-  };
-
+  
   const getHeading = () => {
     console.log("getHeading", configDetail.heading, detailContext.detail);
     let config = configDetail.heading;
@@ -54,12 +44,12 @@ const Detail: React.FC<Props> = (props) => {
         <ArrowLeft color="#394494" size={28} />
       </div>
       <div className={styles.title}>
-        {displayValue(config.title, detailContext.detail)}
+        {getValByPath(detailContext.detail, config.title)}
       </div>
       {config.thumbnail && <div className={styles.thumbnail}>
         <img
-            src={getValue(config.thumbnail.src, detailContext.detail)}
-            alt={getValue(config.title, detailContext.detail)}
+            src={getValByPath(detailContext.detail, config.thumbnail.src)}
+            alt={getValByPath(detailContext.detail, config.title)}
             style={thumbStyle}
         ></img>
       </div>}

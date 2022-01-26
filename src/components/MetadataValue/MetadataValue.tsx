@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import "./MetadataValue.scss";
-import _ from "lodash";
+import { getValByPath } from "../../util/util";
 
 type Props = {
   config?: any;
@@ -38,45 +38,39 @@ const data = [
  */
 const MetadataValue: React.FC<Props> = (props) => {
 
-    const displayValue = (config, data) => {
+    const displayValue = (data, config) => {
         if (config.type === "datetime") {
             return <DateTime config={config} data={data} />
         } else if (config.type === "chiclet") {
             return <Chiclet config={config} data={data} />
         }
-        let val: any = _.get(data, config.value, null);
-        return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : 
-            <span>{val}</span>
-        );
+        return getValByPath(data, config, true);
     };
 
     const getPopover = () => {
-        if (props.config.popover) {
-            return (
-                <Popover id="popover-basic">
-                    <Popover.Header>{props.config.popover.title}</Popover.Header>
-                    <Popover.Body>
-                        <Table size="sm">
-                            <tbody>{data.map((d, i) => {return (
-                                <tr>
-                                    {props.config.popover.cols.map(col => { return (
-                                        <td className={col.type}>
-                                                {displayValue(col, d)}
-                                        </td>
-                                    )})}
-                                </tr>
-                            )})}</tbody>
-                        </Table>
-                    </Popover.Body>
-                </Popover>
-            )
-        } else {
+        if (props.config.popover) { return (
+            <Popover id="popover-basic">
+                <Popover.Header>{props.config.popover.title}</Popover.Header>
+                <Popover.Body>
+                    <Table size="sm"><tbody>{data.map((d, i) => {return (
+                        <tr>
+                            {props.config.popover.cols.map(col => { return (
+                                <td className={col.type}>{displayValue(d, col)}</td>
+                            )})}
+                        </tr>
+                    )})}</tbody></Table>
+                </Popover.Body>
+            </Popover>
+        )} else {
             return <div></div>;
         }
     };
 
     const getMetadata = () => { return (
-        <div className={props.config.popover ? "hasPopover" : ""} style={{backgroundColor: props.config.color ? props.config.color : "lightgray"}}>
+        <div 
+            className={props.config.popover ? "hasPopover" : ""} 
+            style={{backgroundColor: props.config.color ? props.config.color : "lightgray"}}
+        >
             {props.config.value}
         </div>
     )};

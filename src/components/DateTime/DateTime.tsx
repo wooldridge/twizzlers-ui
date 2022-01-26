@@ -1,6 +1,6 @@
 import React from "react";
 import "./DateTime.scss";
-import _ from "lodash";
+import { getValByPath } from "../../util/util";
 import { DateTime as dt } from "luxon";
 
 type Props = {
@@ -22,8 +22,7 @@ const DateTime: React.FC<Props> = (props) => {
     if (props.children) {
         val = props.children;
     } else {
-        val = _.get(props.data, props.config.value, null);
-        val = _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
+        val = getValByPath(props.data, props.config.value, true);
     }
 
     let formattedDateTime;

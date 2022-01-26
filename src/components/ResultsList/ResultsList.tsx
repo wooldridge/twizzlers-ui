@@ -7,7 +7,7 @@ import { DetailContext } from "../../store/DetailContext";
 import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
 import "./ResultsList.scss";
 import {colors} from "../../config/colors";
-import _ from "lodash";
+import { getValByPath, getValByPathAsArray } from "../../util/util";
 
 type Props = {
   config?: any;
@@ -96,29 +96,6 @@ const ResultsList: React.FC<Props> = (props) => {
     detailContext.handleDetail(e.target.id);
   };
 
-  // TODO different than displayValue?
-  const getValue = (key, results) => {
-    let val = _.get(results, key);
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-  };
-
-  const getArrayValue = (key, results) => {
-    let val = _.get(results, key);
-    return Array.isArray(val) ? val : [val];
-  };
-
-  const displayValue = (key, results) => {
-    let val = _.get(results, key);
-    return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-  };
-
-  const displayDate = (key, results) => {
-    let val = _.get(results, key);
-    val = _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-    let parts = val.split("T");
-    return _.isNil(parts[0]) ? null : parts[0];
-  };
-
   const getResults = () => {
     let results = searchContext.searchResults.result.map((results, index) => {
       let items = props.config.items && props.config.items.map((it, index) => {
@@ -134,8 +111,8 @@ const ResultsList: React.FC<Props> = (props) => {
         } else {
           return (
             <div key={"item-" + index} className="item">
-              <span className={it.className} style={it.style ? it.style : null} title={displayValue(it.value, results)}>
-                {displayValue(it.value, results)}
+              <span className={it.className} style={it.style ? it.style : null} title={getValByPath(results, it.value, true)}>
+                {getValByPath(results, it.value, true)}
               </span>
             </div>
           )
@@ -146,21 +123,21 @@ const ResultsList: React.FC<Props> = (props) => {
           <div className="thumbnail">
             {props.config.thumbnail ? 
             <img
-              src={getValue(props.config.thumbnail.src, results)}
-              alt={getValue(props.config.title, results)}
+              src={getValByPath(results, props.config.thumbnail.src, true)}
+              alt={getValByPath(results, props.config.title, true)}
               style={thumbStyle}
             ></img> : null}
           </div>
           <div className="details">
-            <div className="title" id={getValue(props.config.id, results)} onClick={handleNameClick}>
-              {displayValue(props.config.title, results)}
+            <div className="title" id={getValByPath(results, props.config.id, true)} onClick={handleNameClick}>
+              {getValByPath(results, props.config.title, true)}
             </div>
             <div className="subtitle">
               {items}
             </div>
             {props.config.categories ? 
             <div className="categories">
-              {getArrayValue(props.config.categories.value, results).map((s, index2) => {
+              {getValByPathAsArray(results, props.config.categories.value)!.map((s, index2) => {
                 return (
                   <Chiclet 
                     key={"category-" + index2} 
@@ -179,7 +156,7 @@ const ResultsList: React.FC<Props> = (props) => {
             <div className="icons">
               {props.config.status ? 
               <div className="status">
-                {displayValue(props.config.status, results)}
+                {getValByPath(results, props.config.status, true)}
               </div> : null}
               <GearFill color="#5d6aaa" size={16} />
               <CodeSlash color="#5d6aaa" size={16} />
