@@ -64,7 +64,7 @@ export const configSearch = {
                     postal1: "zip.fiveDigit",
                     postal2: "zip.plusFour"
                 },
-                styles: {
+                style: {
                     width: "350px",
                     overflow: "hidden",
                     textOverflow: "ellipsis"
@@ -80,7 +80,12 @@ export const configSearch = {
         },
         timestamp: {
             value: "extracted.person.createdOn",
-            label: "Created on"
+            type: "datetime",
+            format: "yyyy-MM-dd",
+            label: "Created on",
+            style: {
+                fontStyle: "normal"
+            }
         },
         status: "extracted.person.status"
     }

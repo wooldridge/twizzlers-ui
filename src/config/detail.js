@@ -36,7 +36,8 @@ export const configDetail = {
                             },
                             {
                                 value: "timestamp",
-                                type: "date"
+                                type: "datetime",
+                                format: "yyyy-MM-dd",
                             }
                         ],
                     }
@@ -197,7 +198,8 @@ export const configDetail = {
                             },
                             {
                                 value: "timestamp",
-                                type: "date"
+                                type: "datetime",
+                                format: "yyyy-MM-dd",
                             }
                         ],
                     }

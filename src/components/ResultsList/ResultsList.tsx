@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Address from "../Address/Address";
+import DateTime from "../DateTime/DateTime";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
 import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
@@ -125,7 +126,7 @@ const ResultsList: React.FC<Props> = (props) => {
             <div key={"item-" + index} className="item">
               {React.createElement(
                 COMPONENTS[it.component], 
-                { config: it.config, data: results, styles: it.styles }, null
+                { config: it.config, data: results, style: it.style }, null
               )}
             </div>
           );
@@ -171,7 +172,7 @@ const ResultsList: React.FC<Props> = (props) => {
           <div className="actions">
             {props.config.timestamp ? 
             <div className="timestamp">
-              {props.config.timestamp.label} {displayDate(props.config.timestamp.value, results)}
+              <DateTime config={props.config.timestamp} data={results} style={props.config.timestamp.style} />
             </div> : null}
             <div className="icons">
               {props.config.status ? 

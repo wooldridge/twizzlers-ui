@@ -5,7 +5,7 @@ import _ from "lodash";
 type Props = {
   config?: any;
   data?: any;
-  styles?: any;
+  style?: any;
 };
 
 /**
@@ -26,7 +26,7 @@ const Address: React.FC<Props> = (props) => {
         return val ? "".concat(pre, val, post) : "";
     }
 
-    const addressStyle: any = props.styles ? props.styles : {};
+    const addressStyle: any = props.style ? props.style : {};
 
     // Get address-containing object (if array, use first element)
     const addressData = props.config.addressPath ? getValue(props.config.addressPath, props.data) : props.data;

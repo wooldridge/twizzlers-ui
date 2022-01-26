@@ -1,4 +1,5 @@
 import React from "react";
+import DateTime from "../DateTime/DateTime";
 import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -40,22 +41,14 @@ const MetadataValue: React.FC<Props> = (props) => {
     const metaColors = props.config.popover ? 
         colors[props.config.popover.colors] ? colors[props.config.popover.colors] : {} : {};
 
-    const displayValue = (key, res, type) => {
-        console.log(key, res, type);
-        if (type === "date") {
-            return displayDate(key, res);
+    const displayValue = (config, data) => {
+        if (config.type === "datetime") {
+            return <DateTime config={config} data={data} />
         }
-        let val: any = _.get(res, key, null);
+        let val: any = _.get(data, config.value, null);
         return _.isNil(val) ? null : (Array.isArray(val) ? val[0] : 
-            <span style={{backgroundColor: (type === "chiclet") ? metaColors[val] : ""}}>{val}</span>
+            <span style={{backgroundColor: (config.type === "chiclet") ? metaColors[val] : ""}}>{val}</span>
         );
-    };
-
-    const displayDate = (key, results) => {
-        let val: any = _.get(results, key);
-        val = _.isNil(val) ? null : (Array.isArray(val) ? val[0] : val);
-        let parts: any = val.split("T");
-        return _.isNil(parts[0]) ? null : parts[0];
     };
 
     const getPopover = () => {
@@ -69,7 +62,7 @@ const MetadataValue: React.FC<Props> = (props) => {
                                 <tr>
                                     {props.config.popover.cols.map(col => { return (
                                         <td className={col.type}>
-                                                {displayValue(col.value, d, col.type)}
+                                                {displayValue(col, d)}
                                         </td>
                                     )})}
                                 </tr>
