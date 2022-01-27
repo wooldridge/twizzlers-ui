@@ -18,8 +18,6 @@ type Props = {
  */
 const Value: React.FC<Props> = (props) => {
 
-    console.log("Value props", props);
-
     let val;
     if (props.children) {
         val = props.children;

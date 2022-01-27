@@ -1,6 +1,7 @@
 import React from "react";
 import Chiclet from "../Chiclet/Chiclet";
 import DateTime from "../DateTime/DateTime";
+import Value from "../Value/Value";
 import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -40,11 +41,11 @@ const MetadataValue: React.FC<Props> = (props) => {
 
     const displayValue = (data, config) => {
         if (config.type === "datetime") {
-            return <DateTime config={config} data={data} />
+            return <DateTime config={config} data={data} />;
         } else if (config.type === "chiclet") {
-            return <Chiclet config={config} data={data} />
+            return <Chiclet config={config} data={data} />;
         }
-        return getValByPath(data, config, true);
+        return <Value data={data} config={config} />;
     };
 
     const getPopover = () => {

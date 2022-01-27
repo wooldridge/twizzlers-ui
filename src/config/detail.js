@@ -31,12 +31,12 @@ export const configDetail = {
                         colors: "sourcesColors",
                         cols: [
                             {
-                                value: "name",
+                                path: "name",
                                 type: "chiclet",
                                 colors: "sourcesColors"
                             },
                             {
-                                value: "timestamp",
+                                path: "timestamp",
                                 type: "datetime",
                                 format: "yyyy-MM-dd",
                             }
@@ -194,12 +194,12 @@ export const configDetail = {
                         colors: "sourcesColors",
                         cols: [
                             {
-                                value: "name",
+                                path: "name",
                                 type: "chiclet",
                                 colors: "sourcesColors"
                             },
                             {
-                                value: "timestamp",
+                                path: "timestamp",
                                 type: "datetime",
                                 format: "yyyy-MM-dd",
                             }

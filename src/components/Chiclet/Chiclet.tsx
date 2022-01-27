@@ -22,7 +22,7 @@ const Chiclet: React.FC<Props> = (props) => {
     if (props.children) {
         val = props.children;
     } else {
-        val = getValByPath(props.data, props.config.value, true);
+        val = getValByPath(props.data, props.config.path, true);
     }
 
     const chicletColors = props.config.colors ? 
