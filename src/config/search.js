@@ -46,13 +46,16 @@ export const configSearch = {
         ]
     },
     results: {
-        id: "extracted.person.personId",
         thumbnail: {
             src: "extracted.person.image",
             width: "70px",
-            height: "70px"
+            height: "70px",
+            alt: "result thumbnail"
         },
-        title: "extracted.person.name",
+        title: { 
+            id: "extracted.person.personId",
+            path: "extracted.person.name"
+        },
         items: [
             { 
                 component: "Address", 
@@ -70,16 +73,16 @@ export const configSearch = {
                     textOverflow: "ellipsis"
                 }
             },
-            { value: "extracted.person.phone", className: "phone" },
-            { value: "extracted.person.email", className: "email" },
-            { value: "extracted.person.ssn" }
+            { path: "extracted.person.phone", className: "phone" },
+            { path: "extracted.person.email", className: "email" },
+            { path: "extracted.person.ssn" }
         ],
         categories: {
-            value: "extracted.person.sources",
+            path: "extracted.person.sources",
             colors: "sourcesColors"
         },
         timestamp: {
-            value: "extracted.person.createdOn",
+            path: "extracted.person.createdOn",
             type: "datetime",
             format: "yyyy-MM-dd",
             label: "Created on",
@@ -87,6 +90,6 @@ export const configSearch = {
                 fontStyle: "normal"
             }
         },
-        status: "extracted.person.status"
+        status: { path: "extracted.person.status" }
     }
 };

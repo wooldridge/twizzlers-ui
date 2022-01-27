@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Address from "../Address/Address";
 import Chiclet from "../Chiclet/Chiclet";
 import DateTime from "../DateTime/DateTime";
+import Value from "../Value/Value";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
 import {GearFill, CodeSlash, ArrowRepeat} from "react-bootstrap-icons";
@@ -111,9 +112,7 @@ const ResultsList: React.FC<Props> = (props) => {
         } else {
           return (
             <div key={"item-" + index} className="item">
-              <span className={it.className} style={it.style ? it.style : null} title={getValByPath(results, it.value, true)}>
-                {getValByPath(results, it.value, true)}
-              </span>
+              <Value data={results} config={it} getFirst={true} />
             </div>
           )
         }
@@ -124,20 +123,20 @@ const ResultsList: React.FC<Props> = (props) => {
             {props.config.thumbnail ? 
             <img
               src={getValByPath(results, props.config.thumbnail.src, true)}
-              alt={getValByPath(results, props.config.title, true)}
+              alt={props.config && props.config.thumbnail && props.config.thumbnail.alt}
               style={thumbStyle}
             ></img> : null}
           </div>
           <div className="details">
-            <div className="title" id={getValByPath(results, props.config.id, true)} onClick={handleNameClick}>
-              {getValByPath(results, props.config.title, true)}
+            <div className="title" onClick={handleNameClick}>
+              <Value data={results} config={props.config.title} getFirst={true} />
             </div>
             <div className="subtitle">
               {items}
             </div>
             {props.config.categories ? 
             <div className="categories">
-              {getValByPathAsArray(results, props.config.categories.value)!.map((s, index2) => {
+              {getValByPathAsArray(results, props.config.categories.path)!.map((s, index2) => {
                 return (
                   <Chiclet 
                     key={"category-" + index2} 
@@ -156,7 +155,7 @@ const ResultsList: React.FC<Props> = (props) => {
             <div className="icons">
               {props.config.status ? 
               <div className="status">
-                {getValByPath(results, props.config.status, true)}
+                <Value data={results} config={props.config.status} getFirst={true} />
               </div> : null}
               <GearFill color="#5d6aaa" size={16} />
               <CodeSlash color="#5d6aaa" size={16} />

@@ -1,17 +1,20 @@
 import ResultsList from "./ResultsList";
 import { SearchContext } from "../../store/SearchContext";
 import { DetailContext } from "../../store/DetailContext";
-import {render, act, cleanup} from "@testing-library/react";
+import {render} from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
 
 const resultsListConfig = {
-    id: "extracted.person.id",
     thumbnail: {
         src: "extracted.person.image",
         width: 100,
-        height: 100
+        height: 100,
+        alt: "result thumbnail"
     },
-    title: "extracted.person.name",
+    title: {
+        path: "extracted.person.name",
+        id: "extracted.person.id"
+    },
     items: [
         { 
             component: "Address", 
@@ -102,7 +105,7 @@ const detailContextValue = {
 describe("ResultsList component", () => {
 
     test("Verify list items appear and titles are clickable when results returned", () => {
-        const {getByText, getByAltText} = render(
+        const {getByText, getAllByAltText} = render(
             <SearchContext.Provider value={searchContextValue}>
                 <DetailContext.Provider value={detailContextValue}>
                     <ResultsList config={resultsListConfig} />
@@ -110,7 +113,7 @@ describe("ResultsList component", () => {
             </SearchContext.Provider>
         );
         let title = getByText("John Doe");
-        expect(getByAltText("John Doe")).toBeInTheDocument(); // Image
+        expect(getAllByAltText("result thumbnail")[0]).toBeInTheDocument(); // Image
         expect(title).toBeInTheDocument(); // Title
         expect(getByText("Anytown, CA")).toBeInTheDocument(); // Subtitle (address)
         expect(getByText("123-456-7890")).toBeInTheDocument(); // Subtitle 

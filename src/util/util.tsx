@@ -7,13 +7,13 @@ import _ from "lodash";
  * @function getValueByPath
  * @arg {object} data Data object from which to extract the value.
  * @arg {string} path  Path to the value to extract.
- * @arg {boolean} returnFirst Return first element if value is an array? Optional (default is false).
+ * @arg {boolean} getFirst If true, return first element if value is an array. Optional (default is false).
  * @returns {any} Value at that path location or null if not found. 
  */
-export const getValByPath = (data, path, returnFirst=false) => {
+export const getValByPath = (data, path, getFirst=false) => {
     let val: any = _.get(data, path, null);
     return _.isNil(val) ? null : 
-        ((Array.isArray(val) && returnFirst) ? val[0] : val);
+        ((Array.isArray(val) && getFirst) ? val[0] : val);
 };
 
 /**
