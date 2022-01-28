@@ -37,13 +37,14 @@ const SummaryMeter: React.FC<Props> = (props) => {
 
   const searchContext = useContext(SearchContext);
 
-  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  // const chartComponentRef = useRef<HighchartsReact.RefObject>(null); // TODO required?
 
   const options = {
     chart: {
       type: "solidgauge",
-      height: "160",
-      borderWidth: "2px"
+      height: 180,
+      width: 360,
+      borderWidth: 0 //  TODO causing the "Error: <rect> attribute" errors
     },
     title: null,
     credits: {
@@ -124,6 +125,14 @@ const SummaryMeter: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.meter}>
+      <div style={{zIndex: 1}}>
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={options}
+            // ref={chartComponentRef} // TODO required?
+        />
+      </div>
+      <div style={{zIndex: 1000}}>
         <div className={styles.labelAll}>
             <div className={styles.block} />
             <div className={styles.text}>All results</div>
@@ -139,11 +148,7 @@ const SummaryMeter: React.FC<Props> = (props) => {
             <div className={styles.separator} />
             <span>{searchContext.returned}</span>
         </div>
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
-            ref={chartComponentRef}
-        />
+      </div>
     </div>
   );
 };

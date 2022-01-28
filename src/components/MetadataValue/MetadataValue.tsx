@@ -6,7 +6,6 @@ import Table from "react-bootstrap/Table";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import "./MetadataValue.scss";
-import { getValByPath } from "../../util/util";
 
 type Props = {
   config?: any;
@@ -54,9 +53,9 @@ const MetadataValue: React.FC<Props> = (props) => {
                 <Popover.Header>{props.config.popover.title}</Popover.Header>
                 <Popover.Body>
                     <Table size="sm"><tbody>{data.map((d, i) => {return (
-                        <tr>
-                            {props.config.popover.cols.map(col => { return (
-                                <td className={col.type}>{displayValue(d, col)}</td>
+                        <tr key={"row-" + i}>
+                            {props.config.popover.cols.map((col, i2) => { return (
+                                <td key={"col-" + i2} className={col.type}>{displayValue(d, col)}</td>
                             )})}
                         </tr>
                     )})}</tbody></Table>
