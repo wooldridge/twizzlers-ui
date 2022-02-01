@@ -149,7 +149,7 @@ const Facets: React.FC<Props> = (props) => {
   return (
     <div className="facets">
       {/* Show each facet */}
-      {props.config.items && props.config.items.map((f, index) => {
+      {props.config.items && searchContext.searchResults && props.config.items.map((f, index) => {
         return ( 
         <div className="facet" key={"facet-" + index}>
           <div className="title">

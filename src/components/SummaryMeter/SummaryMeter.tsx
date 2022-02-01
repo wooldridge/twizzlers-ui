@@ -44,7 +44,7 @@ const SummaryMeter: React.FC<Props> = (props) => {
       type: "solidgauge",
       height: 180,
       width: 360,
-      borderWidth: 0 //  TODO causing the "Error: <rect> attribute" errors
+      borderWidth: 0 //  NOTE setting as string causes "Error: <rect> attribute" errors
     },
     title: null,
     credits: {
